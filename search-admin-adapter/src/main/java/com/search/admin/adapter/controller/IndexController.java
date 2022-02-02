@@ -2,10 +2,12 @@ package com.search.admin.adapter.controller;
 
 import com.search.admin.adapter.convert.IndexConvert;
 import com.search.admin.adapter.request.IndexAddRequestVO;
+import com.search.admin.adapter.request.IndexSettingRequestVO;
 import com.search.admin.adapter.response.IndexResponseVO;
 import com.search.admin.adapter.response.IndexSettingResponseVO;
 import com.search.admin.app.service.IndexService;
 import com.search.admin.app.service.dto.IndexAddDTO;
+import com.search.admin.app.service.dto.IndexSettingDTO;
 import com.search.admin.infra.base.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +32,9 @@ public class IndexController {
      * @return
      */
     @PostMapping(value = "/v1/create/index/setting")
-    public Result<String> createIndexSetting(){
-        return Result.success(null);
+    public Result<String> createIndexSetting(@RequestBody IndexSettingRequestVO requestVO){
+        IndexSettingDTO indexSettingDTO = IndexConvert.INSTANCE.convertIndexSettingRequestVO2IndexSettingDTO(requestVO);
+        return Result.success(indexService.createIndexSetting(indexSettingDTO));
     }
 
     /**
