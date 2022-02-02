@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: search-admin
+  profiles:
+    active: dev3
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.16.113.41:8848
+      config:
+        server-addr: 172.16.113.41:8848

@@ -1,0 +1,36 @@
+
+# 日志
+logging:
+  level:
+    root: info
+
+# endpoint
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    jmx:
+      exposure:
+        include: "*"
+    web:
+      exposure:
+        include: "*"
+      base-path: /actuator
+  server:
+    port: 8081
+
+server:
+  port: 8080
+
+#spring:
+#  security:
+#    user:
+#      name: admin
+#      password: 123456
+#      roles: SUPERADMIN
+spring:
+  main:
+    allow-circular-references: true
+  elasticsearch:
+    uris: http://172.16.90.231:9200
