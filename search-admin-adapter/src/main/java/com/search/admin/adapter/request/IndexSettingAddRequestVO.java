@@ -12,14 +12,11 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-public class IndexSettingRequestVO implements Serializable {
+public class IndexSettingAddRequestVO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1779844094455672773L;
-    /**
-     * 索引id
-     */
-    private String indexId;
+
     /**
      * 索引名称
      */

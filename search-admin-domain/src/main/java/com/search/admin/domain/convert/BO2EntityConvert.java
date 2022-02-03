@@ -8,7 +8,8 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface BO2EntityConvert {
 
-    BO2EntityConvert INSTANCE  = Mappers.getMapper(BO2EntityConvert.class);
+    BO2EntityConvert INSTANCE = Mappers.getMapper(BO2EntityConvert.class);
+
 
     IndexSettings convertIndexSettingBO2IndexSetting(IndexSettingBO indexSettingBO);
 }

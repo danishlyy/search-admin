@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 @Constraint(validatedBy = FieldTypeValidValidator.class)
-public @interface  FieldTypeValid {
+public @interface FieldTypeValid {
 
     String message() default "field的类型不合法";
 

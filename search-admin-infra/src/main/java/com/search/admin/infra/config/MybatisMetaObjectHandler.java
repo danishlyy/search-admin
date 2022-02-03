@@ -18,15 +18,15 @@ public class MybatisMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         log.info("start execute MybatisMetaObjectHandler insertFill ");
-        this.strictInsertFill(metaObject,"createTime",()-> DateTimeUtil.formatLocalDateTimeNow2String(),String.class);
-        this.strictInsertFill(metaObject,"creator",()-> Constant.ADMIN,String.class);
-        this.strictInsertFill(metaObject,"modifyTime",()-> DateTimeUtil.formatLocalDateTimeNow2String(),String.class);
-        this.strictInsertFill(metaObject,"modifier",()-> Constant.ADMIN,String.class);
+        this.strictInsertFill(metaObject, "createTime", () -> DateTimeUtil.formatLocalDateTimeNow2String(), String.class);
+        this.strictInsertFill(metaObject, "creator", () -> Constant.ADMIN, String.class);
+        this.strictInsertFill(metaObject, "modifyTime", () -> DateTimeUtil.formatLocalDateTimeNow2String(), String.class);
+        this.strictInsertFill(metaObject, "modifier", () -> Constant.ADMIN, String.class);
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
         log.info("start execute MybatisMetaObjectHandler updateFill ");
-        this.strictInsertFill(metaObject,"modifyTime",()-> DateTimeUtil.formatLocalDateTimeNow2String(),String.class);
+        this.strictInsertFill(metaObject, "modifyTime", () -> DateTimeUtil.formatLocalDateTimeNow2String(), String.class);
     }
 }

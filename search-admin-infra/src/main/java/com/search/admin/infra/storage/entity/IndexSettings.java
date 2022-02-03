@@ -1,10 +1,6 @@
 package com.search.admin.infra.storage.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.*;
 
 /**
  * <p>
@@ -20,12 +16,23 @@ public class IndexSettings {
     /**
      * 主键
      */
+    @TableId(type = IdType.ASSIGN_ID)
     private String id;
 
     /**
      * 索引名称
      */
     private String indexName;
+
+    /**
+     * 索引的描述信息
+     */
+    private String indexDesc;
+
+    /**
+     * 索引的setting设置
+     */
+    private String settings;
 
     /**
      * 字段映射
@@ -59,9 +66,24 @@ public class IndexSettings {
     /**
      * 是否有效 0有效1无效
      */
-   @TableLogic
+    @TableLogic
     private String deleteFlag;
 
+    public String getIndexDesc() {
+        return indexDesc;
+    }
+
+    public void setIndexDesc(String indexDesc) {
+        this.indexDesc = indexDesc;
+    }
+
+    public String getSettings() {
+        return settings;
+    }
+
+    public void setSettings(String settings) {
+        this.settings = settings;
+    }
 
     public String getId() {
         return id;
@@ -70,6 +92,7 @@ public class IndexSettings {
     public void setId(String id) {
         this.id = id;
     }
+
     public String getIndexName() {
         return indexName;
     }
@@ -77,6 +100,7 @@ public class IndexSettings {
     public void setIndexName(String indexName) {
         this.indexName = indexName;
     }
+
     public String getIndexMapping() {
         return indexMapping;
     }
@@ -84,6 +108,7 @@ public class IndexSettings {
     public void setIndexMapping(String indexMapping) {
         this.indexMapping = indexMapping;
     }
+
     public String getCreator() {
         return creator;
     }
@@ -91,6 +116,7 @@ public class IndexSettings {
     public void setCreator(String creator) {
         this.creator = creator;
     }
+
     public String getCreateTime() {
         return createTime;
     }
@@ -98,6 +124,7 @@ public class IndexSettings {
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
+
     public String getModifier() {
         return modifier;
     }
@@ -105,6 +132,7 @@ public class IndexSettings {
     public void setModifier(String modifier) {
         this.modifier = modifier;
     }
+
     public String getModifyTime() {
         return modifyTime;
     }
@@ -112,6 +140,7 @@ public class IndexSettings {
     public void setModifyTime(String modifyTime) {
         this.modifyTime = modifyTime;
     }
+
     public String getDeleteFlag() {
         return deleteFlag;
     }
@@ -123,14 +152,15 @@ public class IndexSettings {
     @Override
     public String toString() {
         return "IndexSettings{" +
-            "id=" + id +
-            ", indexName=" + indexName +
-            ", indexMapping=" + indexMapping +
-            ", creator=" + creator +
-            ", createTime=" + createTime +
-            ", modifier=" + modifier +
-            ", modifyTime=" + modifyTime +
-            ", deleteFlag=" + deleteFlag +
-        "}";
+                "id=" + id +
+                ", indexName=" + indexName +
+                ", settings=" + settings +
+                ", indexMapping=" + indexMapping +
+                ", creator=" + creator +
+                ", createTime=" + createTime +
+                ", modifier=" + modifier +
+                ", modifyTime=" + modifyTime +
+                ", deleteFlag=" + deleteFlag +
+                "}";
     }
 }

@@ -5,13 +5,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SearchFrameworkException extends RuntimeException{
+public class SearchFrameworkException extends RuntimeException {
 
     private String errorCode;
     private String errMsg;
 
 
-    public SearchFrameworkException(String errorCode,String errMsg){
+    public SearchFrameworkException(String errorCode, String errMsg) {
         this.errorCode = errorCode;
         this.errMsg = errMsg;
     }

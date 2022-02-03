@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.validation.constraints.NotBlank;
 import java.io.Serial;
 import java.io.Serializable;
 

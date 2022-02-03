@@ -12,7 +12,7 @@ import javax.validation.ConstraintValidatorContext;
  * 自定义 ES 字段类型校验注解
  */
 @Slf4j
-public class FieldTypeValidValidator implements ConstraintValidator<FieldTypeValid,String> {
+public class FieldTypeValidValidator implements ConstraintValidator<FieldTypeValid, String> {
     @Override
     public void initialize(FieldTypeValid constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
@@ -20,10 +20,10 @@ public class FieldTypeValidValidator implements ConstraintValidator<FieldTypeVal
 
     @Override
     public boolean isValid(String type, ConstraintValidatorContext context) {
-        if (StringUtils.isNotBlank(type)){
-            log.warn("param field type:{}",type);
-            for(FieldTypeEnum e:FieldTypeEnum.values()){
-                if (type.equals(e.getCode())){
+        if (StringUtils.isNotBlank(type)) {
+            log.warn("param field type:{}", type);
+            for (FieldTypeEnum e : FieldTypeEnum.values()) {
+                if (type.equals(e.getCode())) {
                     return true;
                 }
             }

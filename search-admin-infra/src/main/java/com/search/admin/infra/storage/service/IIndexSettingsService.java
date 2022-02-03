@@ -1,7 +1,7 @@
 package com.search.admin.infra.storage.service;
 
-import com.search.admin.infra.storage.entity.IndexSettings;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.search.admin.infra.storage.entity.IndexSettings;
 
 /**
  * <p>

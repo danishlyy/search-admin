@@ -1,7 +1,7 @@
 package com.search.admin.infra.storage.mapper;
 
-import com.search.admin.infra.storage.entity.IndexSettings;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.search.admin.infra.storage.entity.IndexSettings;
 
 /**
  * <p>

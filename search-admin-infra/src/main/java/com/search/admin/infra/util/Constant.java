@@ -9,8 +9,8 @@ public interface Constant {
     String symbol_002 = "_";
     String symbol_003 = "+";
     char symbol_004 = '.';
-//    Character symbol_005 = '..';
-char symbol_006 = '\\';
+    //    Character symbol_005 = '..';
+    char symbol_006 = '\\';
     char symbol_007 = '/';
     char symbol_008 = '*';
     char symbol_009 = '?';

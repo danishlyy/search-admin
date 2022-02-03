@@ -24,7 +24,7 @@ public class Result<T> implements Serializable {
         return result;
     }
 
-    public static <T> Result<T> failOfCode(String code,String msg){
+    public static <T> Result<T> failOfCode(String code, String msg) {
         Result<T> result = new Result<>();
         result.setCode(code);
         result.setMsg(msg);

@@ -11,7 +11,7 @@ import javax.validation.ConstraintValidatorContext;
 import java.nio.charset.StandardCharsets;
 
 @Slf4j
-public class IndexNameLimitationValidator implements ConstraintValidator<IndexNameLimitation,String> {
+public class IndexNameLimitationValidator implements ConstraintValidator<IndexNameLimitation, String> {
 
     private static final char[] symbolChar = {
             Constant.symbol_004,
@@ -30,7 +30,6 @@ public class IndexNameLimitationValidator implements ConstraintValidator<IndexNa
     };
 
 
-
     @Override
     public void initialize(IndexNameLimitation constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
@@ -42,27 +41,28 @@ public class IndexNameLimitationValidator implements ConstraintValidator<IndexNa
      * 不可以以-、_、+开头
      * 不可以是.或者..
      * 不可以超过255byte
+     *
      * @param indexName
      * @param context
      * @return
      */
     @Override
     public boolean isValid(String indexName, ConstraintValidatorContext context) {
-        log.info("indexName:{}",indexName);
-        if (StringUtils.isBlank(indexName)){
+        log.info("indexName:{}", indexName);
+        if (StringUtils.isBlank(indexName)) {
             return false;
         }
-        if (indexName.startsWith(Constant.symbol_001) || indexName.startsWith(Constant.symbol_002) || indexName.startsWith(Constant.symbol_003)){
+        if (indexName.startsWith(Constant.symbol_001) || indexName.startsWith(Constant.symbol_002) || indexName.startsWith(Constant.symbol_003)) {
             return false;
         }
-        if (StringUtils.containsAny(indexName,symbolChar)){
+        if (StringUtils.containsAny(indexName, symbolChar)) {
             return false;
         }
-        if (!StrUtil.isLowerCase(indexName)){
+        if (!StrUtil.isLowerCase(indexName)) {
             return false;
         }
         byte[] bytes = indexName.getBytes(StandardCharsets.UTF_8);
-        if (bytes.length >= 255){
+        if (bytes.length >= 255) {
             return false;
         }
         return true;

@@ -18,6 +18,8 @@ public class IndexSettingBO {
      */
     private String indexName;
 
+    private String indexDesc;
+
     /**
      * 分片数
      */
@@ -26,6 +28,10 @@ public class IndexSettingBO {
      * 副本数
      */
     private String numberOfReplicas;
+
+    private String settings;
+
+    private String indexMapping;
 
 
 }

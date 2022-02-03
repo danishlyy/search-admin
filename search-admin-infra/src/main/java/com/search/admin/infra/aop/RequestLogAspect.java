@@ -1,6 +1,5 @@
 package com.search.admin.infra.aop;
 
-import com.search.admin.infra.base.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -24,14 +23,14 @@ import java.util.Arrays;
 public class RequestLogAspect {
 
     @Pointcut("execution(public * com.search.admin..*.*(..))")
-    public void execute(){
+    public void execute() {
 
     }
 
     @Before("execute()")
-    public void executeBefore(JoinPoint joinPoint){
+    public void executeBefore(JoinPoint joinPoint) {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-        if (requestAttributes == null){
+        if (requestAttributes == null) {
             return;
         }
         ServletRequestAttributes req = (ServletRequestAttributes) requestAttributes;
@@ -47,18 +46,18 @@ public class RequestLogAspect {
     }
 
     @Around("execute()")
-    public Object executeAround(ProceedingJoinPoint joinPoint){
+    public Object executeAround(ProceedingJoinPoint joinPoint) {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start(joinPoint.getSignature().getName());
         Object proceed = null;
         try {
             proceed = joinPoint.proceed();
-        }catch (Throwable e){
-            log.error("execute around failed",e);
+        } catch (Throwable e) {
+            log.error("execute around failed", e);
 
         }
         stopWatch.stop();
-        log.info("consume time:{}",stopWatch.prettyPrint());
+        log.info("consume time:{}", stopWatch.prettyPrint());
         return proceed;
     }
 
