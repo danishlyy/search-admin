@@ -7,11 +7,11 @@ import com.search.admin.adapter.request.IndexSettingAddRequestVO;
 import com.search.admin.adapter.request.IndexSettingUpdateRequestVO;
 import com.search.admin.adapter.response.IndexResponseVO;
 import com.search.admin.adapter.response.IndexSettingResponseVO;
+import com.search.admin.app.dto.IndexAddDTO;
+import com.search.admin.app.dto.IndexDTO;
+import com.search.admin.app.dto.IndexSettingDTO;
+import com.search.admin.app.dto.PageDTO;
 import com.search.admin.app.service.IndexService;
-import com.search.admin.app.service.dto.IndexAddDTO;
-import com.search.admin.app.service.dto.IndexDTO;
-import com.search.admin.app.service.dto.IndexSettingDTO;
-import com.search.admin.app.service.dto.PageDTO;
 import com.search.admin.infra.base.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,7 +99,7 @@ public class IndexController {
      *
      * @return
      */
-    @GetMapping(value = "/v1/get/indexes")
+    @GetMapping(value = "/v1/page/query/indexes")
     public Result<PageResponseVO<IndexResponseVO>> getIndexes() {
         PageDTO<IndexDTO> indexDTOPageDTO = indexService.pageQueryIndexes();
         return Result.success(IndexConvert.INSTANCE.convertPageIndexDTO2PageIndexResponseVO(indexDTOPageDTO));

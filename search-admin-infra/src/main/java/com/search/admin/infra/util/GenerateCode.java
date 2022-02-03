@@ -21,7 +21,7 @@ public class GenerateCode {
                             .pathInfo(Collections.singletonMap(OutputFile.mapper, "/Users/yongyongli/project"));
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("index_settings");
+                    builder.addInclude("sync_index_info_history");
                 })
                 .templateEngine(new FreemarkerTemplateEngine())
                 .execute();

@@ -6,10 +6,10 @@ import com.search.admin.adapter.request.IndexSettingAddRequestVO;
 import com.search.admin.adapter.request.IndexSettingUpdateRequestVO;
 import com.search.admin.adapter.response.IndexResponseVO;
 import com.search.admin.adapter.response.IndexSettingResponseVO;
-import com.search.admin.app.service.dto.IndexAddDTO;
-import com.search.admin.app.service.dto.IndexDTO;
-import com.search.admin.app.service.dto.IndexSettingDTO;
-import com.search.admin.app.service.dto.PageDTO;
+import com.search.admin.app.dto.IndexAddDTO;
+import com.search.admin.app.dto.IndexDTO;
+import com.search.admin.app.dto.IndexSettingDTO;
+import com.search.admin.app.dto.PageDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

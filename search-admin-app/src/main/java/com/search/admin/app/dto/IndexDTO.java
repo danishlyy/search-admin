@@ -1,4 +1,4 @@
-package com.search.admin.app.service.dto;
+package com.search.admin.app.dto;
 
 import lombok.Getter;
 import lombok.Setter;

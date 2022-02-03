@@ -1,10 +1,10 @@
 package com.search.admin.app.service;
 
 
-import com.search.admin.app.service.dto.IndexAddDTO;
-import com.search.admin.app.service.dto.IndexDTO;
-import com.search.admin.app.service.dto.IndexSettingDTO;
-import com.search.admin.app.service.dto.PageDTO;
+import com.search.admin.app.dto.IndexAddDTO;
+import com.search.admin.app.dto.IndexDTO;
+import com.search.admin.app.dto.IndexSettingDTO;
+import com.search.admin.app.dto.PageDTO;
 
 public interface IndexService {
 

@@ -1,12 +1,16 @@
-package com.search.admin.app.service.convert;
+package com.search.admin.app.convert;
 
-import com.search.admin.app.service.dto.IndexDTO;
-import com.search.admin.app.service.dto.IndexSettingDTO;
-import com.search.admin.app.service.dto.PageDTO;
+import com.search.admin.app.dto.DictionaryDTO;
+import com.search.admin.app.dto.IndexDTO;
+import com.search.admin.app.dto.IndexSettingDTO;
+import com.search.admin.app.dto.PageDTO;
+import com.search.admin.domain.bo.DictionaryBO;
 import com.search.admin.domain.bo.IndexSettingBO;
 import com.search.admin.domain.bo.PageBO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 @Mapper
 public interface DTOConvert {
@@ -18,4 +22,6 @@ public interface DTOConvert {
     IndexSettingDTO convertIndexSettingBO2IndexSettingDTO(IndexSettingBO resultBO);
 
     PageDTO<IndexDTO> convertPageIndexSettingBO2PageIndexDTO(PageBO<IndexSettingBO> pageBO);
+
+    List<DictionaryBO> convertDictionaryDTOList2DictionaryBOList(List<DictionaryDTO> list);
 }
