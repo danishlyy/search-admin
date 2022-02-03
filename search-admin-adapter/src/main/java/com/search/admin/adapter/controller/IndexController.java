@@ -32,7 +32,7 @@ public class IndexController {
      * @return
      */
     @PostMapping(value = "/v1/create/index/setting")
-    public Result<String> createIndexSetting(@RequestBody IndexSettingRequestVO requestVO){
+    public Result<Boolean> createIndexSetting(@RequestBody IndexSettingRequestVO requestVO){
         IndexSettingDTO indexSettingDTO = IndexConvert.INSTANCE.convertIndexSettingRequestVO2IndexSettingDTO(requestVO);
         return Result.success(indexService.createIndexSetting(indexSettingDTO));
     }

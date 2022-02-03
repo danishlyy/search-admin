@@ -22,7 +22,7 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
-    public String createIndexSetting(IndexSettingDTO indexSettingDTO) {
+    public boolean createIndexSetting(IndexSettingDTO indexSettingDTO) {
         IndexSettingBO indexSettingBO = DTOConvert.INSTANCE.convertIndexSettingDTO2IndexSettingBO(indexSettingDTO);
         return indexHandler.createIndexSetting(indexSettingBO);
     }

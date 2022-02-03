@@ -22,4 +22,5 @@ char symbol_006 = '\\';
     char symbol_015 = '#';
     char symbol_016 = ':';
     char symbol_017 = '"';
+    String ADMIN = "system";
 }

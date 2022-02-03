@@ -16,8 +16,8 @@ public class GenerateCode {
                             .outputDir("/Users/yongyongli/project");
                 })
                 .packageConfig(builder -> {
-                    builder.parent("com.search.admin.infra.mapper")
-                            .moduleName("system")
+                    builder.parent("com.search.admin.infra")
+                            .moduleName("storage")
                             .pathInfo(Collections.singletonMap(OutputFile.mapper,"/Users/yongyongli/project"));
                 })
                 .strategyConfig(builder -> {

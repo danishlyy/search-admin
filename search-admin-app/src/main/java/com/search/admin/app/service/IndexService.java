@@ -8,5 +8,5 @@ public interface IndexService {
 
      String createIndexMapping(IndexAddDTO indexAddDTO);
 
-     String createIndexSetting(IndexSettingDTO indexSettingDTO);
+     boolean createIndexSetting(IndexSettingDTO indexSettingDTO);
 }

@@ -23,9 +23,10 @@ public class IndexHandler {
     @Autowired
     private IndexDeleteLogic indexDeleteLogic;
 
-    public String createIndexSetting(IndexSettingBO indexSettingBO) {
+    public boolean createIndexSetting(IndexSettingBO indexSettingBO) {
         boolean exist = indexQueryLogic.findIndexByIndexName(indexSettingBO.getIndexName());
         if (exist){
+            log.warn("indexName:{}",indexSettingBO.getIndexName());
             throw new SearchFrameworkException(BusinessExceptionEnum.index_name_exist.getCode(),BusinessExceptionEnum.index_name_exist.getDesc());
         }
         return indexAddLogic.addIndexSetting(indexSettingBO);
