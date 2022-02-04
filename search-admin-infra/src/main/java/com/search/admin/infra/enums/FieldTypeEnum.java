@@ -1,6 +1,9 @@
 package com.search.admin.infra.enums;
 
-public enum FieldTypeEnum implements KeyValueEnum {
+/**
+ * elasticSearch field数据类型
+ */
+public enum FieldTypeEnum implements KeyValueEnum<String> {
     TYPE_ARRAY("array", "array"),
     TYPE_BOOLEAN("boolean", "boolean"),
     TYPE_DATE("date", "date"),

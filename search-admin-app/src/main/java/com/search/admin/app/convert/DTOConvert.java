@@ -1,9 +1,7 @@
 package com.search.admin.app.convert;
 
-import com.search.admin.app.dto.DictionaryDTO;
-import com.search.admin.app.dto.IndexDTO;
-import com.search.admin.app.dto.IndexSettingDTO;
-import com.search.admin.app.dto.PageDTO;
+import com.search.admin.app.dto.*;
+import com.search.admin.domain.bo.AnalyzerBO;
 import com.search.admin.domain.bo.DictionaryBO;
 import com.search.admin.domain.bo.IndexSettingBO;
 import com.search.admin.domain.bo.PageBO;
@@ -24,4 +22,6 @@ public interface DTOConvert {
     PageDTO<IndexDTO> convertPageIndexSettingBO2PageIndexDTO(PageBO<IndexSettingBO> pageBO);
 
     List<DictionaryBO> convertDictionaryDTOList2DictionaryBOList(List<DictionaryDTO> list);
+
+    AnalyzerBO convertAnalyzerDTO2AnalyzerBO(AnalyzerDTO analyzerDTO);
 }

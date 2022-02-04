@@ -22,6 +22,11 @@ management:
 server:
   port: 8080
 
+search:
+  config:
+    hosts:
+      - "172.16.90.231:9200"
+
 #spring:
 #  security:
 #    user:
