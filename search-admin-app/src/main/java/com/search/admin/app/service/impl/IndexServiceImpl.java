@@ -6,6 +6,7 @@ import com.search.admin.app.dto.IndexDTO;
 import com.search.admin.app.dto.IndexSettingDTO;
 import com.search.admin.app.dto.PageDTO;
 import com.search.admin.app.service.IndexService;
+import com.search.admin.domain.bo.IndexBO;
 import com.search.admin.domain.bo.IndexSettingBO;
 import com.search.admin.domain.bo.PageBO;
 import com.search.admin.domain.handler.IndexHandler;
@@ -22,7 +23,8 @@ public class IndexServiceImpl implements IndexService {
 
     @Override
     public String createIndexMapping(IndexAddDTO indexAddDTO) {
-        return null;
+        IndexBO indexBO = DTOConvert.INSTANCE.convertIndexAddDTO2IndexBO(indexAddDTO);
+        return indexHandler.createIndexMapping(indexBO);
     }
 
     @Override

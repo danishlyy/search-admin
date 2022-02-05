@@ -1,6 +1,7 @@
 package com.search.admin.infra.storage.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.annotation.*;
  * @since 2022-02-03
  */
 @TableName("index_settings")
+@Data
 public class IndexSettings {
 
     /**
@@ -32,7 +34,12 @@ public class IndexSettings {
     /**
      * 索引的setting设置
      */
-    private String settings;
+    private String numberOfShards;
+
+    /**
+     * 索引的setting设置
+     */
+    private String numberOfReplicas;
 
     /**
      * 字段映射
@@ -69,98 +76,5 @@ public class IndexSettings {
     @TableLogic
     private String deleteFlag;
 
-    public String getIndexDesc() {
-        return indexDesc;
-    }
 
-    public void setIndexDesc(String indexDesc) {
-        this.indexDesc = indexDesc;
-    }
-
-    public String getSettings() {
-        return settings;
-    }
-
-    public void setSettings(String settings) {
-        this.settings = settings;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getIndexName() {
-        return indexName;
-    }
-
-    public void setIndexName(String indexName) {
-        this.indexName = indexName;
-    }
-
-    public String getIndexMapping() {
-        return indexMapping;
-    }
-
-    public void setIndexMapping(String indexMapping) {
-        this.indexMapping = indexMapping;
-    }
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getModifier() {
-        return modifier;
-    }
-
-    public void setModifier(String modifier) {
-        this.modifier = modifier;
-    }
-
-    public String getModifyTime() {
-        return modifyTime;
-    }
-
-    public void setModifyTime(String modifyTime) {
-        this.modifyTime = modifyTime;
-    }
-
-    public String getDeleteFlag() {
-        return deleteFlag;
-    }
-
-    public void setDeleteFlag(String deleteFlag) {
-        this.deleteFlag = deleteFlag;
-    }
-
-    @Override
-    public String toString() {
-        return "IndexSettings{" +
-                "id=" + id +
-                ", indexName=" + indexName +
-                ", settings=" + settings +
-                ", indexMapping=" + indexMapping +
-                ", creator=" + creator +
-                ", createTime=" + createTime +
-                ", modifier=" + modifier +
-                ", modifyTime=" + modifyTime +
-                ", deleteFlag=" + deleteFlag +
-                "}";
-    }
 }

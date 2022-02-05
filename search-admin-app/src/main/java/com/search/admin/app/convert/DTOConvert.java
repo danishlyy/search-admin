@@ -1,10 +1,7 @@
 package com.search.admin.app.convert;
 
 import com.search.admin.app.dto.*;
-import com.search.admin.domain.bo.AnalyzerBO;
-import com.search.admin.domain.bo.DictionaryBO;
-import com.search.admin.domain.bo.IndexSettingBO;
-import com.search.admin.domain.bo.PageBO;
+import com.search.admin.domain.bo.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -24,4 +21,6 @@ public interface DTOConvert {
     List<DictionaryBO> convertDictionaryDTOList2DictionaryBOList(List<DictionaryDTO> list);
 
     AnalyzerBO convertAnalyzerDTO2AnalyzerBO(AnalyzerDTO analyzerDTO);
+
+    IndexBO convertIndexAddDTO2IndexBO(IndexAddDTO indexAddDTO);
 }

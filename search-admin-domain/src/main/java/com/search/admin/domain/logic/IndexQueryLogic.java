@@ -55,4 +55,9 @@ public class IndexQueryLogic {
         return pageResult;
 
     }
+
+    public List<IndexSettingBO> findIndexByIds(List<String> indexIds) {
+        List<IndexSettings> list = iIndexSettingsService.listByIds(indexIds);
+        return Entity2BOConvert.INSTANCE.convertIndexSettingsList2IndexSettingBOList(list);
+    }
 }

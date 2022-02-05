@@ -29,7 +29,6 @@ public class IndexSettingBO {
      */
     private String numberOfReplicas;
 
-    private String settings;
 
     private String indexMapping;
 

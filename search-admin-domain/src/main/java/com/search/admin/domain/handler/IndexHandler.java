@@ -1,5 +1,6 @@
 package com.search.admin.domain.handler;
 
+import com.search.admin.domain.bo.IndexBO;
 import com.search.admin.domain.bo.IndexSettingBO;
 import com.search.admin.domain.bo.PageBO;
 import com.search.admin.domain.convert.Entity2BOConvert;
@@ -7,14 +8,11 @@ import com.search.admin.domain.logic.IndexAddLogic;
 import com.search.admin.domain.logic.IndexDeleteLogic;
 import com.search.admin.domain.logic.IndexQueryLogic;
 import com.search.admin.domain.logic.IndexUpdateLogic;
-import com.search.admin.domain.origin.bo.SettingBO;
-import com.search.admin.domain.origin.bo.SettingIndexBO;
-import com.search.admin.domain.origin.bo.SettingIndexPropertiesBO;
 import com.search.admin.infra.enums.BusinessExceptionEnum;
 import com.search.admin.infra.ex.SearchFrameworkException;
 import com.search.admin.infra.storage.entity.IndexSettings;
-import com.search.admin.infra.util.JacksonUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -50,17 +48,15 @@ public class IndexHandler {
             log.warn("indexId:{} not exist", indexSettingBO.getIndexId());
             throw new SearchFrameworkException(BusinessExceptionEnum.INDEX_NOT_EXIST.getCode(), BusinessExceptionEnum.INDEX_NOT_EXIST.getDesc());
         }
-        String settings = indexSettings.getSettings();
-        SettingBO settingBO = JacksonUtil.toObject(settings, SettingBO.class);
-        if (Objects.isNull(settingBO)) {
+        String shards = indexSettings.getNumberOfShards();
+        String replicas = indexSettings.getNumberOfReplicas();
+        if (StringUtils.isBlank(shards) ||  StringUtils.isBlank(replicas)) {
             log.warn("indexId:{}", indexSettingBO.getIndexId());
             throw new SearchFrameworkException(BusinessExceptionEnum.INDEX_SETTING_EMPTY.getCode(), BusinessExceptionEnum.INDEX_SETTING_EMPTY.getDesc());
         }
-        SettingIndexBO index = settingBO.getSettings();
-        SettingIndexPropertiesBO propertiesBO = index.getIndex();
+
         // 设置索引的分片新副本数
-        propertiesBO.setNumber_of_replicas(indexSettingBO.getNumberOfReplicas());
-        indexSettings.setSettings(JacksonUtil.toJsonString(settingBO));
+        indexSettings.setNumberOfReplicas(indexSettingBO.getNumberOfReplicas());
         return indexUpdateLogic.updateIndexSetting(indexSettings);
     }
 
@@ -71,5 +67,13 @@ public class IndexHandler {
 
     public PageBO<IndexSettingBO> pageQueryIndexes() {
         return indexQueryLogic.pageQueryIndexes();
+    }
+
+    public String createIndexMapping(IndexBO indexBO) {
+        boolean exist = indexQueryLogic.findIndexByIndexName(indexBO.getIndexName());
+        if (exist) {
+            return indexUpdateLogic.updateIndexMapping(indexBO);
+        }
+        return indexAddLogic.addIndexMapping(indexBO);
     }
 }
