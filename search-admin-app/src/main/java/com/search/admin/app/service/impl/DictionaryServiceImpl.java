@@ -31,4 +31,9 @@ public class DictionaryServiceImpl implements DictionaryService {
     public boolean batchDeleteDictionaries(List<DictionaryDTO> list) {
         return dictionaryHandler.batchDeleteDictionaries(DTOConvert.INSTANCE.convertDictionaryDTOList2DictionaryBOList(list));
     }
+
+    @Override
+    public List<DictionaryDTO> queryDictionary(String dictionaryType) {
+        return DTOConvert.INSTANCE.convertDictionaryBOList2DictionaryDTOList(dictionaryHandler.queryDictionary(dictionaryType));
+    }
 }

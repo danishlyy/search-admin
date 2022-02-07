@@ -11,4 +11,6 @@ public interface DictionaryService {
     boolean batchUpdateDictionaries(List<DictionaryDTO> list);
 
     boolean batchDeleteDictionaries(List<DictionaryDTO> list);
+
+    List<DictionaryDTO> queryDictionary(String dictionaryType);
 }

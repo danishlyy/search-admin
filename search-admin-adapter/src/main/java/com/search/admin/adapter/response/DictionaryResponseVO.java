@@ -13,4 +13,14 @@ import java.io.Serializable;
 public class DictionaryResponseVO implements Serializable {
     @Serial
     private static final long serialVersionUID = -6968315605427133404L;
+
+    /**
+     * 字典code
+     */
+    private String code;
+
+    /**
+     * 字典描述
+     */
+    private String desc;
 }

@@ -1,7 +1,9 @@
 package com.search.admin.domain.convert;
 
+import com.search.admin.domain.bo.DictionaryBO;
 import com.search.admin.domain.bo.IndexSettingBO;
 import com.search.admin.infra.storage.entity.IndexSettings;
+import com.search.admin.infra.storage.entity.SearchDictionary;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -19,4 +21,6 @@ public interface Entity2BOConvert {
     List<IndexSettingBO> convertIndexEntityList2IndexBOList(List<IndexSettings> records);
 
     List<IndexSettingBO> convertIndexSettingsList2IndexSettingBOList(List<IndexSettings> list);
+
+    List<DictionaryBO> convertDictionaryEntityList2DictionaryBOList(List<SearchDictionary> list);
 }

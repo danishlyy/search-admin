@@ -1,5 +1,9 @@
 package com.search.admin.domain.logic;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.search.admin.domain.bo.DictionaryBO;
+import com.search.admin.domain.convert.Entity2BOConvert;
 import com.search.admin.infra.storage.entity.SearchDictionary;
 import com.search.admin.infra.storage.service.ISearchDictionaryService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,5 +30,11 @@ public class DictionaryLogic {
 
     public boolean batchDeleteDictionaries(List<SearchDictionary> list) {
         return iSearchDictionaryService.removeBatchByIds(list.stream().map(SearchDictionary::getId).collect(Collectors.toList()));
+    }
+
+    public List<DictionaryBO> queryDictionariesByDictionaryType(String dictionaryType) {
+        LambdaQueryWrapper<SearchDictionary> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(SearchDictionary::getDictType,dictionaryType);
+        return Entity2BOConvert.INSTANCE.convertDictionaryEntityList2DictionaryBOList(iSearchDictionaryService.list(queryWrapper));
     }
 }

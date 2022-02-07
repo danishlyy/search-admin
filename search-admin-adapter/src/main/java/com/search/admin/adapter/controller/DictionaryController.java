@@ -1,6 +1,5 @@
 package com.search.admin.adapter.controller;
 
-import com.search.admin.adapter.base.PageResponseVO;
 import com.search.admin.adapter.convert.DictionaryConvert;
 import com.search.admin.adapter.request.DictionaryAddRequestVO;
 import com.search.admin.adapter.request.DictionaryDeleteRequestVO;
@@ -12,14 +11,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
 @Slf4j
-public class SearchDictionaryController {
+public class DictionaryController {
 
     @Autowired
     private DictionaryService dictionaryService;
@@ -64,11 +65,11 @@ public class SearchDictionaryController {
 
     /**
      * 分页查询字典列表
-     *
+     *  {@link  com.search.admin.infra.enums.DictionaryTypeEnum}
      * @return
      */
-    @PostMapping(value = "/v1/page/query/dictionaries")
-    public Result<PageResponseVO<DictionaryResponseVO>> pageQueryDictionaries() {
-        return Result.success(null);
+    @PostMapping(value = "/v1/query/dictionary")
+    public Result<List<DictionaryResponseVO>> queryDictionary(@RequestParam(value = "dictionaryType") @NotNull String dictionaryType) {
+        return Result.success(DictionaryConvert.INSTANCE.convertDictionaryDTOList2DictionaryResponseVOList(dictionaryService.queryDictionary(dictionaryType)));
     }
 }

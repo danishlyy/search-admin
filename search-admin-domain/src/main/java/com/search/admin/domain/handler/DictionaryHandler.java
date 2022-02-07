@@ -27,4 +27,8 @@ public class DictionaryHandler {
     public boolean batchDeleteDictionaries(List<DictionaryBO> list) {
         return dictionaryLogic.batchDeleteDictionaries(BO2EntityConvert.INSTANCE.convertDictionaryBOList2DictionaryEntityList(list));
     }
+
+    public List<DictionaryBO> queryDictionary(String dictionaryType) {
+        return dictionaryLogic.queryDictionariesByDictionaryType(dictionaryType);
+    }
 }
