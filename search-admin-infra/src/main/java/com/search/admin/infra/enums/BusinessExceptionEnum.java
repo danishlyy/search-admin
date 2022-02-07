@@ -6,6 +6,8 @@ public enum BusinessExceptionEnum implements KeyValueEnum {
     INDEX_NOT_EXIST("10000003", "index not exist"),
     NUMBER_OF_REPLICAS_ILLEGAL("10000004", "index replicas must more than 1"),
     INDEX_SETTING_EMPTY("10000005", "index setting is empty"),
+    CLUSTER_HEALTH_FAILED("10000006", "cannot watch cluster health "),
+    CREATE_INDEX_FAILED("10000007", "sync index info to elasticsearch failed "),
     ;
 
     private String code;

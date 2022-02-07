@@ -18,8 +18,8 @@ public class AuditController {
     @Autowired
     private AuditService auditService;
 
-    @PostMapping(value = "/v1/confirm/indexes")
+    @PostMapping(value = "/v1/confirm/index")
     public Result<Boolean> confirmIndexConfiguration(@RequestBody @Valid ConfirmIndexRequestVO requestVO){
-        return Result.success(auditService.confirmIndexConfiguration(requestVO.getIndexIds()));
+        return Result.success(auditService.confirmIndexConfiguration(requestVO.getIndexId()));
     }
 }

@@ -23,4 +23,6 @@ public interface DTOConvert {
     AnalyzerBO convertAnalyzerDTO2AnalyzerBO(AnalyzerDTO analyzerDTO);
 
     IndexBO convertIndexAddDTO2IndexBO(IndexAddDTO indexAddDTO);
+
+    ClusterInfoDTO convertClusterInfoBO2ClusterInfoDTO(ClusterInfoBO clusterInfoBO);
 }
