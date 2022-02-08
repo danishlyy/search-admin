@@ -3,7 +3,7 @@ package com.search.admin.adapter.convert;
 import com.search.admin.adapter.request.DictionaryAddRequestVO;
 import com.search.admin.adapter.request.DictionaryDeleteRequestVO;
 import com.search.admin.adapter.request.DictionaryUpdateRequestVO;
-import com.search.admin.adapter.response.DictionaryResponseVO;
+import com.search.admin.adapter.response.DictionaryVO;
 import com.search.admin.app.dto.DictionaryDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -21,5 +21,7 @@ public interface DictionaryConvert {
 
     List<DictionaryDTO> convertDictionaryDeleteRequestVOList2DictionaryDTOList(List<DictionaryDeleteRequestVO> request);
 
-    List<DictionaryResponseVO> convertDictionaryDTOList2DictionaryResponseVOList(List<DictionaryDTO> source);
+    DictionaryVO convertDictionaryDTO2DictionaryResponseVO(DictionaryDTO source);
+
+    List<DictionaryVO> convertDictionaryDTOList2DictionaryResponseVOList(List<DictionaryDTO> source);
 }

@@ -29,6 +29,7 @@ public class MybatisMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void updateFill(MetaObject metaObject) {
         log.info("start execute MybatisMetaObjectHandler updateFill ");
-        this.strictInsertFill(metaObject, "modifyTime", () -> DateTimeUtil.formatLocalDateTimeNow2String(), String.class);
+        this.strictUpdateFill(metaObject, "modifyTime", () -> DateTimeUtil.formatLocalDateTimeNow2String(), String.class);
+        this.strictUpdateFill(metaObject, "modifier", () -> Constant.ADMIN, String.class);
     }
 }

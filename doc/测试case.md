@@ -58,3 +58,122 @@ response：
     "data": null
 }
 ```
+
+字典查询case：
+GET /v1/query/dictionary?dictionaryType=1
+response：
+```json
+{
+  "code": "00000000",
+  "msg": "response success",
+  "data": [
+    {
+      "id": "1490881719767732225",
+      "dictCode": "standard",
+      "dictDesc": "标准分词器"
+    },
+    {
+      "id": "1490881719771926529",
+      "dictCode": "simple",
+      "dictDesc": "简单分词器"
+    },
+    {
+      "id": "1490881719776120834",
+      "dictCode": "whitespace",
+      "dictDesc": "空格分词器"
+    },
+    {
+      "id": "1490881719784509441",
+      "dictCode": "stop",
+      "dictDesc": "停用词分词器"
+    },
+    {
+      "id": "1490881719788703746",
+      "dictCode": "keyword",
+      "dictDesc": "关键词分词器"
+    },
+    {
+      "id": "1490881719792898049",
+      "dictCode": "pattern",
+      "dictDesc": "模式分词器"
+    }
+  ]
+}
+```
+
+根据字典id批量删除字典id非空验证：
+POST /v1/batch/delete/dictionaries
+request：
+```json
+[
+    {
+        "id":""
+    }
+]
+```
+response：
+```json
+{
+    "code": "99999998",
+    "msg": "字典id不可为空",
+    "data": null
+}
+```
+
+字典根据id批量删除case验证：
+POST /v1/batch/delete/dictionaries
+request：
+```json
+[
+    {
+        "id":"1490883074817314818"
+    },
+    {
+        "id":"1490883074427244546"
+    }
+]
+```
+response：
+```json
+{
+    "code": "00000000",
+    "msg": "response success",
+    "data": true
+}
+```
+
+字典批量更新必填校验case：
+POST /v1/batch/update/dictionaries
+request：
+```json
+[
+    {"id":"", "dictType":"3","dictCode":"0","dictValue":"0","dictDesc":"是test"},
+    {"id":"","dictType":"3","dictCode":"1","dictValue":"1","dictDesc":"否test"}
+]
+```
+response：
+```json
+{
+    "code": "99999998",
+    "msg": "字典id不可为空",
+    "data": null
+}
+```
+
+字典批量更新字典描述信息：
+POST /v1/batch/update/dictionaries
+request：
+```json
+[
+    {"id":"1490883074427244546", "dictType":"3","dictCode":"0","dictValue":"0","dictDesc":"是test"},
+    {"id":"1490883074817314818","dictType":"3","dictCode":"1","dictValue":"1","dictDesc":"否test"}
+]
+```
+response：
+```json
+{
+  "code": "00000000",
+  "msg": "response success",
+  "data": true
+}
+```
