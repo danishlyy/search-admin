@@ -1,6 +1,7 @@
 package com.search.admin.infra.advice;
 
 import com.search.admin.infra.base.Result;
+import com.search.admin.infra.ex.SearchFrameworkException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -26,6 +27,12 @@ public class GlobalExceptionHandler {
         List<ObjectError> allErrors = bindingResult.getAllErrors();
         String errorMsg = allErrors.stream().map(ObjectError::getDefaultMessage).sorted().distinct().collect(Collectors.joining(";"));
         return Result.failOfCode(RESPONSE_VALIDATE_FAIL_CODE, errorMsg);
+    }
+
+    @ExceptionHandler(value = SearchFrameworkException.class)
+    public Result methodParamValidateHandler(SearchFrameworkException ex) {
+        log.warn("method param validate failed", ex);
+        return Result.failOfCode(ex.getErrorCode(), ex.getErrMsg());
     }
 
     @ExceptionHandler(value = Exception.class)

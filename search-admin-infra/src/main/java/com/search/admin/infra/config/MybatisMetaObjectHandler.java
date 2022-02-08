@@ -1,6 +1,7 @@
 package com.search.admin.infra.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.search.admin.infra.enums.YesNoEnum;
 import com.search.admin.infra.util.Constant;
 import com.search.admin.infra.util.DateTimeUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ public class MybatisMetaObjectHandler implements MetaObjectHandler {
         this.strictInsertFill(metaObject, "creator", () -> Constant.ADMIN, String.class);
         this.strictInsertFill(metaObject, "modifyTime", () -> DateTimeUtil.formatLocalDateTimeNow2String(), String.class);
         this.strictInsertFill(metaObject, "modifier", () -> Constant.ADMIN, String.class);
+        this.strictInsertFill(metaObject, "deleteFlag", () -> YesNoEnum.YES.getCode(), String.class);
     }
 
     @Override

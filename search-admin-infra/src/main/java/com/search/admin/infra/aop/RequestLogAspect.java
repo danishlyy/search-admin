@@ -1,5 +1,8 @@
 package com.search.admin.infra.aop;
 
+import com.search.admin.infra.base.Result;
+import com.search.admin.infra.enums.BusinessExceptionEnum;
+import com.search.admin.infra.ex.SearchFrameworkException;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -45,21 +48,22 @@ public class RequestLogAspect {
 
     }
 
-    @Around("execute()")
-    public Object executeAround(ProceedingJoinPoint joinPoint) {
-        StopWatch stopWatch = new StopWatch();
-        stopWatch.start(joinPoint.getSignature().getName());
-        Object proceed = null;
-        try {
-            proceed = joinPoint.proceed();
-        } catch (Throwable e) {
-            log.error("execute around failed", e);
-
-        }
-        stopWatch.stop();
-        log.info("consume time:{}", stopWatch.prettyPrint());
-        return proceed;
-    }
+//    @Around("execute()")
+//    public Result executeAround(ProceedingJoinPoint joinPoint) {
+//        StopWatch stopWatch = new StopWatch();
+//        stopWatch.start(joinPoint.getSignature().getName());
+//        Result proceed = null;
+//        try {
+//            proceed = (Result) joinPoint.proceed();
+//        } catch (Throwable e) {
+//            log.error("execute around failed", e);
+//            SearchFrameworkException searchFrameworkException = (SearchFrameworkException) e;
+//            return Result.failOfCode(searchFrameworkException.getErrorCode(),searchFrameworkException.getErrMsg());
+//        }
+//        stopWatch.stop();
+//        log.info("consume time:{}", stopWatch.prettyPrint());
+//        return proceed;
+//    }
 
 
 }

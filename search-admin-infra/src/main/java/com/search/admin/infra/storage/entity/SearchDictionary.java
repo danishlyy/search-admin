@@ -63,6 +63,7 @@ public class SearchDictionary {
      * 是否有效0有效1无效
      */
     @TableLogic
+    @TableField(fill = FieldFill.INSERT)
     private String deleteFlag;
 
     /**

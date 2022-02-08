@@ -8,6 +8,7 @@ public enum BusinessExceptionEnum implements KeyValueEnum {
     INDEX_SETTING_EMPTY("10000005", "index setting is empty"),
     CLUSTER_HEALTH_FAILED("10000006", "cannot watch cluster health "),
     CREATE_INDEX_FAILED("10000007", "sync index info to elasticsearch failed "),
+    DICTIONARY_TYPE_IS_NULL("10000008", "dictionary type is null "),
     ;
 
     private String code;
