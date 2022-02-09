@@ -5,6 +5,9 @@ import com.search.admin.app.dto.IndexAddDTO;
 import com.search.admin.app.dto.IndexDTO;
 import com.search.admin.app.dto.IndexSettingDTO;
 import com.search.admin.app.dto.PageDTO;
+import com.search.admin.infra.base.ValidateList;
+
+import java.util.List;
 
 public interface IndexService {
 
@@ -17,4 +20,6 @@ public interface IndexService {
     IndexSettingDTO getIndexSetting(String indexId);
 
     PageDTO<IndexDTO> pageQueryIndexes();
+
+    boolean deleteIndex(List<IndexDTO> indexIdList);
 }

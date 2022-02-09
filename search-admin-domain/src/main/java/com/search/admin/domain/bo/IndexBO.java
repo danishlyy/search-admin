@@ -11,6 +11,7 @@ import java.util.List;
 @ToString
 public class IndexBO {
 
+    private String indexId;
     private String indexName;
     private List<IndexMappingPropertiesBO> fields;
 }

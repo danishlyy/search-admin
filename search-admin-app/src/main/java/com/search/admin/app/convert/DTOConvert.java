@@ -27,4 +27,6 @@ public interface DTOConvert {
     ClusterInfoDTO convertClusterInfoBO2ClusterInfoDTO(ClusterInfoBO clusterInfoBO);
 
     List<DictionaryDTO> convertDictionaryBOList2DictionaryDTOList(List<DictionaryBO> source);
+
+    List<IndexBO> convertIndexDTOList2IndexBOList(List<IndexDTO> indexIdList);
 }

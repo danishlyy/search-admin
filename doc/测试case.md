@@ -48,11 +48,17 @@ response:
 POST /v1/batch/insert/dictionaries
 request：
 ```json
-
+[{"dictType":"3","dictCode":"0","dictValue":"0","dictDesc":"是"},
+{"dictType":"3","dictCode":"1","dictValue":"1","dictDesc":"否"}
+]
 ```
 response：
 ```json
-
+{
+    "code": "10000009",
+    "msg": "dictType_dictCode 3_0;3_1  is repeatable ",
+    "data": null
+}
 ```
 
 字典查询必填参数验证：
@@ -178,6 +184,165 @@ request：
 [
     {"id":"1490883074427244546", "dictType":"3","dictCode":"0","dictValue":"0","dictDesc":"是test"},
     {"id":"1490883074817314818","dictType":"3","dictCode":"1","dictValue":"1","dictDesc":"否test"}
+]
+```
+response：
+```json
+{
+  "code": "00000000",
+  "msg": "response success",
+  "data": true
+}
+```
+
+新增索引名称、分片、副本数参数校验不通过case：
+POST /v1/create/index/setting
+request：
+```json
+{"indexName":"","numberOfShards":"","numberOfReplicas":""}
+```
+response：
+```json
+{
+    "code": "99999998",
+    "msg": "indexName is not correct,please refer to https://www.elastic.co/guide/en/elasticsearch/reference/7.0/indices-create-index.html;numberOfReplicas cannot be null,at least 1;numberOfShards cannot be null,at least 1;不能为空",
+    "data": null
+}
+```
+新增索引名称、分片、副本成功case：
+POST /v1/create/index/setting
+request：
+```json
+{"indexName":"product_info","indexDesc":"产品信息","numberOfShards":"1","numberOfReplicas":"2"}
+```
+response：
+```json
+{
+    "code": "00000000",
+    "msg": "response success",
+    "data": true
+}
+```
+重复新增索引名称、分片、副本失败case：
+POST /v1/create/index/setting
+request：
+```json
+{"indexName":"product_info","indexDesc":"产品信息","numberOfShards":"1","numberOfReplicas":"2"}
+```
+response：
+```json
+{
+    "code": "10000001",
+    "msg": "indexName product_info has exist",
+    "data": null
+}
+```
+修改索引副本、描述信息不传id校验失败case：
+POST /v1/update/index/setting
+request：
+```json
+{"indexId":"","indexDesc":"产品信息test","numberOfReplicas":"3"}
+```
+response：
+```json
+{
+    "code": "99999998",
+    "msg": "索引id不可以为空",
+    "data": null
+}
+```
+修改索引副本、描述信息成功case：
+POST /v1/update/index/setting
+request：
+```json
+{"indexId":"1491330950936715265","indexDesc":"产品信息test","numberOfReplicas":"3"}
+```
+response：
+```json
+{
+    "code": "00000000",
+    "msg": "response success",
+    "data": true
+}
+```
+
+根据索引id查询索引名称、描述、分片、副本成功case：
+GET /v1/get/index/setting?indexId=1491330950936715265
+request：
+```json
+
+```
+response：
+```json
+{
+    "code": "00000000",
+    "msg": "response success",
+    "data": {
+        "indexId": "1491330950936715265",
+        "indexName": "product_info",
+        "numberOfShards": "1",
+        "numberOfReplicas": "3"
+    }
+}
+```
+
+根据索引id查询索引名称、描述、分片、副本失败case：
+GET /v1/get/index/setting?indexId=1491330950936715265
+request：
+```json
+{
+    "code": "10000003",
+    "msg": "index not exist",
+    "data": null
+}
+```
+response：
+```json
+{
+    "code": "00000000",
+    "msg": "response success",
+    "data": {
+        "indexId": "1491330950936715265",
+        "indexName": "product_info",
+        "numberOfShards": "1",
+        "numberOfReplicas": "3"
+    }
+}
+```
+
+根据索引id批量删除索引信息必填校验case：
+POST /v1/delete/indexes
+request
+```json
+[
+  {
+    "indexId":""
+  },
+  {
+    "indexId":""
+  }
+]
+```
+response：
+```json
+{
+    "code": "99999998",
+    "msg": "索引id不可以为空",
+    "data": null
+}
+```
+
+根据索引id批量删除索引信息必填校验case：
+POST /v1/delete/indexes
+request
+```json
+[
+  {
+    "indexId":"1491330950936715265"
+  },
+  {
+    "indexId":"1491349710993129474"
+  }
 ]
 ```
 response：

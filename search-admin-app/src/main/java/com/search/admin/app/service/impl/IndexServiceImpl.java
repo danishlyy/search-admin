@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Slf4j
 public class IndexServiceImpl implements IndexService {
@@ -51,5 +53,11 @@ public class IndexServiceImpl implements IndexService {
     public PageDTO<IndexDTO> pageQueryIndexes() {
         PageBO<IndexSettingBO> pageBO = indexHandler.pageQueryIndexes();
         return DTOConvert.INSTANCE.convertPageIndexSettingBO2PageIndexDTO(pageBO);
+    }
+
+    @Override
+    public boolean deleteIndex(List<IndexDTO> indexIdList) {
+        List<IndexBO> list = DTOConvert.INSTANCE.convertIndexDTOList2IndexBOList(indexIdList);
+        return indexHandler.deleteIndex(list);
     }
 }

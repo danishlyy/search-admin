@@ -3,6 +3,7 @@ package com.search.admin.adapter.controller;
 import com.search.admin.adapter.base.PageResponseVO;
 import com.search.admin.adapter.convert.IndexConvert;
 import com.search.admin.adapter.request.IndexAddRequestVO;
+import com.search.admin.adapter.request.IndexDeleteRequestVO;
 import com.search.admin.adapter.request.IndexSettingAddRequestVO;
 import com.search.admin.adapter.request.IndexSettingUpdateRequestVO;
 import com.search.admin.adapter.response.IndexResponseVO;
@@ -13,12 +14,15 @@ import com.search.admin.app.dto.IndexSettingDTO;
 import com.search.admin.app.dto.PageDTO;
 import com.search.admin.app.service.IndexService;
 import com.search.admin.infra.base.Result;
+import com.search.admin.infra.base.ValidateList;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -89,9 +93,10 @@ public class IndexController {
      *
      * @return
      */
-    @PostMapping(value = "/v1/delete/index")
-    public Result<String> deleteIndex() {
-        return Result.success(null);
+    @PostMapping(value = "/v1/delete/indexes")
+    public Result<Boolean> deleteIndex(@RequestBody @Validated ValidateList<IndexDeleteRequestVO> request) {
+        List<IndexDTO> list = IndexConvert.INSTANCE.convertIndexDeleteRequestVOList2IndexDTOList(request);
+        return Result.success(indexService.deleteIndex(list));
     }
 
     /**

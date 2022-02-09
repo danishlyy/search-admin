@@ -16,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Objects;
 
 @Component
@@ -34,7 +35,7 @@ public class IndexHandler {
         boolean exist = indexQueryLogic.findIndexByIndexName(indexSettingBO.getIndexName());
         if (exist) {
             log.warn("indexName:{}", indexSettingBO.getIndexName());
-            throw new SearchFrameworkException(BusinessExceptionEnum.INDEX_NAME_EXIST.getCode(), BusinessExceptionEnum.INDEX_NAME_EXIST.getDesc());
+            throw new SearchFrameworkException(BusinessExceptionEnum.INDEX_NAME_EXIST.getCode(), String.format(BusinessExceptionEnum.INDEX_NAME_EXIST.getDesc(),indexSettingBO.getIndexName()));
         }
         return indexAddLogic.addIndexSetting(indexSettingBO);
     }
@@ -57,10 +58,15 @@ public class IndexHandler {
 
         // 设置索引的分片新副本数
         indexSettings.setNumberOfReplicas(indexSettingBO.getNumberOfReplicas());
+        indexSettings.setIndexDesc(indexSettingBO.getIndexDesc());
         return indexUpdateLogic.updateIndexSetting(indexSettings);
     }
 
     public IndexSettingBO getIndexSetting(IndexSettingBO indexSettingBO) {
+        if (StringUtils.isBlank(indexSettingBO.getIndexId())){
+            log.warn("indexId:{}",indexSettingBO.getIndexId());
+            throw new SearchFrameworkException(BusinessExceptionEnum.INDEX_NOT_EXIST.getCode(),BusinessExceptionEnum.INDEX_NOT_EXIST.getDesc() );
+        }
         IndexSettings entity = indexQueryLogic.findIndexByIndexId(indexSettingBO.getIndexId());
         return Entity2BOConvert.INSTANCE.convertIndexSettings2IndexSettingBO(entity);
     }
@@ -75,5 +81,9 @@ public class IndexHandler {
             return indexUpdateLogic.updateIndexMapping(indexBO);
         }
         return indexAddLogic.addIndexMapping(indexBO);
+    }
+
+    public boolean deleteIndex(List<IndexBO> list) {
+        return indexDeleteLogic.deleteIndex(list);
     }
 }

@@ -24,6 +24,11 @@ public class IndexSettingDTO implements Serializable {
     private String indexName;
 
     /**
+     * 索引描述
+     */
+    private String indexDesc;
+
+    /**
      * 分片数
      */
     private String numberOfShards;

@@ -16,7 +16,10 @@ public class IndexSettingUpdateRequestVO extends IndexBaseRequestVO implements S
     @Serial
     private static final long serialVersionUID = -7406465604046827145L;
 
-    @NotBlank(message = "numberOfReplicas cannot be null,at least 1")
+    @NotBlank(message = "索引副本数不可以为空，至少为1")
     private String numberOfReplicas;
+
+    @NotBlank(message = "索引描述不可以为空")
+    private String indexDesc;
 
 }

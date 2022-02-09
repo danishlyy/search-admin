@@ -22,4 +22,14 @@ public class IndexMappingPropertiesRequestVO implements Serializable {
     @NotBlank(message = "索引fieldType不可以为空")
     @FieldTypeValid
     private String fieldType;
+    /**
+     * 是否分词 需要注解校验
+     */
+    private String analyzeFlag;
+
+    /**
+     * 分词器类型
+     */
+    private String analyzeType;
+
 }

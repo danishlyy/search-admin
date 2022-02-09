@@ -21,17 +21,23 @@ public class IndexSettingAddRequestVO implements Serializable {
      * 索引名称
      */
     @IndexNameLimitation
-    @NotBlank
+    @NotBlank(message = "索引名称不可以为空")
     private String indexName;
+
+    /**
+     * 索引描述
+     */
+    @NotBlank(message = "索引描述不可以为空")
+    private String indexDesc;
 
     /**
      * 分片数
      */
-    @NotBlank(message = "numberOfShards cannot be null,at least 1")
+    @NotBlank(message = "分片数不可以为空，必须大于等于1")
     private String numberOfShards;
     /**
      * 副本数
      */
-    @NotBlank(message = "numberOfReplicas cannot be null,at least 1")
+    @NotBlank(message = "副本数不可以为空，必须大于等于1")
     private String numberOfReplicas;
 }

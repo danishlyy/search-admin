@@ -21,6 +21,11 @@ public class IndexSettingResponseVO extends IndexBaseResponseVO implements Seria
     private String indexName;
 
     /**
+     * 索引描述
+     */
+    private String indexDesc;
+
+    /**
      * 索引分片数
      */
     private String numberOfShards;

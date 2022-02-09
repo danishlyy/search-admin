@@ -1,7 +1,7 @@
 package com.search.admin.infra.enums;
 
 public enum BusinessExceptionEnum implements KeyValueEnum {
-    INDEX_NAME_EXIST("10000001", "indexName has exist"),
+    INDEX_NAME_EXIST("10000001", "indexName %s has exist"),
     INDEX_SETTING_CONVERT("10000002", "index setting convert2json or json2object failed"),
     INDEX_NOT_EXIST("10000003", "index not exist"),
     NUMBER_OF_REPLICAS_ILLEGAL("10000004", "index replicas must more than 1"),
