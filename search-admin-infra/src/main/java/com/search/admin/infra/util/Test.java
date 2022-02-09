@@ -18,6 +18,8 @@ public class Test {
         String format = dateTimeFormatter.format(now);
         log.info("time:{}", format);
 
+        String msg = "code %s is repeatable";
+        log.info("msg:{}",String.format(msg,"1_0"));
 
     }
 }

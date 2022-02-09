@@ -55,8 +55,8 @@ create table search_dictionary
     id          varchar(128) not null
         constraint search_dictionary_pk
         primary key,
-    dict_type   varchar(64),
-    dict_code   varchar(4),
+    dict_type   varchar(16),
+    dict_code   varchar(16),
     dict_value  varchar(64),
     creator     varchar(64)  not null,
     create_time varchar(14)  not null,
@@ -90,6 +90,11 @@ comment on column search_dictionary.dict_desc is '字典描述';
 
 alter table search_dictionary
     owner to search_admin;
+
+create index idx_type_code
+    on search_dictionary (dict_code, dict_type);
+
+
 
 -- auto-generated definition
 create table sync_index_info_history

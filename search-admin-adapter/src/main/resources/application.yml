@@ -64,6 +64,7 @@ spring:
 
 #mybatisplus 配置
 mybatis-plus:
+  mapper-locations: classpath:/mapper/**/**/*Mapper.xml
   global-config:
     db-config:
       logic-delete-field: deleteFlag # 全局逻辑删除的实体字段名

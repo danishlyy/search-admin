@@ -3,9 +3,7 @@ package com.search.admin.adapter.request;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.io.Serial;
 import java.io.Serializable;

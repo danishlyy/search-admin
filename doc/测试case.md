@@ -44,6 +44,17 @@ response:
 }
 ```
 
+批量新增字典重复字典code校验case：
+POST /v1/batch/insert/dictionaries
+request：
+```json
+
+```
+response：
+```json
+
+```
+
 字典查询必填参数验证：
 GET /v1/query/dictionary?dictionaryType=
 request：

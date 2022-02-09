@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.search.admin.infra.storage.mapper.SearchDictionaryMapper">
+
+    <select id="listByValidateConditions" resultType="com.search.admin.infra.storage.entity.SearchDictionary">
+        select dict_type,dict_code from search_dictionary t where   t.dict_type||dict_code in
+        <foreach collection="validateCondition" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+</mapper>

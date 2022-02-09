@@ -2,6 +2,9 @@ package com.search.admin.infra.storage.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.search.admin.infra.storage.entity.SearchDictionary;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.search.admin.infra.storage.entity.SearchDictionary;
  */
 public interface SearchDictionaryMapper extends BaseMapper<SearchDictionary> {
 
+    List<SearchDictionary> listByValidateConditions(@Param("validateCondition") List<String> validateCondition);
 }

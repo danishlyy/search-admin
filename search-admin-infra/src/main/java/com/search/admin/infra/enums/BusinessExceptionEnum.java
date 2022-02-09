@@ -9,6 +9,7 @@ public enum BusinessExceptionEnum implements KeyValueEnum {
     CLUSTER_HEALTH_FAILED("10000006", "cannot watch cluster health "),
     CREATE_INDEX_FAILED("10000007", "sync index info to elasticsearch failed "),
     DICTIONARY_TYPE_IS_NULL("10000008", "dictionary type is null "),
+    DICTIONARY_CODE_REPEATABLE("10000009", "dictType_dictCode %s  is repeatable "),
     ;
 
     private String code;

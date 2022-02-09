@@ -6,6 +6,8 @@ import com.search.admin.infra.storage.mapper.SearchDictionaryMapper;
 import com.search.admin.infra.storage.service.ISearchDictionaryService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 搜索字典表 服务实现类
@@ -17,4 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class SearchDictionaryServiceImpl extends ServiceImpl<SearchDictionaryMapper, SearchDictionary> implements ISearchDictionaryService {
 
+    @Override
+    public List<SearchDictionary> listByValidateConditions(List<String> validateCondition) {
+        return baseMapper.listByValidateConditions( validateCondition);
+    }
 }
