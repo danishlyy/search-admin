@@ -24,4 +24,12 @@ public class IndexResponseVO extends IndexBaseResponseVO implements Serializable
      * 索引描述
      */
     private String indexDesc;
+    /**
+     * 分片数
+     */
+    private String numberOfShards;
+    /**
+     * 副本数
+     */
+    private String numberOfReplicas;
 }

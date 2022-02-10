@@ -20,4 +20,8 @@ public class IndexDTO {
      * 索引描述
      */
     private String indexDesc;
+
+    private String numberOfShards;
+
+    private String numberOfReplicas;
 }

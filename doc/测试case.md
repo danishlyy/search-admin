@@ -299,14 +299,15 @@ request：
 response：
 ```json
 {
-    "code": "00000000",
-    "msg": "response success",
-    "data": {
-        "indexId": "1491330950936715265",
-        "indexName": "product_info",
-        "numberOfShards": "1",
-        "numberOfReplicas": "3"
-    }
+  "code": "00000000",
+  "msg": "response success",
+  "data": {
+    "indexId": "1491330950936715265",
+    "indexName": "product_info",
+    "indexDesc": "产品信息test",
+    "numberOfShards": "1",
+    "numberOfReplicas": "3"
+  }
 }
 ```
 
@@ -389,5 +390,40 @@ response：
   "code": "99999998",
   "msg": "分词器不可以为空;索引名称必须有;需要分词的文本不可以为空",
   "data": null
+}
+```
+
+ES索引列表 分页查询成功case
+GET /v1/page/query/indexes
+request：
+```json
+
+```
+response：
+```json
+{
+    "code": "00000000",
+    "msg": "response success",
+    "data": {
+        "pages": "1",
+        "total": "2",
+        "current": "1",
+        "records": [
+            {
+                "indexId": "1491330950936715265",
+                "indexName": "product_info",
+                "indexDesc": "产品信息test",
+                "numberOfShards": "1",
+                "numberOfReplicas": "3"
+            },
+            {
+                "indexId": "1491349710993129474",
+                "indexName": "trade_info",
+                "indexDesc": "交易信息",
+                "numberOfShards": "1",
+                "numberOfReplicas": "1"
+            }
+        ]
+    }
 }
 ```
