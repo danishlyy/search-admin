@@ -17,4 +17,8 @@ public class AnalyzerDTO {
      * 待分词文本
      */
     private String text;
+
+    private String indexName;
+
+    private String analyzerType;
 }

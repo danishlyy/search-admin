@@ -353,3 +353,41 @@ response：
   "data": true
 }
 ```
+
+基于索引进行文本分词验证成功case：
+POST /v1/custom/analyze/text
+request：
+```json
+{
+  "analyzer": "whitespace",
+  "text": "Michael Jordan",
+  "indexName":"hotel_order"
+}
+```
+response：
+```json
+{
+    "code": "00000000",
+    "msg": "response success",
+    "data": "[{\"term\":\"michael\",\"startOffset\":0,\"endOffset\":7,\"position\":0,\"positionLength\":1,\"type\":\"<ALPHANUM>\",\"attributes\":{}},{\"term\":\"jordan\",\"startOffset\":8,\"endOffset\":14,\"position\":1,\"positionLength\":1,\"type\":\"<ALPHANUM>\",\"attributes\":{}}]"
+}
+```
+
+基于索引进行文本分词验证失败case：
+POST /v1/custom/analyze/text
+request：
+```json
+{
+  "analyzer": "",
+  "text": "",
+  "indexName":""
+}
+```
+response：
+```json
+{
+  "code": "99999998",
+  "msg": "分词器不可以为空;索引名称必须有;需要分词的文本不可以为空",
+  "data": null
+}
+```

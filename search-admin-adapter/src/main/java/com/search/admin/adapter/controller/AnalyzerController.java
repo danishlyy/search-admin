@@ -2,6 +2,7 @@ package com.search.admin.adapter.controller;
 
 import com.search.admin.adapter.convert.AnalyzerConvert;
 import com.search.admin.adapter.request.AnalyzerRequestVO;
+import com.search.admin.adapter.request.CustomAnalyzerRequestVO;
 import com.search.admin.app.dto.AnalyzerDTO;
 import com.search.admin.app.service.AnalyzerService;
 import com.search.admin.infra.base.Result;
@@ -24,7 +25,7 @@ public class AnalyzerController {
     private AnalyzerService analyzerService;
 
     /**
-     * 验证分词效果
+     * 内置分词器 验证分词效果
      * @param requestVO
      * @return
      */
@@ -32,5 +33,12 @@ public class AnalyzerController {
     public Result<String> analyzer(@RequestBody @Valid AnalyzerRequestVO requestVO){
         AnalyzerDTO analyzerDTO = AnalyzerConvert.INSTANCE.convertAnalyzerRequestVO2AnalyzerDTO(requestVO);
         return Result.success(analyzerService.analyzer(analyzerDTO));
+    }
+
+    @PostMapping(value = "/v1/custom/analyze/text")
+    public Result<String> customAnalyzer(@RequestBody @Valid CustomAnalyzerRequestVO requestVO){
+        AnalyzerDTO analyzerDTO = AnalyzerConvert.INSTANCE.convertCustomAnalyzerRequestVO2AnalyzerDTO(requestVO);
+        return Result.success(analyzerService.analyzer(analyzerDTO));
+
     }
 }

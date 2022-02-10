@@ -17,4 +17,11 @@ public class AnalyzerBO {
      * 待分词文本
      */
     private String text;
+
+    private String indexName;
+    /**
+     * {@link com.search.admin.infra.enums.AnalyzerTypeEnum}
+     * 分词器分类
+     */
+    private String analyzerType;
 }
