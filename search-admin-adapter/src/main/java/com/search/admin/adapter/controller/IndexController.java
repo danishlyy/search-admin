@@ -72,11 +72,10 @@ public class IndexController {
      * @return
      */
     @PostMapping(value = "/v1/create/index/mapping")
-    public Result<String> createIndexMapping(@RequestBody @Valid IndexAddRequestVO indexAddRequestVO) {
+    public Result<Boolean> createIndexMapping(@RequestBody @Valid IndexAddRequestVO indexAddRequestVO) {
         IndexAddDTO indexAddDTO = IndexConvert.INSTANCE.convertIndexAddRequestVO2IndexAddDTO(indexAddRequestVO);
         return Result.success(indexService.createIndexMapping(indexAddDTO));
     }
-
     /**
      * 更新索引映射信息 指允许增加field，不可以修改原有field类型
      *

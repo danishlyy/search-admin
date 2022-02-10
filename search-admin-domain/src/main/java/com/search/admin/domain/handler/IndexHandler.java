@@ -75,12 +75,8 @@ public class IndexHandler {
         return indexQueryLogic.pageQueryIndexes();
     }
 
-    public String createIndexMapping(IndexBO indexBO) {
-        boolean exist = indexQueryLogic.findIndexByIndexName(indexBO.getIndexName());
-        if (exist) {
-            return indexUpdateLogic.updateIndexMapping(indexBO);
-        }
-        return indexAddLogic.addIndexMapping(indexBO);
+    public boolean createIndexMapping(IndexBO indexBO) {
+        return indexUpdateLogic.updateIndexMapping(indexBO);
     }
 
     public boolean deleteIndex(List<IndexBO> list) {

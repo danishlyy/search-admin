@@ -24,12 +24,9 @@ public class AuditLogic {
     @Autowired
     private SearchAdminClient searchAdminClient;
 
-    /**
-     * sync index info to elasticsearch，save sync history
-     * @param indexSettings
-     * @return
-     */
-    public boolean syncIndexConfiguration(IndexSettings indexSettings) {
+
+
+    public boolean auditIndexSetting(IndexSettings indexSettings) {
         RestHighLevelClient client = searchAdminClient.elasticsearchClient();
         String indexName = indexSettings.getIndexName();
         CreateIndexRequest createIndexRequest = new CreateIndexRequest(indexName);
@@ -38,6 +35,20 @@ public class AuditLogic {
                 .put(ElasticSearchKeysEnum.setting_number_of_replicas.getCode(), indexSettings.getNumberOfReplicas())
                 .build();
         createIndexRequest.settings(settings);
+        CreateIndexResponse createIndexResponse = null;
+        try {
+            createIndexResponse = client.indices().create(createIndexRequest, RequestOptions.DEFAULT);
+        } catch (IOException e) {
+            log.error("sync index info to elasticsearch failed",e);
+            throw new SearchFrameworkException(BusinessExceptionEnum.CREATE_INDEX_FAILED.getCode(),BusinessExceptionEnum.CREATE_INDEX_FAILED.getDesc());
+        }
+        return createIndexResponse.isAcknowledged();
+    }
+
+    public boolean auditIndexMapping(IndexSettings indexSettings) {
+        RestHighLevelClient client = searchAdminClient.elasticsearchClient();
+        String indexName = indexSettings.getIndexName();
+        CreateIndexRequest createIndexRequest = new CreateIndexRequest(indexName);
         createIndexRequest.mapping(indexSettings.getIndexMapping(), XContentType.JSON);
         CreateIndexResponse createIndexResponse = null;
         try {

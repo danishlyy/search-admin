@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-public class ConfirmIndexRequestVO implements Serializable {
+public class AuditIndexRequestVO implements Serializable {
     @Serial
     private static final long serialVersionUID = -7507538722057632514L;
 

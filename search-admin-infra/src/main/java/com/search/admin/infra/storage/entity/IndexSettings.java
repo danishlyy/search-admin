@@ -42,9 +42,14 @@ public class IndexSettings {
     private String numberOfReplicas;
 
     /**
-     * 字段映射
+     * 字段映射 构造成ES原生的映射
      */
     private String indexMapping;
+
+    /**
+     * 原始字段映射 前端传入
+     */
+    private String originalMapping;
 
     /**
      * 创建者

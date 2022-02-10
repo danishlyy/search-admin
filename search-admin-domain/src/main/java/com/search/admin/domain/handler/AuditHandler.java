@@ -17,10 +17,13 @@ public class AuditHandler {
     private AuditLogic auditLogic;
 
 
-
-
-    public boolean confirmIndexConfiguration(String indexId) {
+    public boolean auditIndexSetting(String indexId) {
         IndexSettings indexSettings = indexQueryLogic.findIndexByIndexId(indexId);
-        return auditLogic.syncIndexConfiguration(indexSettings);
+        return auditLogic.auditIndexSetting(indexSettings);
+    }
+
+    public boolean auditIndexMapping(String indexId) {
+        IndexSettings indexSettings = indexQueryLogic.findIndexByIndexId(indexId);
+        return auditLogic.auditIndexMapping(indexSettings);
     }
 }

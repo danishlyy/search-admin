@@ -4,7 +4,6 @@ import com.search.admin.adapter.base.IndexBaseRequestVO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.validation.annotation.Validated;
 
 import java.io.Serial;
 import java.io.Serializable;

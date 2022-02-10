@@ -11,4 +11,6 @@ public class IndexMappingPropertiesDTO {
 
     private String fieldName;
     private String fieldType;
+    private String analyzeFlag;
+    private String analyzeType;
 }

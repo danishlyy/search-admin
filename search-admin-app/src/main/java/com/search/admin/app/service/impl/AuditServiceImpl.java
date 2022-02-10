@@ -12,8 +12,14 @@ public class AuditServiceImpl implements AuditService {
 
     @Autowired
     private AuditHandler auditHandler;
+
     @Override
-    public boolean confirmIndexConfiguration(String indexId) {
-        return auditHandler.confirmIndexConfiguration(indexId);
+    public boolean auditIndexSetting(String indexId) {
+        return auditHandler.auditIndexSetting(indexId);
+    }
+
+    @Override
+    public boolean auditIndexMapping(String indexId) {
+        return auditHandler.auditIndexMapping(indexId);
     }
 }

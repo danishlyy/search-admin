@@ -24,7 +24,7 @@ public class IndexServiceImpl implements IndexService {
     private IndexHandler indexHandler;
 
     @Override
-    public String createIndexMapping(IndexAddDTO indexAddDTO) {
+    public boolean createIndexMapping(IndexAddDTO indexAddDTO) {
         IndexBO indexBO = DTOConvert.INSTANCE.convertIndexAddDTO2IndexBO(indexAddDTO);
         return indexHandler.createIndexMapping(indexBO);
     }

@@ -11,6 +11,7 @@ public enum BusinessExceptionEnum implements KeyValueEnum {
     DICTIONARY_TYPE_IS_NULL("10000008", "dictionary type is null "),
     DICTIONARY_CODE_REPEATABLE("10000009", "dictType_dictCode %s  is repeatable "),
     ANALYZE_TEXT_FAILED("10000010", "analyze failed "),
+    PARSE_MAPPING_OBJECT_FAILED("10000011", "parse mapping object failed "),
     ;
 
     private String code;

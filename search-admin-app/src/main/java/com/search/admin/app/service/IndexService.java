@@ -5,13 +5,12 @@ import com.search.admin.app.dto.IndexAddDTO;
 import com.search.admin.app.dto.IndexDTO;
 import com.search.admin.app.dto.IndexSettingDTO;
 import com.search.admin.app.dto.PageDTO;
-import com.search.admin.infra.base.ValidateList;
 
 import java.util.List;
 
 public interface IndexService {
 
-    String createIndexMapping(IndexAddDTO indexAddDTO);
+    boolean createIndexMapping(IndexAddDTO indexAddDTO);
 
     boolean createIndexSetting(IndexSettingDTO indexSettingDTO);
 
