@@ -1,7 +1,7 @@
 package com.search.admin.infra.storage.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.search.admin.infra.storage.entity.SyncIndexInfoHistory;
+import com.search.admin.infra.storage.entity.AuditIndexInfo;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import com.search.admin.infra.storage.entity.SyncIndexInfoHistory;
  * </p>
  *
  * @author liyongyong
- * @since 2022-02-03
+ * @since 2022-02-11
  */
-public interface ISyncIndexInfoHistoryService extends IService<SyncIndexInfoHistory> {
+public interface IAuditIndexInfoService extends IService<AuditIndexInfo> {
 
 }

@@ -1,7 +1,7 @@
 package com.search.admin.infra.storage.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.search.admin.infra.storage.entity.SyncIndexInfoHistory;
+import com.search.admin.infra.storage.entity.AuditIndexInfo;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import com.search.admin.infra.storage.entity.SyncIndexInfoHistory;
  * </p>
  *
  * @author liyongyong
- * @since 2022-02-03
+ * @since 2022-02-11
  */
-public interface SyncIndexInfoHistoryMapper extends BaseMapper<SyncIndexInfoHistory> {
+public interface AuditIndexInfoMapper extends BaseMapper<AuditIndexInfo> {
 
 }
