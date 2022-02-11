@@ -1,5 +1,6 @@
 package com.search.admin.adapter.request;
 
+import com.search.admin.adapter.base.IndexBaseRequestVO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,7 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-public class IndexQueryRequestVO implements Serializable {
+public class IndexQueryRequestVO extends IndexBaseRequestVO implements Serializable {
     @Serial
     private static final long serialVersionUID = -3509905524393135000L;
 }

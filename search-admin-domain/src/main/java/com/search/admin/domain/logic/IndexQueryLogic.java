@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.search.admin.domain.bo.IndexBO;
 import com.search.admin.domain.bo.IndexSettingBO;
 import com.search.admin.domain.bo.PageBO;
 import com.search.admin.domain.convert.Entity2BOConvert;
@@ -59,5 +60,15 @@ public class IndexQueryLogic {
     public List<IndexSettingBO> findIndexByIds(List<String> indexIds) {
         List<IndexSettings> list = iIndexSettingsService.listByIds(indexIds);
         return Entity2BOConvert.INSTANCE.convertIndexSettingsList2IndexSettingBOList(list);
+    }
+
+    public IndexBO findIndexMappingByIndexId(String indexId) {
+        LambdaQueryWrapper<IndexSettings> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.select(IndexSettings::getId)
+                .select(IndexSettings::getIndexName)
+                .select(IndexSettings::getIndexMapping)
+                .eq(IndexSettings::getId,indexId);
+        IndexSettings indexSettings = iIndexSettingsService.getById(indexId);
+        return Entity2BOConvert.INSTANCE.convertIndexMapping2IndexBO(indexSettings);
     }
 }

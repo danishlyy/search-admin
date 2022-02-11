@@ -15,11 +15,11 @@ public interface DictionaryConvert {
 
     DictionaryConvert INSTANCE = Mappers.getMapper(DictionaryConvert.class);
 
-    List<DictionaryDTO> convertDictionaryAddRequestVOList2DictionaryDTOList(List<DictionaryAddRequestVO> request);
+    List<DictionaryDTO> convertDictionaryAddRequestVOList2DictionaryDTOList(List<DictionaryAddRequestVO> source);
 
-    List<DictionaryDTO> convertDictionaryUpdateRequestVOList2DictionaryDTOList(List<DictionaryUpdateRequestVO> request);
+    List<DictionaryDTO> convertDictionaryUpdateRequestVOList2DictionaryDTOList(List<DictionaryUpdateRequestVO> source);
 
-    List<DictionaryDTO> convertDictionaryDeleteRequestVOList2DictionaryDTOList(List<DictionaryDeleteRequestVO> request);
+    List<DictionaryDTO> convertDictionaryDeleteRequestVOList2DictionaryDTOList(List<DictionaryDeleteRequestVO> source);
 
     DictionaryVO convertDictionaryDTO2DictionaryResponseVO(DictionaryDTO source);
 

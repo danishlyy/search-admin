@@ -3,6 +3,7 @@ package com.search.admin.adapter.controller;
 import com.search.admin.adapter.base.PageResponseVO;
 import com.search.admin.adapter.convert.IndexConvert;
 import com.search.admin.adapter.request.*;
+import com.search.admin.adapter.response.IndexMappingResponseVO;
 import com.search.admin.adapter.response.IndexResponseVO;
 import com.search.admin.adapter.response.IndexSettingResponseVO;
 import com.search.admin.app.dto.IndexAddDTO;
@@ -113,8 +114,9 @@ public class IndexController {
      * @return
      */
     @GetMapping(value = "/v1/get/index/mapping")
-    public Result<IndexResponseVO> getIndexMapping() {
-        return Result.success(null);
+    public Result<IndexMappingResponseVO> getIndexMapping(@RequestBody @Valid IndexQueryRequestVO requestVO) {
+        IndexDTO indexMapping = indexService.getIndexMapping(requestVO.getIndexId());
+        return Result.success(IndexConvert.INSTANCE.convertIndexDTO2IndexMappingResponseVO(indexMapping));
     }
 
 

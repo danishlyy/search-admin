@@ -23,9 +23,9 @@ public interface BO2EntityConvert {
     @Mapping(target = "numberOfReplicas",expression = "java(DefaultValueUtil.setDefaultNumberOfReplicasIfNull(source.getNumberOfShards()))")
     IndexSettings convertIndexSettingBO2IndexSetting(IndexSettingBO source);
 
-    List<SearchDictionary> convertDictionaryBOList2DictionaryEntityList(List<DictionaryBO> list);
+    List<SearchDictionary> convertDictionaryBOList2DictionaryEntityList(List<DictionaryBO> source);
 
     @Mapping(target = "id",source = "indexId")
-    @Mapping(target = "indexMapping",expression = "java(IndexMappingHelper.toOriginalIndexMapping(indexBO))")
-    IndexSettings convertIndexBO2IndexSetting(IndexBO indexBO);
+    @Mapping(target = "indexMapping",expression = "java(IndexMappingHelper.toOriginalIndexMapping(source.getFields()))")
+    IndexSettings convertIndexBO2IndexSetting(IndexBO source);
 }

@@ -86,4 +86,8 @@ public class IndexHandler {
     public boolean updateIndexMapping(IndexBO indexBO) {
         return indexUpdateLogic.updateIndexMapping(indexBO);
     }
+
+    public IndexBO getIndexMapping(String indexId) {
+        return indexQueryLogic.findIndexMappingByIndexId(indexId);
+    }
 }

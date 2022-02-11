@@ -28,4 +28,6 @@ public class DefaultValueUtil {
     public static String setCustomAnalyzerType(){
         return AnalyzerTypeEnum.CUSTOM_ANALYZER_TYPE.getCode();
     }
+
+
 }

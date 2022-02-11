@@ -1,6 +1,8 @@
 package com.search.admin.domain.helper;
 
-import com.search.admin.domain.bo.IndexBO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.search.admin.domain.bo.IndexMappingPropertiesBO;
 import com.search.admin.infra.enums.BusinessExceptionEnum;
 import com.search.admin.infra.ex.SearchFrameworkException;
@@ -16,6 +18,8 @@ import java.util.Map;
 
 @Slf4j
 public class IndexMappingHelper {
+
+    private static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
 
     public static String parseMappingObj2Json(List<IndexMappingPropertiesBO> source){
@@ -41,7 +45,17 @@ public class IndexMappingHelper {
         return JacksonUtil.toJsonString(mapping);
     }
 
-    public static String toOriginalIndexMapping(IndexBO indexBO){
-        return JacksonUtil.toJsonString(indexBO);
+    public static String toOriginalIndexMapping(List<IndexMappingPropertiesBO> list){
+        return JacksonUtil.toJsonString(list);
     }
+
+    public static List<IndexMappingPropertiesBO> convertFieldStr2List(String source){
+        try {
+            return OBJECT_MAPPER.readValue(source, new TypeReference<>() {});
+        } catch (JsonProcessingException e) {
+           throw new SearchFrameworkException(BusinessExceptionEnum.SYSTEM_ERROR.getCode(), BusinessExceptionEnum.SYSTEM_ERROR.getDesc());
+        }
+    }
+
+
 }

@@ -12,6 +12,7 @@ public enum BusinessExceptionEnum implements KeyValueEnum {
     DICTIONARY_CODE_REPEATABLE("10000009", "dictType_dictCode %s  is repeatable "),
     ANALYZE_TEXT_FAILED("10000010", "analyze failed "),
     PARSE_MAPPING_OBJECT_FAILED("10000011", "parse mapping object failed "),
+    SYSTEM_ERROR("10000099", "system error "),
     ;
 
     private String code;

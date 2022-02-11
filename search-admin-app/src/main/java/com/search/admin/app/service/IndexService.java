@@ -23,4 +23,6 @@ public interface IndexService {
     boolean deleteIndex(List<IndexDTO> indexIdList);
 
     boolean updateIndexMapping(IndexAddDTO indexAddDTO);
+
+    IndexDTO getIndexMapping(String indexId);
 }

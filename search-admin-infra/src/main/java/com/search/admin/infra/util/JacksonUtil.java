@@ -28,4 +28,6 @@ public class JacksonUtil {
             throw new SearchFrameworkException(BusinessExceptionEnum.INDEX_SETTING_CONVERT.getCode(), BusinessExceptionEnum.INDEX_SETTING_CONVERT.getDesc());
         }
     }
+
+
 }

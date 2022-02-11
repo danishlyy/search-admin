@@ -13,5 +13,6 @@ public class IndexBO {
 
     private String indexId;
     private String indexName;
+    private String indexMapping;
     private List<IndexMappingPropertiesBO> fields;
 }

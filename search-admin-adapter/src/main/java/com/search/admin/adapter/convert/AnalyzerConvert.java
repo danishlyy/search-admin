@@ -17,5 +17,5 @@ public interface AnalyzerConvert {
     AnalyzerDTO convertAnalyzerRequestVO2AnalyzerDTO(AnalyzerRequestVO source);
 
     @Mapping(target = "analyzerType",expression = "java(DefaultValueUtil.setCustomAnalyzerType())")
-    AnalyzerDTO convertCustomAnalyzerRequestVO2AnalyzerDTO(CustomAnalyzerRequestVO requestVO);
+    AnalyzerDTO convertCustomAnalyzerRequestVO2AnalyzerDTO(CustomAnalyzerRequestVO source);
 }

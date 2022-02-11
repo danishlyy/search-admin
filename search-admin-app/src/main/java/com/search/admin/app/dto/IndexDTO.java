@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -24,4 +26,6 @@ public class IndexDTO {
     private String numberOfShards;
 
     private String numberOfReplicas;
+
+    private List<IndexMappingPropertiesDTO> fields;
 }

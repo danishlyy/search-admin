@@ -66,4 +66,10 @@ public class IndexServiceImpl implements IndexService {
         IndexBO indexBO = DTOConvert.INSTANCE.convertIndexAddDTO2IndexBO(indexAddDTO);
         return indexHandler.updateIndexMapping(indexBO);
     }
+
+    @Override
+    public IndexDTO getIndexMapping(String indexId) {
+        IndexBO indexBO = indexHandler.getIndexMapping(indexId);
+        return DTOConvert.INSTANCE.convertIndexBO2IndexDTO(indexBO);
+    }
 }

@@ -11,5 +11,5 @@ public interface ClusterConvert {
     ClusterConvert INSTANCE = Mappers.getMapper(ClusterConvert.class);
 
 
-    ClusterInfoResponse convertClusterInfo2ClusterInfoResponse(ClusterInfoDTO elasticSearchClusterInfo);
+    ClusterInfoResponse convertClusterInfo2ClusterInfoResponse(ClusterInfoDTO source);
 }

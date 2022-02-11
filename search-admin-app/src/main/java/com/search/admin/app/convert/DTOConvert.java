@@ -12,21 +12,24 @@ public interface DTOConvert {
 
     DTOConvert INSTANCE = Mappers.getMapper(DTOConvert.class);
 
-    IndexSettingBO convertIndexSettingDTO2IndexSettingBO(IndexSettingDTO indexSettingDTO);
+    IndexSettingBO convertIndexSettingDTO2IndexSettingBO(IndexSettingDTO source);
 
-    IndexSettingDTO convertIndexSettingBO2IndexSettingDTO(IndexSettingBO resultBO);
+    IndexSettingDTO convertIndexSettingBO2IndexSettingDTO(IndexSettingBO source);
 
-    PageDTO<IndexDTO> convertPageIndexSettingBO2PageIndexDTO(PageBO<IndexSettingBO> pageBO);
+    PageDTO<IndexDTO> convertPageIndexSettingBO2PageIndexDTO(PageBO<IndexSettingBO> source);
 
-    List<DictionaryBO> convertDictionaryDTOList2DictionaryBOList(List<DictionaryDTO> list);
+    List<DictionaryBO> convertDictionaryDTOList2DictionaryBOList(List<DictionaryDTO> source);
 
-    AnalyzerBO convertAnalyzerDTO2AnalyzerBO(AnalyzerDTO analyzerDTO);
+    AnalyzerBO convertAnalyzerDTO2AnalyzerBO(AnalyzerDTO source);
 
-    IndexBO convertIndexAddDTO2IndexBO(IndexAddDTO indexAddDTO);
+    IndexBO convertIndexAddDTO2IndexBO(IndexAddDTO source);
 
-    ClusterInfoDTO convertClusterInfoBO2ClusterInfoDTO(ClusterInfoBO clusterInfoBO);
+    ClusterInfoDTO convertClusterInfoBO2ClusterInfoDTO(ClusterInfoBO source);
 
     List<DictionaryDTO> convertDictionaryBOList2DictionaryDTOList(List<DictionaryBO> source);
 
-    List<IndexBO> convertIndexDTOList2IndexBOList(List<IndexDTO> indexIdList);
+    List<IndexBO> convertIndexDTOList2IndexBOList(List<IndexDTO> source);
+
+
+    IndexDTO convertIndexBO2IndexDTO(IndexBO source);
 }

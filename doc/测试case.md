@@ -490,3 +490,61 @@ response：
     "data": null
 }
 ```
+
+根据索引id查询索引映射信息校验失败case：
+GET /v1/get/index/mapping
+request：
+```json
+{
+    "indexId":""
+}
+```
+response：
+```json
+{
+    "code": "99999998",
+    "msg": "索引id不可以为空",
+    "data": null
+}
+```
+
+根据索引id查询索引映射信息成功case：
+GET /v1/get/index/mapping
+request：
+```json
+{
+    "indexId":"1491330950936715265"
+}
+```
+response：
+```json
+{
+  "code": "00000000",
+  "msg": "response success",
+  "data": {
+    "indexId": "1491330950936715265",
+    "indexName": "product_info",
+    "fields": [
+      {
+        "fieldName": "productCode",
+        "fieldType": "keyword",
+        "analyzeFlag": "1",
+        "analyzeType": ""
+      },
+      {
+        "fieldName": "productName",
+        "fieldType": "text",
+        "analyzeFlag": "0",
+        "analyzeType": "standard"
+      },
+      {
+        "fieldName": "productType",
+        "fieldType": "keyword",
+        "analyzeFlag": "1",
+        "analyzeType": ""
+      }
+    ]
+  }
+}
+```
+
