@@ -2,10 +2,7 @@ package com.search.admin.adapter.controller;
 
 import com.search.admin.adapter.base.PageResponseVO;
 import com.search.admin.adapter.convert.IndexConvert;
-import com.search.admin.adapter.request.IndexAddRequestVO;
-import com.search.admin.adapter.request.IndexDeleteRequestVO;
-import com.search.admin.adapter.request.IndexSettingAddRequestVO;
-import com.search.admin.adapter.request.IndexSettingUpdateRequestVO;
+import com.search.admin.adapter.request.*;
 import com.search.admin.adapter.response.IndexResponseVO;
 import com.search.admin.adapter.response.IndexSettingResponseVO;
 import com.search.admin.app.dto.IndexAddDTO;
@@ -77,13 +74,14 @@ public class IndexController {
         return Result.success(indexService.createIndexMapping(indexAddDTO));
     }
     /**
-     * 更新索引映射信息 指允许增加field，不可以修改原有field类型
+     * 更新索引映射信息
      *
      * @return
      */
     @PostMapping(value = "/v1/update/index/mapping")
-    public Result<String> updateIndexMapping() {
-        return Result.success(null);
+    public Result<Boolean> updateIndexMapping(@RequestBody @Valid IndexUpdateRequestVO indexUpdateRequestVO) {
+        IndexAddDTO indexAddDTO = IndexConvert.INSTANCE.convertIndexUpdateRequestVO2IndexAddDTO(indexUpdateRequestVO);
+        return Result.success(indexService.updateIndexMapping(indexAddDTO));
     }
 
 

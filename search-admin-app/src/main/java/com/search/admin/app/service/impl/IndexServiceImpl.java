@@ -60,4 +60,10 @@ public class IndexServiceImpl implements IndexService {
         List<IndexBO> list = DTOConvert.INSTANCE.convertIndexDTOList2IndexBOList(indexIdList);
         return indexHandler.deleteIndex(list);
     }
+
+    @Override
+    public boolean updateIndexMapping(IndexAddDTO indexAddDTO) {
+        IndexBO indexBO = DTOConvert.INSTANCE.convertIndexAddDTO2IndexBO(indexAddDTO);
+        return indexHandler.updateIndexMapping(indexBO);
+    }
 }

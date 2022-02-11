@@ -427,3 +427,66 @@ response：
     }
 }
 ```
+
+新增索引映射关系成功case
+POST /v1/create/index/mapping
+request：
+```json
+{"indexId":"1491330950936715265","indexName":"product_info","fields":[{"fieldName":"productCode","fieldType":"keyword","analyzeFlag":"1","analyzeType":""},
+{"fieldName":"productName","fieldType":"text","analyzeFlag":"0","analyzeType":"standard"}]}
+```
+response：
+```json
+{
+    "code": "00000000",
+    "msg": "response success",
+    "data": true
+}
+```
+新增索引时必填校验case
+POST /v1/create/index/mapping
+request：
+```json
+{"indexId":"1491330950936715265","indexName":"product_info","fields":[{"fieldName":"","fieldType":"keyword","analyzeFlag":"1","analyzeType":""},
+  {"fieldName":"productName","fieldType":"text","analyzeFlag":"0","analyzeType":"standard"}]}
+```
+response：
+```json
+{
+  "code": "99999998",
+  "msg": "索引fieldName不可以为空",
+  "data": null
+}
+```
+
+更新索引映射信息成功case[字段名不可修改，字段类型，是否分词、分词类型可修改]：
+POST /v1/update/index/mapping
+request：
+```json
+{"indexId":"1491330950936715265","indexName":"product_info","fields":[{"fieldName":"productCode","fieldType":"keyword","analyzeFlag":"1","analyzeType":""},
+{"fieldName":"productName","fieldType":"text","analyzeFlag":"0","analyzeType":"standard"},{"fieldName":"productType","fieldType":"keyword","analyzeFlag":"1","analyzeType":""}]}
+```
+response：
+```json
+{
+    "code": "00000000",
+    "msg": "response success",
+    "data": true
+}
+```
+
+更新索引映射信息必填校验失败case：
+POST /v1/update/index/mapping
+request：
+```json
+{"indexId":"1491330950936715265","indexName":"product_info","fields":[{"fieldName":"productCode","fieldType":"keyword","analyzeFlag":"1","analyzeType":""},
+{"fieldName":"","fieldType":"text","analyzeFlag":"0","analyzeType":"standard"},{"fieldName":"productType","fieldType":"","analyzeFlag":"1","analyzeType":""}]}
+```
+response：
+```json
+{
+    "code": "99999998",
+    "msg": "field的类型不合法;索引fieldName不可以为空;索引fieldType不可以为空",
+    "data": null
+}
+```

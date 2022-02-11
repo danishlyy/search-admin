@@ -1,10 +1,7 @@
 package com.search.admin.adapter.convert;
 
 import com.search.admin.adapter.base.PageResponseVO;
-import com.search.admin.adapter.request.IndexAddRequestVO;
-import com.search.admin.adapter.request.IndexDeleteRequestVO;
-import com.search.admin.adapter.request.IndexSettingAddRequestVO;
-import com.search.admin.adapter.request.IndexSettingUpdateRequestVO;
+import com.search.admin.adapter.request.*;
 import com.search.admin.adapter.response.IndexResponseVO;
 import com.search.admin.adapter.response.IndexSettingResponseVO;
 import com.search.admin.app.dto.IndexAddDTO;
@@ -32,4 +29,6 @@ public interface IndexConvert {
     PageResponseVO<IndexResponseVO> convertPageIndexDTO2PageIndexResponseVO(PageDTO<IndexDTO> indexDTOPageDTO);
 
     List<IndexDTO> convertIndexDeleteRequestVOList2IndexDTOList(List<IndexDeleteRequestVO> request);
+
+    IndexAddDTO convertIndexUpdateRequestVO2IndexAddDTO(IndexUpdateRequestVO indexUpdateRequestVO);
 }

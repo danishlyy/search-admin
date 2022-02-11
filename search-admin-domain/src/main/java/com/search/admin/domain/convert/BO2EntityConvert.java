@@ -26,7 +26,6 @@ public interface BO2EntityConvert {
     List<SearchDictionary> convertDictionaryBOList2DictionaryEntityList(List<DictionaryBO> list);
 
     @Mapping(target = "id",source = "indexId")
-    @Mapping(target = "originalMapping",expression = "java(IndexMappingHelper.toOriginalIndexMapping(indexBO))")
-    @Mapping(target = "indexMapping",expression = "java(IndexMappingHelper.parseMappingObj2Json(indexBO.getFields()))")
+    @Mapping(target = "indexMapping",expression = "java(IndexMappingHelper.toOriginalIndexMapping(indexBO))")
     IndexSettings convertIndexBO2IndexSetting(IndexBO indexBO);
 }

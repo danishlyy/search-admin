@@ -21,4 +21,6 @@ public interface IndexService {
     PageDTO<IndexDTO> pageQueryIndexes();
 
     boolean deleteIndex(List<IndexDTO> indexIdList);
+
+    boolean updateIndexMapping(IndexAddDTO indexAddDTO);
 }

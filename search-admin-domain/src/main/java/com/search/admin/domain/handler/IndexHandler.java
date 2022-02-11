@@ -82,4 +82,8 @@ public class IndexHandler {
     public boolean deleteIndex(List<IndexBO> list) {
         return indexDeleteLogic.deleteIndex(list);
     }
+
+    public boolean updateIndexMapping(IndexBO indexBO) {
+        return indexUpdateLogic.updateIndexMapping(indexBO);
+    }
 }

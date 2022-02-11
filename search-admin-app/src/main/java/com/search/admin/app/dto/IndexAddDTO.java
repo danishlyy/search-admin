@@ -10,6 +10,7 @@ import java.util.List;
 @Setter
 @ToString
 public class IndexAddDTO {
+    private String indexId;
     private String indexName;
     private List<IndexMappingPropertiesDTO> fields;
 }

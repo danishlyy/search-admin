@@ -46,10 +46,6 @@ public class IndexSettings {
      */
     private String indexMapping;
 
-    /**
-     * 原始字段映射 前端传入
-     */
-    private String originalMapping;
 
     /**
      * 创建者
