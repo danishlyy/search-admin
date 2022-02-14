@@ -22,4 +22,9 @@ public class AuditServiceImpl implements AuditService {
     public boolean auditIndexMapping(String indexId) {
         return auditHandler.auditIndexMapping(indexId);
     }
+
+    @Override
+    public boolean auditDeleteIndex(String indexName) {
+        return auditHandler.auditDeleteIndex(indexName);
+    }
 }

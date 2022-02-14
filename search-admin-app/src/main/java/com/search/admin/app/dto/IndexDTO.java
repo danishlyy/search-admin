@@ -18,6 +18,8 @@ public class IndexDTO {
      */
     private String indexName;
 
+    private String indexStatus;
+
     /**
      * 索引描述
      */

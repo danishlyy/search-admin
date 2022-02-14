@@ -1,12 +1,10 @@
 package com.search.admin.app.service.impl;
 
 import com.search.admin.app.convert.DTOConvert;
-import com.search.admin.app.dto.IndexAddDTO;
-import com.search.admin.app.dto.IndexDTO;
-import com.search.admin.app.dto.IndexSettingDTO;
-import com.search.admin.app.dto.PageDTO;
+import com.search.admin.app.dto.*;
 import com.search.admin.app.service.IndexService;
 import com.search.admin.domain.bo.IndexBO;
+import com.search.admin.domain.bo.IndexPageConditionBO;
 import com.search.admin.domain.bo.IndexSettingBO;
 import com.search.admin.domain.bo.PageBO;
 import com.search.admin.domain.handler.IndexHandler;
@@ -50,8 +48,9 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
-    public PageDTO<IndexDTO> pageQueryIndexes() {
-        PageBO<IndexSettingBO> pageBO = indexHandler.pageQueryIndexes();
+    public PageDTO<IndexDTO> pageQueryIndexes(IndexPageDTO indexPageDTO) {
+        IndexPageConditionBO indexPageConditionBO  = DTOConvert.INSTANCE.convertIndexPageDTO2IndexPageBO(indexPageDTO);
+        PageBO<IndexSettingBO> pageBO = indexHandler.pageQueryIndexes(indexPageConditionBO);
         return DTOConvert.INSTANCE.convertPageIndexSettingBO2PageIndexDTO(pageBO);
     }
 

@@ -5,12 +5,10 @@ import com.search.admin.adapter.request.*;
 import com.search.admin.adapter.response.IndexMappingResponseVO;
 import com.search.admin.adapter.response.IndexResponseVO;
 import com.search.admin.adapter.response.IndexSettingResponseVO;
-import com.search.admin.app.dto.IndexAddDTO;
-import com.search.admin.app.dto.IndexDTO;
-import com.search.admin.app.dto.IndexSettingDTO;
-import com.search.admin.app.dto.PageDTO;
+import com.search.admin.app.dto.*;
 import com.search.admin.infra.util.DefaultValueUtil;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -28,6 +26,8 @@ public interface IndexConvert {
 
     IndexSettingResponseVO convertIndexSettingDTO2IndexSettingResponseVO(IndexSettingDTO source);
 
+    @Mapping(target = "indexStatusDesc",expression = "java(DefaultValueUtil.transIndexStatus(source.getIndexStatus()))")
+    IndexResponseVO IndexDTO2IndexResponseVO(IndexDTO source);
     PageResponseVO<IndexResponseVO> convertPageIndexDTO2PageIndexResponseVO(PageDTO<IndexDTO> source);
 
     List<IndexDTO> convertIndexDeleteRequestVOList2IndexDTOList(List<IndexDeleteRequestVO> source);
@@ -35,4 +35,8 @@ public interface IndexConvert {
     IndexAddDTO convertIndexUpdateRequestVO2IndexAddDTO(IndexUpdateRequestVO source);
 
     IndexMappingResponseVO convertIndexDTO2IndexMappingResponseVO(IndexDTO source);
+
+    NoticeDTO convertNoticeRequestVO2NoticeDTO(NoticeRequestVO source);
+
+    IndexPageDTO convertPageIndexQueryRequestVO2PageIndexQueryDTO(PageIndexQueryRequestVO source);
 }

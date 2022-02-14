@@ -4,10 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Getter
 @Setter
 @ToString
-public class DictionaryDTO {
+public class DictionaryDTO implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -3951941001050500376L;
 
     private String id;
 

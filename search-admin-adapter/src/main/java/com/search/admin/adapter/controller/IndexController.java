@@ -6,10 +6,7 @@ import com.search.admin.adapter.request.*;
 import com.search.admin.adapter.response.IndexMappingResponseVO;
 import com.search.admin.adapter.response.IndexResponseVO;
 import com.search.admin.adapter.response.IndexSettingResponseVO;
-import com.search.admin.app.dto.IndexAddDTO;
-import com.search.admin.app.dto.IndexDTO;
-import com.search.admin.app.dto.IndexSettingDTO;
-import com.search.admin.app.dto.PageDTO;
+import com.search.admin.app.dto.*;
 import com.search.admin.app.service.IndexService;
 import com.search.admin.infra.base.Result;
 import com.search.admin.infra.base.ValidateList;
@@ -103,8 +100,9 @@ public class IndexController {
      * @return
      */
     @GetMapping(value = "/v1/page/query/indexes")
-    public Result<PageResponseVO<IndexResponseVO>> getIndexes() {
-        PageDTO<IndexDTO> indexDTOPageDTO = indexService.pageQueryIndexes();
+    public Result<PageResponseVO<IndexResponseVO>> getIndexes(@RequestBody @Valid  PageIndexQueryRequestVO requestVO) {
+        IndexPageDTO indexPageDTO = IndexConvert.INSTANCE.convertPageIndexQueryRequestVO2PageIndexQueryDTO(requestVO);
+        PageDTO<IndexDTO> indexDTOPageDTO = indexService.pageQueryIndexes(indexPageDTO);
         return Result.success(IndexConvert.INSTANCE.convertPageIndexDTO2PageIndexResponseVO(indexDTOPageDTO));
     }
 
@@ -118,6 +116,8 @@ public class IndexController {
         IndexDTO indexMapping = indexService.getIndexMapping(requestVO.getIndexId());
         return Result.success(IndexConvert.INSTANCE.convertIndexDTO2IndexMappingResponseVO(indexMapping));
     }
+
+
 
 
 

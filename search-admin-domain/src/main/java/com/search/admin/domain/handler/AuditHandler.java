@@ -26,4 +26,8 @@ public class AuditHandler {
         IndexSettings indexSettings = indexQueryLogic.findIndexByIndexId(indexId);
         return auditLogic.auditIndexMapping(indexSettings);
     }
+
+    public boolean auditDeleteIndex(String indexName) {
+        return auditLogic.auditDeleteIndex(indexName);
+    }
 }

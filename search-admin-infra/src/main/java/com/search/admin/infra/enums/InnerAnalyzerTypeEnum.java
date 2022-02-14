@@ -1,12 +1,12 @@
 package com.search.admin.infra.enums;
 
 public enum InnerAnalyzerTypeEnum implements KeyValueEnum<String>{
-    analyzer_type_standard("standard","standard"),
-    analyzer_type_simple("simple","simple"),
-    analyzer_type_whitespace("whitespace","whitespace"),
-    analyzer_type_stop("stop","stop"),
-    analyzer_type_keyword("keyword","keyword"),
-    analyzer_type_pattern("pattern","pattern"),;
+    ANALYZER_TYPE_STANDARD("standard","standard"),
+    ANALYZER_TYPE_SIMPLE("simple","simple"),
+    ANALYZER_TYPE_WHITESPACE("whitespace","whitespace"),
+    ANALYZER_TYPE_STOP("stop","stop"),
+    ANALYZER_TYPE_KEYWORD("keyword","keyword"),
+    ANALYZER_TYPE_PATTERN("pattern","pattern"),;
 
 
     private String code;
@@ -19,11 +19,11 @@ public enum InnerAnalyzerTypeEnum implements KeyValueEnum<String>{
 
     @Override
     public String getCode() {
-        return null;
+        return this.code;
     }
 
     @Override
     public String getDesc() {
-        return null;
+        return this.desc;
     }
 }

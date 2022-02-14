@@ -20,6 +20,10 @@ public class IndexSettingBO {
 
     private String indexDesc;
 
+    private String indexStatus;
+
+    private String indexStatusDesc;
+
     /**
      * 分片数
      */

@@ -393,11 +393,106 @@ response：
 }
 ```
 
+ES索引列表 分页查询参数校验失败case：
+GET /v1/page/query/indexes
+request：
+```json
+{"pageNumber":"","pageSize":"","indexName":"","indexStatus":""}
+```
+response：
+```json
+{
+    "code": "99999998",
+    "msg": "分页参数必传;每页查询的条数必传",
+    "data": null
+}
+```
 ES索引列表 分页查询成功case
 GET /v1/page/query/indexes
 request：
 ```json
+{"pageNumber":"1","pageSize":"10","indexName":"","indexStatus":""}
+```
+response：
+```json
+{
+  "code": "00000000",
+  "msg": "response success",
+  "data": {
+    "pages": "1",
+    "total": "2",
+    "current": "1",
+    "records": [
+      {
+        "indexId": "1491349710993129474",
+        "indexName": "trade_info",
+        "indexDesc": "交易信息",
+        "indexStatusDesc": "有效",
+        "indexStatus": "0",
+        "numberOfShards": "1",
+        "numberOfReplicas": "1"
+      },
+      {
+        "indexId": "1491330950936715265",
+        "indexName": "product_info",
+        "indexDesc": "产品信息test",
+        "indexStatusDesc": "有效",
+        "indexStatus": "0",
+        "numberOfShards": "1",
+        "numberOfReplicas": "3"
+      }
+    ]
+  }
+}
+```
 
+request：
+```json
+{"pageNumber":"1","pageSize":"10","indexName":"product_info","indexStatus":""}
+```
+response：
+```json
+{
+    "code": "00000000",
+    "msg": "response success",
+    "data": {
+        "pages": "1",
+        "total": "1",
+        "current": "1",
+        "records": [
+            {
+                "indexId": "1491330950936715265",
+                "indexName": "product_info",
+                "indexDesc": "产品信息test",
+                "indexStatusDesc": "有效",
+                "indexStatus": "0",
+                "numberOfShards": "1",
+                "numberOfReplicas": "3"
+            }
+        ]
+    }
+}
+```
+request：
+```json
+{"pageNumber":"1","pageSize":"10","indexName":"product_info","indexStatus":"1"}
+```
+response：
+```json
+{
+    "code": "00000000",
+    "msg": "response success",
+    "data": {
+        "pages": "0",
+        "total": "0",
+        "current": "1",
+        "records": []
+    }
+}
+```
+request：
+```json
+{"pageNumber":"2","pageSize":"10","indexName":"","indexStatus":""}
 ```
 response：
 ```json
@@ -407,27 +502,11 @@ response：
     "data": {
         "pages": "1",
         "total": "2",
-        "current": "1",
-        "records": [
-            {
-                "indexId": "1491330950936715265",
-                "indexName": "product_info",
-                "indexDesc": "产品信息test",
-                "numberOfShards": "1",
-                "numberOfReplicas": "3"
-            },
-            {
-                "indexId": "1491349710993129474",
-                "indexName": "trade_info",
-                "indexDesc": "交易信息",
-                "numberOfShards": "1",
-                "numberOfReplicas": "1"
-            }
-        ]
+        "current": "2",
+        "records": []
     }
 }
 ```
-
 新增索引映射关系成功case
 POST /v1/create/index/mapping
 request：
@@ -548,3 +627,32 @@ response：
 }
 ```
 
+通知审核功能入参校验不通过case：
+POST /v1/add/notice/info
+request：
+```json
+{"indexId":"","indexName":"","indexStatus":"","syncType":""}
+```
+response：
+```json
+{
+    "code": "99999998",
+    "msg": "同步类型必填;索引id不可以为空;索引名称不可以为空;索引的状态不可以为空",
+    "data": null
+}
+```
+
+通知审核功能成功case：
+POST /v1/add/notice/info
+request：
+```json
+{"indexId":"1491330950936715265","indexName":"product_info","indexStatus":"0","syncType":"2"}
+```
+response：
+```json
+{
+    "code": "00000000",
+    "msg": "response success",
+    "data": true
+}
+```

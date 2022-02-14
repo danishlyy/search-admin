@@ -25,6 +25,14 @@ public class IndexResponseVO extends IndexBaseResponseVO implements Serializable
      */
     private String indexDesc;
     /**
+     * 索引状态描述
+     */
+    private String indexStatusDesc;
+    /**
+     * 索引状态代码
+     */
+    private String indexStatus;
+    /**
      * 分片数
      */
     private String numberOfShards;

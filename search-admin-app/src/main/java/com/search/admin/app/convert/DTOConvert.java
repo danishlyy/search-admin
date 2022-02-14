@@ -32,4 +32,8 @@ public interface DTOConvert {
 
 
     IndexDTO convertIndexBO2IndexDTO(IndexBO source);
+
+    NoticeBO convertNoticeBO2NoticeDTO(NoticeDTO source);
+
+    IndexPageConditionBO convertIndexPageDTO2IndexPageBO(IndexPageDTO source);
 }

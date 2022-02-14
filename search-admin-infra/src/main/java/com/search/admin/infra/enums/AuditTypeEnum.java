@@ -1,14 +1,14 @@
 package com.search.admin.infra.enums;
 
-public enum ElasticSearchClusterEnum implements KeyValueEnum<String>{
-    GREEN("GREEN","GREEN"),
-    YELLOW("YELLOW","YELLOW"),
-    RED("RED","RED"),;
+public enum AuditTypeEnum implements KeyValueEnum<String>{
+    WAIT_AUDIT("0","待审核"),
+    AUDIT_PASS("1","审核通过"),
+    AUDIT_REJECT("2","拒绝审核"),;
 
     private String code;
     private String desc;
 
-    ElasticSearchClusterEnum(String code, String desc) {
+    AuditTypeEnum(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.search.admin.domain.bo.IndexBO;
+import com.search.admin.domain.bo.IndexPageConditionBO;
 import com.search.admin.domain.bo.IndexSettingBO;
 import com.search.admin.domain.bo.PageBO;
 import com.search.admin.domain.convert.Entity2BOConvert;
@@ -12,6 +13,7 @@ import com.search.admin.infra.enums.YesNoEnum;
 import com.search.admin.infra.storage.entity.IndexSettings;
 import com.search.admin.infra.storage.service.IIndexSettingsService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,10 +37,18 @@ public class IndexQueryLogic {
         return iIndexSettingsService.getById(indexId);
     }
 
-    public PageBO<IndexSettingBO> pageQueryIndexes() {
+    public PageBO<IndexSettingBO> pageQueryIndexes(IndexPageConditionBO pageConditionBO) {
         LambdaQueryWrapper<IndexSettings> queryWrapper = Wrappers.lambdaQuery();
-        queryWrapper.eq(IndexSettings::getDeleteFlag, YesNoEnum.YES.getCode());
+//        queryWrapper.eq(IndexSettings::getDeleteFlag, YesNoEnum.YES.getCode());
+        if (StringUtils.isNotBlank(pageConditionBO.getIndexStatus())){
+            queryWrapper.eq(IndexSettings::getDeleteFlag,pageConditionBO.getIndexStatus());
+        }
+        if (StringUtils.isNotBlank(pageConditionBO.getIndexName())){
+            queryWrapper.like(IndexSettings::getIndexName,pageConditionBO.getIndexName());
+        }
         Page<IndexSettings> indexPage = new Page<>();
+        indexPage.setCurrent(Long.parseLong(pageConditionBO.getPageNumber()));
+        indexPage.setSize(Long.parseLong(pageConditionBO.getPageSize()));
         IPage<IndexSettings> result = iIndexSettingsService.page(indexPage, queryWrapper);
         // 当前页数
         long current = result.getCurrent();

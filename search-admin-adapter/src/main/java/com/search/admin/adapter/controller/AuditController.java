@@ -1,5 +1,6 @@
 package com.search.admin.adapter.controller;
 
+import com.search.admin.adapter.request.AuditIndexDeleteRequestVO;
 import com.search.admin.adapter.request.AuditIndexRequestVO;
 import com.search.admin.app.service.AuditService;
 import com.search.admin.infra.base.Result;
@@ -26,5 +27,10 @@ public class AuditController {
     @PostMapping(value = "/v1/audit/index/mapping")
     public Result<Boolean> auditIndexMapping(@RequestBody @Valid AuditIndexRequestVO requestVO){
         return Result.success(auditService.auditIndexMapping(requestVO.getIndexId()));
+    }
+
+    @PostMapping(value = "/v1/audit/delete/index")
+    public Result<Boolean> auditDeleteIndex(@RequestBody @Valid AuditIndexDeleteRequestVO requestVO){
+        return Result.success(auditService.auditDeleteIndex(requestVO.getIndexName()));
     }
 }

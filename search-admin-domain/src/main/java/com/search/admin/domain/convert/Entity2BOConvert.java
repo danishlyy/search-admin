@@ -18,6 +18,7 @@ public interface Entity2BOConvert {
     Entity2BOConvert INSTANCE = Mappers.getMapper(Entity2BOConvert.class);
 
     @Mapping(target = "indexId", source = "id")
+    @Mapping(target = "indexStatus",source = "deleteFlag")
     IndexSettingBO convertIndexSettings2IndexSettingBO(IndexSettings source);
 
     List<IndexSettingBO> convertIndexEntityList2IndexBOList(List<IndexSettings> source);

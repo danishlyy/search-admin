@@ -1,6 +1,7 @@
 package com.search.admin.domain.handler;
 
 import com.search.admin.domain.bo.IndexBO;
+import com.search.admin.domain.bo.IndexPageConditionBO;
 import com.search.admin.domain.bo.IndexSettingBO;
 import com.search.admin.domain.bo.PageBO;
 import com.search.admin.domain.convert.Entity2BOConvert;
@@ -71,8 +72,8 @@ public class IndexHandler {
         return Entity2BOConvert.INSTANCE.convertIndexSettings2IndexSettingBO(entity);
     }
 
-    public PageBO<IndexSettingBO> pageQueryIndexes() {
-        return indexQueryLogic.pageQueryIndexes();
+    public PageBO<IndexSettingBO> pageQueryIndexes(IndexPageConditionBO pageConditionBO) {
+        return indexQueryLogic.pageQueryIndexes(pageConditionBO);
     }
 
     public boolean createIndexMapping(IndexBO indexBO) {

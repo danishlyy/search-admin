@@ -6,16 +6,20 @@ import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
 
 @Getter
 @Setter
 @ToString
-public class IndexAddDTO implements Serializable {
+public class IndexPageDTO implements Serializable {
     @Serial
-    private static final long serialVersionUID = 3578458846973615249L;
+    private static final long serialVersionUID = -1020261326172024033L;
 
-    private String indexId;
+    private String pageNumber;
+
+    private String pageSize;
+
     private String indexName;
-    private List<IndexMappingPropertiesDTO> fields;
+
+    private String indexStatus;
+
 }

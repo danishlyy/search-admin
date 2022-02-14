@@ -1,10 +1,7 @@
 package com.search.admin.app.service;
 
 
-import com.search.admin.app.dto.IndexAddDTO;
-import com.search.admin.app.dto.IndexDTO;
-import com.search.admin.app.dto.IndexSettingDTO;
-import com.search.admin.app.dto.PageDTO;
+import com.search.admin.app.dto.*;
 
 import java.util.List;
 
@@ -18,7 +15,7 @@ public interface IndexService {
 
     IndexSettingDTO getIndexSetting(String indexId);
 
-    PageDTO<IndexDTO> pageQueryIndexes();
+    PageDTO<IndexDTO> pageQueryIndexes(IndexPageDTO indexPageDTO);
 
     boolean deleteIndex(List<IndexDTO> indexIdList);
 

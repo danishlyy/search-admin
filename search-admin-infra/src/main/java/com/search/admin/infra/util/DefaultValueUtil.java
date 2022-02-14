@@ -1,6 +1,6 @@
 package com.search.admin.infra.util;
 
-import com.search.admin.infra.enums.AnalyzerTypeEnum;
+import com.search.admin.infra.enums.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,4 +30,20 @@ public class DefaultValueUtil {
     }
 
 
+    public static String setSyncStatusDefaultValue() {
+        return SyncStatusEnum.WAIT_SYNC.getCode();
+    }
+
+    public static String setAuditTypeDefaultValue(){
+        return AuditTypeEnum.WAIT_AUDIT.getCode();
+    }
+
+    public static String setNoticeTimeDefaultValue(){
+        return DateTimeUtil.formatLocalDateTimeNow2String();
+    }
+
+    public static String transIndexStatus(String indexStatus){
+        return IndexStatusEnum.INDEX_EFFECTIVE.getCode().equals(indexStatus)
+                ? IndexStatusEnum.INDEX_EFFECTIVE.getDesc() : IndexStatusEnum.INDEX_INEFFECTIVE.getDesc();
+    }
 }

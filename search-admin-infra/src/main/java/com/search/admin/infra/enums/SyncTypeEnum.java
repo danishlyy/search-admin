@@ -1,14 +1,14 @@
 package com.search.admin.infra.enums;
 
-public enum ElasticSearchClusterEnum implements KeyValueEnum<String>{
-    GREEN("GREEN","GREEN"),
-    YELLOW("YELLOW","YELLOW"),
-    RED("RED","RED"),;
+public enum SyncTypeEnum implements KeyValueEnum<String>{
+    SYNC_SETTING("0","setting同步"),
+    SYNC_MAPPING("1","mapping同步"),
+    SYNC_ALL("2","全部同步"),;
 
     private String code;
     private String desc;
 
-    ElasticSearchClusterEnum(String code, String desc) {
+    SyncTypeEnum(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }
