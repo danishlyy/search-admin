@@ -9,7 +9,6 @@ import com.search.admin.domain.bo.IndexPageConditionBO;
 import com.search.admin.domain.bo.IndexSettingBO;
 import com.search.admin.domain.bo.PageBO;
 import com.search.admin.domain.convert.Entity2BOConvert;
-import com.search.admin.infra.enums.YesNoEnum;
 import com.search.admin.infra.storage.entity.IndexSettings;
 import com.search.admin.infra.storage.service.IIndexSettingsService;
 import lombok.extern.slf4j.Slf4j;

@@ -11,12 +11,10 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-public class IndexPageDTO extends PageBase implements Serializable {
+public class AuditInfoDTO extends PageBase implements Serializable {
     @Serial
-    private static final long serialVersionUID = -1020261326172024033L;
+    private static final long serialVersionUID = 8385506552027382802L;
 
     private String indexName;
-
-    private String indexStatus;
-
+    private String auditStatus;
 }

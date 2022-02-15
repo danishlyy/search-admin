@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-public class PageRequestVO implements Serializable {
+public abstract class PageRequestVO implements Serializable {
     @Serial
     private static final long serialVersionUID = 8479073253540444891L;
 

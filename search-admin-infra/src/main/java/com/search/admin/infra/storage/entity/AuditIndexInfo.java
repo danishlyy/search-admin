@@ -83,6 +83,8 @@ public class AuditIndexInfo {
      */
     private String indexStatus;
 
+    private String reindexFlag;
+
     /**
      * reindex成功标志0成功1失败
      */

@@ -36,4 +36,9 @@ public interface DTOConvert {
     NoticeBO convertNoticeBO2NoticeDTO(NoticeDTO source);
 
     IndexPageConditionBO convertIndexPageDTO2IndexPageBO(IndexPageDTO source);
+
+    AuditInfoBO convertAuditInfoDTO2AuditInfoBO(AuditInfoDTO source);
+
+
+    PageDTO<AuditInfoResultDTO> convertPageAuditInfoBO2PageAuditInfoResultDTO(PageBO<AuditInfoBO> source);
 }

@@ -1,9 +1,9 @@
 package com.search.admin.domain.convert;
 
-import com.search.admin.domain.bo.DictionaryBO;
-import com.search.admin.domain.bo.IndexBO;
-import com.search.admin.domain.bo.IndexSettingBO;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.search.admin.domain.bo.*;
 import com.search.admin.domain.helper.IndexMappingHelper;
+import com.search.admin.infra.storage.entity.AuditIndexInfo;
 import com.search.admin.infra.storage.entity.IndexSettings;
 import com.search.admin.infra.storage.entity.SearchDictionary;
 import org.mapstruct.Mapper;
@@ -30,4 +30,6 @@ public interface Entity2BOConvert {
     @Mapping(source = "id",target = "indexId")
     @Mapping(target = "fields",expression = "java(IndexMappingHelper.convertFieldStr2List(source.getIndexMapping()))")
     IndexBO convertIndexMapping2IndexBO(IndexSettings source);
+
+    PageBO<AuditInfoBO> convertPageAuditIndexInfo2PageAuditInfoBO(Page<AuditIndexInfo> source);
 }

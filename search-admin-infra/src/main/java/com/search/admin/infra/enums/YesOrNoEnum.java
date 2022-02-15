@@ -1,13 +1,13 @@
 package com.search.admin.infra.enums;
 
-public enum YesNoEnum implements KeyValueEnum<String> {
-    YES("0", "有效"),
-    NO("1", "无效");
+public enum YesOrNoEnum implements KeyValueEnum<String>{
+    TYPE_YES("0","是"),
+    TYPE_NO("1","否"),;
 
     private String code;
     private String desc;
 
-    YesNoEnum(String code, String desc) {
+    YesOrNoEnum(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }

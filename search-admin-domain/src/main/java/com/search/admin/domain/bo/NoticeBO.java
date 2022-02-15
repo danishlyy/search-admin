@@ -19,6 +19,8 @@ public class NoticeBO {
 
     private String indexStatus;
 
+    private String reindexFlag;
+
     private String reIndexStatus;
 
     private String noticeTime;

@@ -1,5 +1,7 @@
 package com.search.admin.domain.handler;
 
+import com.search.admin.domain.bo.AuditInfoBO;
+import com.search.admin.domain.bo.PageBO;
 import com.search.admin.domain.logic.AuditLogic;
 import com.search.admin.domain.logic.IndexQueryLogic;
 import com.search.admin.infra.storage.entity.IndexSettings;
@@ -29,5 +31,9 @@ public class AuditHandler {
 
     public boolean auditDeleteIndex(String indexName) {
         return auditLogic.auditDeleteIndex(indexName);
+    }
+
+    public PageBO<AuditInfoBO> auditInfoPageQuery(AuditInfoBO auditInfoBO) {
+        return auditLogic.auditInfoPageQuery(auditInfoBO);
     }
 }

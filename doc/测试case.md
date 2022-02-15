@@ -656,3 +656,76 @@ response：
     "data": true
 }
 ```
+
+索引删除审核校验case
+POST /v1/audit/delete/index
+request：
+```json
+{"indexName":"","id":""}
+```
+response：
+```json
+{
+    "code": "99999998",
+    "msg": "审核记录唯一条件id不可为空;索引名称不可以为空",
+    "data": null
+}
+```
+
+索引删除审核成功case
+POST /v1/audit/delete/index
+request：
+```json
+{"indexName":"my_index","id":"1493065344852451329"}
+```
+response：
+```json
+{
+  "code": "00000000",
+  "msg": "response success",
+  "data": true
+}
+```
+
+审核分页查询case成功：
+POST /v1/audit/query
+request：
+```json
+{
+    "pageNumber":"1",
+    "pageSize":"10",
+    "indexName": "product_info"
+}
+```
+response：
+```json
+{
+    "code": "00000000",
+    "msg": "response success",
+    "data": {
+        "pages": "1",
+        "total": "1",
+        "current": "1",
+        "records": [
+            {
+                "id": "1493496606616526850",
+                "indexName": "product_info",
+                "indexStatus": "有效",
+                "auditType": "待审核",
+                "syncStatus": "待同步",
+                "reindexFlag": "是",
+                "reindexStatus": null,
+                "modifier": "system",
+                "modifyTime": "2022-02-15 16:05:13",
+                "noticeTime": "2022-02-15 16:05:13",
+                "indexSettingsId": "1491330950936715265",
+                "syncType": "全部同步",
+                "auditSettingBtnFlag": "0",
+                "auditMappingBtnFlag": "0",
+                "auditDeleteIndexBtnFlag": "1",
+                "auditReIndexBtnFlag": "1"
+            }
+        ]
+    }
+}
+```

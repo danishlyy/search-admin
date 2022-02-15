@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-public class IndexBaseRequestVO implements Serializable {
+public abstract class IndexBaseRequestVO implements Serializable {
     @Serial
     private static final long serialVersionUID = 1135258923807818692L;
 
