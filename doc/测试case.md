@@ -729,3 +729,17 @@ response：
     }
 }
 ```
+
+search-admin集成prometheus验证，暴露metrics：
+GET /actuator/prometheus
+response：
+```shell
+# HELP process_uptime_seconds The uptime of the Java virtual machine
+# TYPE process_uptime_seconds gauge
+process_uptime_seconds 52.437
+# HELP jvm_buffer_total_capacity_bytes An estimate of the total capacity of the buffers in this pool
+# TYPE jvm_buffer_total_capacity_bytes gauge
+jvm_buffer_total_capacity_bytes{id="mapped - 'non-volatile memory'",} 0.0
+jvm_buffer_total_capacity_bytes{id="mapped",} 0.0
+jvm_buffer_total_capacity_bytes{id="direct",} 114688.0
+```

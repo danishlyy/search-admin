@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty scope="context" name="spring.application.name" source="spring.application.name" />
+    <springProperty scope="context" name="server.ip" source="spring.cloud.client.ip-address" defaultValue="127.0.0.1"/>
+    <springProperty scope="context" name="server.port" source="server.port" defaultValue="0000"/>
+    <springProperty scope="context" name="spring.profiles.active" source="spring.profiles.active"/>
+    <springProperty scope="context" name="logger.level.console" source="logger.level.console" defaultValue="INFO"/>
+    <springProperty scope="context" name="logger.level.file" source="logger.level.file" defaultValue="INFO"/>
+    <springProperty scope="context" name="logger.path" source="logger.path" defaultValue="logs"/>
+    <springProperty scope="context" name="logger.file" source="logger.file" defaultValue="${logger.path}/${spring.application.name}"/>
+    <springProperty scope="context" name="logger.filesize" source="logger.filesize" defaultValue="50MB"/>
+    <springProperty scope="context" name="logger.filemaxday" source="logger.filemaxday" defaultValue="7"/>
+
+
+    <springProperty scope="context" name="common-pattern" source="logger.common-pattern"
+                    defaultValue="[${spring.application.name}-${server.ip}-${server.port}] %d{yyyy-MM-dd HH:mm:ss.SSS} %level ${PID} [%thread] [%tid] [%F:%L] %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+    />
+
+
+    <contextName>${spring.application.name}-logback</contextName>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <jmxConfigurator/>
+
+
+    <!-- 控制台实时输出，采用高亮语法，用于开发环境 -->
+    <appender name="CONSOLE_APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        </filter>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+                <pattern>${common-pattern}</pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_INFO_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+                <pattern>${common-pattern}</pattern>
+            </layout>
+        </encoder>
+        <!-- 基于时间的分包策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logger.file}/${spring.application.name}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!--保留时间,单位:天-->
+            <maxHistory>${logger.filemaxday}</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${logger.filesize}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="FILE_ERROR_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+                <pattern>${common-pattern}</pattern>
+            </layout>
+        </encoder>
+        <!-- 基于时间的分包策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logger.file}/${spring.application.name}.%d{yyyy-MM-dd}.error.%i.log</fileNamePattern>
+            <!--保留时间,单位:天-->
+            <maxHistory>${logger.filemaxday}</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${logger.filesize}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <root level="${logger.level.console}">
+        <appender-ref ref="CONSOLE_APPENDER"/>
+        <appender-ref ref="FILE_INFO_LOG"/>
+        <appender-ref ref="FILE_ERROR_LOG"/>
+    </root>
+
+</configuration>
+
+
+
