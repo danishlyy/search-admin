@@ -75,6 +75,8 @@ public class AuditInfoResponseVO implements Serializable {
      */
     private String syncType;
 
+    private String syncTypeCode;
+
     /**
      * 审核副本分片按钮显示控制 0 显示 1不显示
      */

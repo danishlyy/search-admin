@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * 字典维护
+ */
 @RestController
 @Slf4j
 public class DictionaryController {

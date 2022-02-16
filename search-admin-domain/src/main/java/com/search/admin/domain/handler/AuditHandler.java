@@ -3,6 +3,7 @@ package com.search.admin.domain.handler;
 import com.search.admin.domain.bo.AuditInfoBO;
 import com.search.admin.domain.bo.PageBO;
 import com.search.admin.domain.logic.AuditLogic;
+import com.search.admin.domain.logic.AuditUpdateLogic;
 import com.search.admin.domain.logic.IndexQueryLogic;
 import com.search.admin.infra.storage.entity.IndexSettings;
 import lombok.extern.slf4j.Slf4j;
@@ -17,17 +18,10 @@ public class AuditHandler {
     private IndexQueryLogic indexQueryLogic;
     @Autowired
     private AuditLogic auditLogic;
+    @Autowired
+    private AuditUpdateLogic auditUpdateLogic;
 
 
-    public boolean auditIndexSetting(String indexId) {
-        IndexSettings indexSettings = indexQueryLogic.findIndexByIndexId(indexId);
-        return auditLogic.auditIndexSetting(indexSettings);
-    }
-
-    public boolean auditIndexMapping(String indexId) {
-        IndexSettings indexSettings = indexQueryLogic.findIndexByIndexId(indexId);
-        return auditLogic.auditIndexMapping(indexSettings);
-    }
 
     public boolean auditDeleteIndex(String indexName) {
         return auditLogic.auditDeleteIndex(indexName);
@@ -35,5 +29,9 @@ public class AuditHandler {
 
     public PageBO<AuditInfoBO> auditInfoPageQuery(AuditInfoBO auditInfoBO) {
         return auditLogic.auditInfoPageQuery(auditInfoBO);
+    }
+
+    public boolean auditInfo(AuditInfoBO auditInfoBO) {
+        return auditUpdateLogic.auditInfo(auditInfoBO);
     }
 }

@@ -1,8 +1,10 @@
 package com.search.admin.adapter.convert;
 
 import com.search.admin.adapter.base.PageResponseVO;
+import com.search.admin.adapter.request.AuditIndexRequestVO;
 import com.search.admin.adapter.request.AuditRequestVO;
 import com.search.admin.adapter.response.AuditInfoResponseVO;
+import com.search.admin.app.dto.AuditDTO;
 import com.search.admin.app.dto.AuditInfoDTO;
 import com.search.admin.app.dto.AuditInfoResultDTO;
 import com.search.admin.app.dto.PageDTO;
@@ -32,7 +34,10 @@ public interface AuditConvert {
     @Mapping(target = "reindexStatus",expression = "java(DefaultValueUtil.transReindexStatus(source.getReindexStatus()))")
     @Mapping(target = "modifyTime",expression = "java(DateTimeUtil.formatDateTime2Pattern0002(source.getModifyTime()))")
     @Mapping(target = "noticeTime",expression = "java(DateTimeUtil.formatDateTime2Pattern0002(source.getNoticeTime()))")
+    @Mapping(target = "syncTypeCode",source = "syncType")
     AuditInfoResponseVO convertAuditInfoResultDTO2AuditInfoResponseVO(AuditInfoResultDTO source);
 
     PageResponseVO<AuditInfoResponseVO> convertPageDTOAuditInfoResultDTO2PageResponseVOAuditInfoResponseVO(PageDTO<AuditInfoResultDTO> source);
+
+    AuditDTO convertAuditRequestVO2AuditDTO(AuditIndexRequestVO requestVO);
 }

@@ -1,6 +1,7 @@
 package com.search.admin.app.service.impl;
 
 import com.search.admin.app.convert.DTOConvert;
+import com.search.admin.app.dto.AuditDTO;
 import com.search.admin.app.dto.AuditInfoDTO;
 import com.search.admin.app.dto.AuditInfoResultDTO;
 import com.search.admin.app.dto.PageDTO;
@@ -19,15 +20,7 @@ public class AuditServiceImpl implements AuditService {
     @Autowired
     private AuditHandler auditHandler;
 
-    @Override
-    public boolean auditIndexSetting(String indexId) {
-        return auditHandler.auditIndexSetting(indexId);
-    }
 
-    @Override
-    public boolean auditIndexMapping(String indexId) {
-        return auditHandler.auditIndexMapping(indexId);
-    }
 
     @Override
     public boolean auditDeleteIndex(String indexName) {
@@ -38,5 +31,11 @@ public class AuditServiceImpl implements AuditService {
     public PageDTO<AuditInfoResultDTO> auditInfoPageQuery(AuditInfoDTO auditInfoDTO) {
         PageBO<AuditInfoBO> pages = auditHandler.auditInfoPageQuery(DTOConvert.INSTANCE.convertAuditInfoDTO2AuditInfoBO(auditInfoDTO));
         return DTOConvert.INSTANCE.convertPageAuditInfoBO2PageAuditInfoResultDTO(pages);
+    }
+
+    @Override
+    public boolean auditInfo(AuditDTO auditDTO) {
+        AuditInfoBO auditInfoBO =  DTOConvert.INSTANCE.convertAuditDTO2AuditInfoBO(auditDTO);
+        return  auditHandler.auditInfo(auditInfoBO);
     }
 }

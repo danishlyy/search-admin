@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+/**
+ * 审核画面
+ */
 @RestController
 @Slf4j
 public class AuditController {
@@ -27,30 +30,30 @@ public class AuditController {
     private AuditService auditService;
 
     /**
-     * 审核索引分片、副本信息
+     * 审核功能
      * @param requestVO
      * @return
      */
-    @PostMapping(value = "/v1/audit/index/setting")
-    public Result<Boolean> auditIndexSetting(@RequestBody @Valid AuditIndexRequestVO requestVO){
-        return Result.success(auditService.auditIndexSetting(requestVO.getIndexId()));
+    @PostMapping(value = "/v1/audit/index")
+    public Result<Boolean> auditInfo(@RequestBody AuditIndexRequestVO requestVO){
+        return Result.success(auditService.auditInfo(AuditConvert.INSTANCE.convertAuditRequestVO2AuditDTO(requestVO)));
     }
 
     /**
-     * 审核索引映射信息
+     * 删除索引审核功能
      * @param requestVO
      * @return
      */
-    @PostMapping(value = "/v1/audit/index/mapping")
-    public Result<Boolean> auditIndexMapping(@RequestBody @Valid AuditIndexRequestVO requestVO){
-        return Result.success(auditService.auditIndexMapping(requestVO.getIndexId()));
-    }
-
     @PostMapping(value = "/v1/audit/delete/index")
     public Result<Boolean> auditDeleteIndex(@RequestBody @Valid AuditIndexDeleteRequestVO requestVO){
         return Result.success(auditService.auditDeleteIndex(requestVO.getIndexName()));
     }
 
+    /**
+     * 审核信息分页查询
+     * @param requestVO
+     * @return
+     */
     @PostMapping(value = "/v1/audit/query")
     public Result<PageResponseVO<AuditInfoResponseVO>> auditInfoPageQuery(@RequestBody AuditRequestVO requestVO){
         AuditInfoDTO auditInfoDTO = AuditConvert.INSTANCE.convertAuditResponseVO2AuditInfoDTO(requestVO);

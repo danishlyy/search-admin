@@ -19,6 +19,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 
+/**
+ * 索引列表
+ */
 @RestController
 @Slf4j
 public class IndexController {

@@ -3,6 +3,7 @@ package com.search.admin.app.convert;
 import com.search.admin.app.dto.*;
 import com.search.admin.domain.bo.*;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -41,4 +42,7 @@ public interface DTOConvert {
 
 
     PageDTO<AuditInfoResultDTO> convertPageAuditInfoBO2PageAuditInfoResultDTO(PageBO<AuditInfoBO> source);
+
+    @Mapping(source = "auditId",target = "id")
+    AuditInfoBO convertAuditDTO2AuditInfoBO(AuditDTO auditDTO);
 }
