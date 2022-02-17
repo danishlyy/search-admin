@@ -25,4 +25,9 @@ public class AuditIndexRequestVO implements Serializable {
 
     @NotBlank(message = "索引id不可为空")
     private String indexSettingsId;
+
+    @NotBlank(message = "审核结果不可为空")
+    private String auditType;
+
+    private String modifier;
 }

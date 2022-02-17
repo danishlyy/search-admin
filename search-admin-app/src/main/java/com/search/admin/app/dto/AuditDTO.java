@@ -19,4 +19,8 @@ public class AuditDTO implements Serializable {
     private String indexSettingsId;
 
     private String syncType;
+
+    private String auditType;
+
+    private String modifier;
 }

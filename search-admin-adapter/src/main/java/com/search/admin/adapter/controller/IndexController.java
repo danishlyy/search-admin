@@ -102,7 +102,7 @@ public class IndexController {
      *
      * @return
      */
-    @GetMapping(value = "/v1/page/query/indexes")
+    @PostMapping(value = "/v1/page/query/indexes")
     public Result<PageResponseVO<IndexResponseVO>> getIndexes(@RequestBody @Valid  PageIndexQueryRequestVO requestVO) {
         IndexPageDTO indexPageDTO = IndexConvert.INSTANCE.convertPageIndexQueryRequestVO2PageIndexQueryDTO(requestVO);
         PageDTO<IndexDTO> indexDTOPageDTO = indexService.pageQueryIndexes(indexPageDTO);

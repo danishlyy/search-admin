@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -35,7 +36,8 @@ public class AuditController {
      * @return
      */
     @PostMapping(value = "/v1/audit/index")
-    public Result<Boolean> auditInfo(@RequestBody AuditIndexRequestVO requestVO){
+    public Result<Boolean> auditInfo(@RequestBody AuditIndexRequestVO requestVO, @RequestHeader(value = "userCode") String userCode){
+        requestVO.setModifier(userCode);
         return Result.success(auditService.auditInfo(AuditConvert.INSTANCE.convertAuditRequestVO2AuditDTO(requestVO)));
     }
 

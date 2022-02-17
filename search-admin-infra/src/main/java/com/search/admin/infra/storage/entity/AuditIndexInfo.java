@@ -83,6 +83,9 @@ public class AuditIndexInfo {
      */
     private String indexStatus;
 
+    /**
+     * 是否需要reindex
+     */
     private String reindexFlag;
 
     /**

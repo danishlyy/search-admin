@@ -10,7 +10,10 @@ import com.search.admin.infra.util.JacksonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.common.xcontent.XContentFactory;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,4 +61,34 @@ public class IndexMappingHelper {
     }
 
 
+    public static XContentBuilder convertMapping2XContentBuilder(String indexName,String indexMapping) {
+        XContentBuilder builder = null;
+        try {
+            builder = XContentFactory.jsonBuilder();
+            List<IndexMappingPropertiesBO> fields = convertFieldStr2List(indexMapping);
+            builder.startObject();
+            {
+                builder.startObject("properties");
+                {
+                    for (IndexMappingPropertiesBO item:fields){
+                        builder.startObject(item.getFieldName());
+                        {
+                            builder.field("type", item.getFieldType());
+                            if (StringUtils.isNotBlank(item.getAnalyzeType())){
+                                builder.field("analyzer",item.getAnalyzeType());
+                            }
+                        }
+                        builder.endObject();
+
+                    }
+                }
+                builder.endObject();
+            }
+            builder.endObject();
+        } catch (IOException e) {
+            log.error("convert index mapping failed,indexName:{}",indexName,e);
+            throw new RuntimeException();
+        }
+        return builder;
+    }
 }
