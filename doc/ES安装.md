@@ -105,3 +105,8 @@ firewall-cmd --permanent --list-ports
 ```shell
 firewall-cmd --permanent --add-port=9200/tcp
 ```
+
+查找es进程号
+```shell
+ps -ef | grep elastic
+```

@@ -13,6 +13,9 @@ public enum BusinessExceptionEnum implements KeyValueEnum {
     ANALYZE_TEXT_FAILED("10000010", "analyze failed "),
     PARSE_MAPPING_OBJECT_FAILED("10000011", "parse mapping object failed "),
     INDEX_DELETE_FAILED("10000012", "delete index failed "),
+    CHECK_SNAPSHOT_REPOSITORY_FAILED("10000013", "check snapshot repository failed"),
+    CREATE_SNAPSHOT_REPOSITORY_FAILED("10000014", "create snapshot repository failed"),
+    CREATE_INDEX_SNAPSHOT_FAILED("10000015", "create index snapshot failed"),
     SYSTEM_ERROR("10000099", "system error "),
     ;
 

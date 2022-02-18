@@ -1172,3 +1172,58 @@ weight：权重，weight函数提供的是一个系数，最终的得分等于�
 
 Top hits聚合指的是聚合时在每个分组内部按照某个规则选出前N个文档进行展示 Collapse聚合，即用户可以在collapse子句中指定分组字段，匹配query的结果按照该字段进行分组， 并在每个分组中按照得分高低展示组内的文档。
 当用户在query子句外指定from和size时，将作用在Collapse聚合之后，即此时的分页是作用在分组之后的
+
+
+SNAPSHOT备份
+![img_7.png](img_7.png)
+
+多个索引备份：
+```json
+{
+    "snapshots":[
+        {
+            "name":"snapshot_february_log20220218200421",
+            "uuid":"qsmkIJ5oSgWO6WKieR6evw",
+            "state":1,
+            "index_metadata_lookup":{
+                "E120o71NSX-YYRN_GhL6hA":"rixVSbNrQyGXui2DCfQ9kA-_na_-1-1-2"
+            },
+            "version":"7.9.3"
+        },
+        {
+            "name":"snapshot_march_log20220218201023",
+            "uuid":"Ij0cQSh8QDKnWNlzWXhtHA",
+            "state":1,
+            "index_metadata_lookup":{
+                "olq9MHcvRlOvPj3KVg4u2w":"0rpI1FB0R7So7n3pVXxnjA-_na_-1-1-2"
+            },
+            "version":"7.9.3"
+        }
+    ],
+    "indices":{
+        "march_log":{
+            "id":"olq9MHcvRlOvPj3KVg4u2w",
+            "snapshots":[
+                "Ij0cQSh8QDKnWNlzWXhtHA"
+            ],
+            "shard_generations":[
+                "a38yhPyPQmyhVBdCVS467Q"
+            ]
+        },
+        "february_log":{
+            "id":"E120o71NSX-YYRN_GhL6hA",
+            "snapshots":[
+                "qsmkIJ5oSgWO6WKieR6evw"
+            ],
+            "shard_generations":[
+                "CV5Edq8tS6aYH3y_B_Tdaw"
+            ]
+        }
+    },
+    "min_version":"7.9.0",
+    "index_metadata_identifiers":{
+        "0rpI1FB0R7So7n3pVXxnjA-_na_-1-1-2":"5YC9DH8BW76Cz3TMjzVL",
+        "rixVSbNrQyGXui2DCfQ9kA-_na_-1-1-2":"WIC4DH8BW76Cz3TMCDW1"
+    }
+}
+```
