@@ -1,15 +1,13 @@
 package com.search.admin.domain.handler;
 
-import com.search.admin.domain.bo.IndexBO;
-import com.search.admin.domain.bo.IndexPageConditionBO;
-import com.search.admin.domain.bo.IndexSettingBO;
-import com.search.admin.domain.bo.PageBO;
+import com.search.admin.domain.bo.*;
 import com.search.admin.domain.convert.Entity2BOConvert;
 import com.search.admin.domain.logic.*;
 import com.search.admin.infra.enums.BusinessExceptionEnum;
 import com.search.admin.infra.ex.SearchFrameworkException;
 import com.search.admin.infra.storage.entity.IndexSettings;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,6 +28,8 @@ public class IndexHandler {
     private IndexDeleteLogic indexDeleteLogic;
     @Autowired
     private FieldLogic fieldLogic;
+    @Autowired
+    private AuditLogic auditLogic;
 
     public boolean createIndexSetting(IndexSettingBO indexSettingBO) {
         boolean exist = indexQueryLogic.findIndexByIndexName(indexSettingBO.getIndexName());
@@ -93,6 +93,11 @@ public class IndexHandler {
     }
 
     public IndexBO getIndexMapping(String indexId) {
-        return indexQueryLogic.findIndexMappingByIndexId(indexId);
+        AuditInfoBO auditInfoBO = auditLogic.findAuditInfoNewestByIndexId(indexId);
+        IndexBO indexBo = indexQueryLogic.findIndexMappingByIndexId(indexId);
+        if (ObjectUtils.isNotEmpty(indexBo) && ObjectUtils.isNotEmpty(auditInfoBO)){
+            indexBo.setSyncStatus(auditInfoBO.getSyncStatus());
+        }
+        return indexBo;
     }
 }

@@ -20,6 +20,8 @@ public class IndexDTO {
 
     private String indexStatus;
 
+    private String syncStatus;
+
     /**
      * 索引描述
      */

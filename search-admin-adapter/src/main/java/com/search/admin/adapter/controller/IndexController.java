@@ -114,7 +114,7 @@ public class IndexController {
      *
      * @return
      */
-    @GetMapping(value = "/v1/get/index/mapping")
+    @PostMapping(value = "/v1/get/index/mapping")
     public Result<IndexMappingResponseVO> getIndexMapping(@RequestBody @Valid IndexQueryRequestVO requestVO) {
         IndexDTO indexMapping = indexService.getIndexMapping(requestVO.getIndexId());
         return Result.success(IndexConvert.INSTANCE.convertIndexDTO2IndexMappingResponseVO(indexMapping));

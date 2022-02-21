@@ -119,4 +119,12 @@ public class AuditLogic {
         Page<AuditIndexInfo> pageResult = iAuditIndexInfoService.page(page, queryWrapper);
         return Entity2BOConvert.INSTANCE.convertPageAuditIndexInfo2PageAuditInfoBO(pageResult);
     }
+
+    public AuditInfoBO findAuditInfoNewestByIndexId(String indexId) {
+        LambdaQueryWrapper<AuditIndexInfo> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(AuditIndexInfo::getIndexSettingsId,indexId);
+        queryWrapper.eq(AuditIndexInfo::getDeleteFlag,YesNoEnum.YES.getCode());
+        AuditIndexInfo auditIndexInfo = iAuditIndexInfoService.getOne(queryWrapper);
+        return Entity2BOConvert.INSTANCE.convertAuditIndexInfo2AuditIndexInfoBO(auditIndexInfo);
+    }
 }

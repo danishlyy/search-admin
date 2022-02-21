@@ -32,4 +32,6 @@ public interface Entity2BOConvert {
     IndexBO convertIndexMapping2IndexBO(IndexSettings source);
 
     PageBO<AuditInfoBO> convertPageAuditIndexInfo2PageAuditInfoBO(Page<AuditIndexInfo> source);
+
+    AuditInfoBO convertAuditIndexInfo2AuditIndexInfoBO(AuditIndexInfo auditIndexInfo);
 }

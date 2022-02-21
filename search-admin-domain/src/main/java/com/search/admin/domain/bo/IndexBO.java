@@ -14,5 +14,6 @@ public class IndexBO {
     private String indexId;
     private String indexName;
     private String indexMapping;
+    private String syncStatus;
     private List<IndexMappingPropertiesBO> fields;
 }

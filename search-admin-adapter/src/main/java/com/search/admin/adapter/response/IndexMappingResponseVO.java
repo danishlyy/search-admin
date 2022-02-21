@@ -22,6 +22,11 @@ public class IndexMappingResponseVO extends IndexBaseResponseVO implements Seria
     private String indexName;
 
     /**
+     * 索引配置同步状态，如果是已同步，不可修改字段名称、字段类型
+     */
+    private String syncStatus;
+
+    /**
      * 索引field列表
      */
     private List<IndexMappingPropertiesResponseVO> fields;
