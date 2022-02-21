@@ -421,7 +421,7 @@ public class TestController {
 
 
 
-    @Scheduled(cron = "0/2 * * * * ? ")
+//    @Scheduled(cron = "0/2 * * * * ? ")
     public Result<String> testSchedule(){
         log.info("testSchedule,time:{}", DateTimeUtil.formatLocalDateTimeNow2String());
         return Result.success(null);
