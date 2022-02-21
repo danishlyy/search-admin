@@ -123,7 +123,9 @@ public class AuditLogic {
     public AuditInfoBO findAuditInfoNewestByIndexId(String indexId) {
         LambdaQueryWrapper<AuditIndexInfo> queryWrapper = Wrappers.lambdaQuery();
         queryWrapper.eq(AuditIndexInfo::getIndexSettingsId,indexId);
+        queryWrapper.orderByDesc(AuditIndexInfo::getModifyTime);
         queryWrapper.eq(AuditIndexInfo::getDeleteFlag,YesNoEnum.YES.getCode());
+        queryWrapper.last(" limit 1");
         AuditIndexInfo auditIndexInfo = iAuditIndexInfoService.getOne(queryWrapper);
         return Entity2BOConvert.INSTANCE.convertAuditIndexInfo2AuditIndexInfoBO(auditIndexInfo);
     }
