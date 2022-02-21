@@ -12,13 +12,19 @@ import org.elasticsearch.action.admin.cluster.repositories.get.GetRepositoriesRe
 import org.elasticsearch.action.admin.cluster.repositories.put.PutRepositoryRequest;
 import org.elasticsearch.action.admin.cluster.snapshots.create.CreateSnapshotRequest;
 import org.elasticsearch.action.admin.cluster.snapshots.create.CreateSnapshotResponse;
+import org.elasticsearch.action.admin.cluster.snapshots.delete.DeleteSnapshotRequest;
+import org.elasticsearch.action.admin.cluster.snapshots.restore.RestoreSnapshotRequest;
+import org.elasticsearch.action.admin.cluster.snapshots.restore.RestoreSnapshotResponse;
 import org.elasticsearch.action.support.IndicesOptions;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
+import org.elasticsearch.client.Cancellable;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.cluster.metadata.RepositoryMetadata;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.repositories.fs.FsRepository;
+import org.elasticsearch.rest.RestStatus;
+import org.elasticsearch.snapshots.RestoreInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -85,7 +91,6 @@ public class SnapshotRepositoryLogic {
     }
 
     public void createIndexSnapshot(List<String> indexNameList, String repositoryName) {
-        boolean createIndexSnapshotFlag = false;
         RestHighLevelClient client = searchAdminClient.elasticsearchClient();
         for (String indexName:indexNameList){
             String snapshotName = "snapshot_"+indexName;
@@ -111,5 +116,55 @@ public class SnapshotRepositoryLogic {
                 }
             });
         }
+    }
+
+    public boolean restoreIndexSnapshot(String repositoryName, String snapshotName) {
+        try {
+            RestoreSnapshotRequest request = new RestoreSnapshotRequest(repositoryName, snapshotName);
+            RestHighLevelClient client = searchAdminClient.elasticsearchClient();
+            client.snapshot().restoreAsync(request, RequestOptions.DEFAULT, new ActionListener<RestoreSnapshotResponse>() {
+                @Override
+                public void onResponse(RestoreSnapshotResponse restoreSnapshotResponse) {
+                    RestStatus status = restoreSnapshotResponse.status();
+                    RestoreInfo restoreInfo = restoreSnapshotResponse.getRestoreInfo();
+                    log.info("status:{},restoreInfo:{}",status,restoreInfo);
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    log.info("restore failed",e);
+                }
+            });
+        }catch (Exception e){
+            log.error("restoreIndexSnapshot failed,repositoryName:{},snapshotName:{}",repositoryName,snapshotName,e);
+            throw new SearchFrameworkException(BusinessExceptionEnum.RECOVER_INDEX_SNAPSHOT_FAILED.getCode(),
+                    BusinessExceptionEnum.RECOVER_INDEX_SNAPSHOT_FAILED.getDesc());
+        }
+        return true;
+    }
+
+    public boolean deleteIndexSnapshot(String snapshotName,String repositoryName) {
+        try {
+            RestHighLevelClient client = searchAdminClient.elasticsearchClient();
+            DeleteSnapshotRequest request = new DeleteSnapshotRequest(repositoryName);
+            request.snapshots(snapshotName);
+            Cancellable response = client.snapshot().deleteAsync(request, RequestOptions.DEFAULT, new ActionListener<AcknowledgedResponse>() {
+                @Override
+                public void onResponse(AcknowledgedResponse acknowledgedResponse) {
+                    log.info("delete index snapshot result:{}",acknowledgedResponse.isAcknowledged());
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    log.error("delete index snapshot failed",e);
+                }
+            });
+        }catch (Exception e){
+            log.error("restoreIndexSnapshot failed,repositoryName:{},snapshotName:{}",repositoryName,snapshotName,e);
+            throw new SearchFrameworkException(BusinessExceptionEnum.DELETE_INDEX_SNAPSHOT_FAILED.getCode(),
+                    BusinessExceptionEnum.DELETE_INDEX_SNAPSHOT_FAILED.getDesc());
+        }
+
+        return true;
     }
 }

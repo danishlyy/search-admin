@@ -61,6 +61,11 @@ search:
 #      password: 123456
 #      roles: SUPERADMIN
 
+es:
+  index:
+    snapshot:
+      repositoryLocation: es_snapshot_repo
+      repositoryName: /backup/es_snapshot
 
 
 

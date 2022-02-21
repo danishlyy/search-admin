@@ -6,6 +6,7 @@ import com.search.admin.adapter.request.IndexMappingPropertiesRequestVO;
 import com.search.admin.adapter.request.Trade;
 import com.search.admin.infra.base.Result;
 import com.search.admin.infra.config.SearchAdminClient;
+import com.search.admin.infra.util.DateTimeUtil;
 import com.search.admin.infra.util.JacksonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -15,15 +16,11 @@ import org.elasticsearch.action.admin.cluster.repositories.get.GetRepositoriesRe
 import org.elasticsearch.action.admin.cluster.repositories.put.PutRepositoryRequest;
 import org.elasticsearch.action.admin.cluster.snapshots.create.CreateSnapshotRequest;
 import org.elasticsearch.action.admin.cluster.snapshots.create.CreateSnapshotResponse;
-import org.elasticsearch.action.admin.cluster.snapshots.delete.DeleteSnapshotRequest;
 import org.elasticsearch.action.admin.cluster.snapshots.get.GetSnapshotsRequest;
 import org.elasticsearch.action.admin.cluster.snapshots.get.GetSnapshotsResponse;
-import org.elasticsearch.action.admin.cluster.snapshots.restore.RestoreSnapshotRequest;
-import org.elasticsearch.action.admin.cluster.snapshots.restore.RestoreSnapshotResponse;
 import org.elasticsearch.action.admin.cluster.snapshots.status.*;
 import org.elasticsearch.action.support.IndicesOptions;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
-import org.elasticsearch.client.Cancellable;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.indices.CreateIndexRequest;
@@ -40,6 +37,7 @@ import org.elasticsearch.repositories.fs.FsRepository;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.snapshots.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -253,7 +251,7 @@ public class TestController {
      * 如果索引的snapshotName已经存在，则再次会报错
      * @return
      */
-    @GetMapping(value = "/v1/create/index/snapshot")
+    @GetMapping(value = "/v1/create/index/snapshots")
     public Result<String> createIndexSnapshot(){
         String repositoryName = "snapshot_es_back_up";
         String indexName = "march_log";
@@ -420,56 +418,12 @@ public class TestController {
     }
 
 
-    /**
-     * delete index snapshot result:true
-     * @return
-     */
-    @GetMapping(value = "/v1/delete/index/snapshot")
-    public Result<String> deleteIndexSnapshot(){
-        String repositoryName = "snapshot_es_back_up";
-        String indexName = "february_log";
 
-        try {
-            RestHighLevelClient client = searchAdminClient.elasticsearchClient();
-            DeleteSnapshotRequest request = new DeleteSnapshotRequest(repositoryName);
-            request.snapshots(indexName);
-            Cancellable response = client.snapshot().deleteAsync(request, RequestOptions.DEFAULT, new ActionListener<AcknowledgedResponse>() {
-                @Override
-                public void onResponse(AcknowledgedResponse acknowledgedResponse) {
-                    log.info("delete index snapshot result:{}",acknowledgedResponse.isAcknowledged());
-                }
 
-                @Override
-                public void onFailure(Exception e) {
-                    log.error("delete index snapshot failed",e);
-                }
-            });
-        } catch (Exception e) {
 
-            log.error("create snapshot failed",e);
-        }
-        return Result.success(null);
-    }
-
-    @GetMapping(value = "/v1/restore/index/snapshot")
-    public Result<String> restoreIndexSnapshot(){
-        String repositoryName = "snapshot_es_back_up";
-        String snapshotName = "february_log";
-        RestoreSnapshotRequest request = new RestoreSnapshotRequest(repositoryName, snapshotName);
-        RestHighLevelClient client = searchAdminClient.elasticsearchClient();
-        client.snapshot().restoreAsync(request, RequestOptions.DEFAULT, new ActionListener<RestoreSnapshotResponse>() {
-            @Override
-            public void onResponse(RestoreSnapshotResponse restoreSnapshotResponse) {
-                RestStatus status = restoreSnapshotResponse.status();
-                RestoreInfo restoreInfo = restoreSnapshotResponse.getRestoreInfo();
-                log.info("status:{},restoreInfo:{}",status,restoreInfo);
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                log.info("restore failed",e);
-            }
-        });
+    @Scheduled(cron = "0/2 * * * * ? ")
+    public Result<String> testSchedule(){
+        log.info("testSchedule,time:{}", DateTimeUtil.formatLocalDateTimeNow2String());
         return Result.success(null);
     }
 }

@@ -7,6 +7,7 @@ public enum DictionaryTypeEnum implements KeyValueEnum<String>{
     AUDIT_TYPE("4","审核类型"),
     EFFECTIVE_TYPE("5","有效无效类型"),
     SYNC_TYPE("6","同步类型"),
+    SYNC_STATUS_TYPE("7","同步状态类型"),
 
     ;
 

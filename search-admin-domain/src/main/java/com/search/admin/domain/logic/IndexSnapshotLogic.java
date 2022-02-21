@@ -22,13 +22,20 @@ public class IndexSnapshotLogic {
 
     public void backUpIndex() {
         List<String> indexNameList = indexQueryLogic.findEffectiveIndex();
-        boolean createRepositoryFlag = false;
         boolean repositoryFlag =  snapshotRepositoryLogic.checkRepositoryExist(repositoryName);
         if (!repositoryFlag){
-            createRepositoryFlag = snapshotRepositoryLogic.createSnapshotRepository(repositoryName,repositoryLocation);
+            snapshotRepositoryLogic.createSnapshotRepository(repositoryName,repositoryLocation);
         }
-        if (createRepositoryFlag){
-            snapshotRepositoryLogic.createIndexSnapshot(indexNameList,repositoryName);
-        }
+        snapshotRepositoryLogic.createIndexSnapshot(indexNameList,repositoryName);
+
+    }
+
+    public boolean restoreIndexSnapshot(String snapshotName) {
+        return snapshotRepositoryLogic.restoreIndexSnapshot(repositoryName,snapshotName);
+    }
+
+    public boolean deleteIndexSnapshot(String snapshotName) {
+        return snapshotRepositoryLogic.deleteIndexSnapshot(snapshotName,repositoryName);
+
     }
 }

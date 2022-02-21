@@ -16,6 +16,8 @@ public enum BusinessExceptionEnum implements KeyValueEnum {
     CHECK_SNAPSHOT_REPOSITORY_FAILED("10000013", "check snapshot repository failed"),
     CREATE_SNAPSHOT_REPOSITORY_FAILED("10000014", "create snapshot repository failed"),
     CREATE_INDEX_SNAPSHOT_FAILED("10000015", "create index snapshot failed"),
+    RECOVER_INDEX_SNAPSHOT_FAILED("10000016", "recover index snapshot failed"),
+    DELETE_INDEX_SNAPSHOT_FAILED("10000017", "delete index snapshot failed"),
     SYSTEM_ERROR("10000099", "system error "),
     ;
 
