@@ -19,6 +19,7 @@ public enum BusinessExceptionEnum implements KeyValueEnum {
     RECOVER_INDEX_SNAPSHOT_FAILED("10000016", "recover index snapshot failed"),
     DELETE_INDEX_SNAPSHOT_FAILED("10000017", "delete index snapshot failed"),
     INDEX_FIELD_REPEATED("10000018", "index field repeated"),
+    REINDEX_FAILED("10000019", "reindex failed"),
     SYSTEM_ERROR("10000099", "system error "),
     ;
 

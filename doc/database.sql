@@ -10,7 +10,7 @@ create table index_settings
         constraint index_settings_pk
         primary key,
     index_name         varchar(255) not null,
-    index_mapping      json,
+    index_mapping      text,
     creator            varchar(64)  not null,
     create_time        varchar(14)  not null,
     modifier           varchar(64)  not null,
@@ -48,6 +48,8 @@ alter table index_settings
 
 create index idx_index_name
     on index_settings (index_name);
+
+
 
 -- auto-generated definition
 create table search_dictionary
@@ -96,8 +98,10 @@ create index idx_type_code
 
 
 
+
+
 -- auto-generated definition
-create table sync_index_info_history
+create table audit_index_info
 (
     id                varchar(128) not null
         constraint sync_index_info_history_pk
@@ -109,31 +113,51 @@ create table sync_index_info_history
     create_time       varchar(14)  not null,
     modifier          varchar(64)  not null,
     modify_time       varchar(14)  not null,
-    delete_flag       varchar(2)   not null
+    delete_flag       varchar(2)   not null,
+    index_name        varchar(255),
+    audit_type        varchar(2),
+    index_status      varchar(2),
+    reindex_status    varchar(2),
+    notice_time       varchar(14),
+    reindex_flag      varchar(2)
 );
 
-comment on table sync_index_info_history is '同步es索引信息历史表';
+comment on table audit_index_info is '同步es索引信息历史表';
 
-comment on column sync_index_info_history.id is '主键';
+comment on column audit_index_info.id is '主键';
 
-comment on column sync_index_info_history.index_settings_id is '索引id';
+comment on column audit_index_info.index_settings_id is '索引id';
 
-comment on column sync_index_info_history.sync_type is '同步类型：0 setting同步 1 mapping同步';
+comment on column audit_index_info.sync_type is '同步类型：0 setting同步 1 mapping同步 2 全部';
 
-comment on column sync_index_info_history.sync_status is '同步状态1 已同步 0 未同步';
+comment on column audit_index_info.sync_status is '同步结果1 已同步 0 未同步';
 
-comment on column sync_index_info_history.creator is '创建者';
+comment on column audit_index_info.creator is '创建者';
 
-comment on column sync_index_info_history.create_time is '创建时间';
+comment on column audit_index_info.create_time is '创建时间';
 
-comment on column sync_index_info_history.modifier is '修改人';
+comment on column audit_index_info.modifier is '修改人';
 
-comment on column sync_index_info_history.modify_time is '修改时间';
+comment on column audit_index_info.modify_time is '修改时间';
 
-comment on column sync_index_info_history.delete_flag is '是否有效 0有效 1无效';
+comment on column audit_index_info.delete_flag is '是否有效 0有效 1无效';
 
-alter table sync_index_info_history
+comment on column audit_index_info.index_name is '索引名称';
+
+comment on column audit_index_info.audit_type is '审核类型1已审核0待审核';
+
+comment on column audit_index_info.index_status is '索引状态0有效 1无效';
+
+comment on column audit_index_info.reindex_status is 'reindex成功标志0成功1失败';
+
+comment on column audit_index_info.notice_time is '通知审核时间';
+
+comment on column audit_index_info.reindex_flag is 'reindex标志 0是 1否 ';
+
+alter table audit_index_info
     owner to search_admin;
+
+
 
 
 
