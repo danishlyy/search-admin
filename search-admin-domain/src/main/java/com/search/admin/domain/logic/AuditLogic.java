@@ -112,6 +112,7 @@ public class AuditLogic {
             queryWrapper.eq(AuditIndexInfo::getAuditType,auditInfoBO.getAuditType());
         }
         queryWrapper.eq(AuditIndexInfo::getDeleteFlag, YesNoEnum.YES.getCode());
+        queryWrapper.orderByDesc(AuditIndexInfo::getModifyTime);
         Page<AuditIndexInfo> page = new Page<>();
         page.setCurrent(Long.parseLong(auditInfoBO.getPageNumber()));
         page.setSize(Long.parseLong(auditInfoBO.getPageSize()));
