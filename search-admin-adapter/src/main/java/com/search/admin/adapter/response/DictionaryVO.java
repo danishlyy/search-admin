@@ -1,9 +1,11 @@
 package com.search.admin.adapter.response;
 
 import com.search.admin.adapter.base.DictionaryBaseVO;
+import com.search.admin.infra.enums.DictionaryTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,6 +18,16 @@ public class DictionaryVO extends DictionaryBaseVO implements Serializable {
     private static final long serialVersionUID = -6968315605427133404L;
 
     /**
+     * 字典类型
+     */
+    private String dictType;
+
+    /**
+     * 字典类型描述
+     */
+    private String dicTypeDesc;
+
+    /**
      * 字典code
      */
     private String dictCode;
@@ -24,4 +36,6 @@ public class DictionaryVO extends DictionaryBaseVO implements Serializable {
      * 字典描述
      */
     private String dictDesc;
+
+
 }

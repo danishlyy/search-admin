@@ -153,4 +153,14 @@ public class DefaultValueUtil {
         }
         return YesNoEnum.NO.getCode();
     }
+
+    public static String transDictType(String dictType){
+            DictionaryTypeEnum[] values = DictionaryTypeEnum.values();
+            for (DictionaryTypeEnum dict:values){
+                if (dictType.equals(dict.getCode())){
+                    return dict.getDesc();
+                }
+            }
+            return null;
+    }
 }

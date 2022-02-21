@@ -1,7 +1,5 @@
 # 日志
 spring:
-#  main:
-#    allow-circular-references: true
   elasticsearch:
     uris: http://172.16.90.231:9200
   datasource:
@@ -29,7 +27,7 @@ spring:
 
 logging:
   level:
-    root: info
+    root: debug
 
 # endpoint
 management:
@@ -79,3 +77,7 @@ mybatis-plus:
       logic-not-delete-value: 0 #逻辑未删除
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+arthas:
+  appName: ${spring.application.name}
+  tunnel-server: ws://172.16.90.11:7777/ws
