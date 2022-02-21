@@ -1,13 +1,13 @@
 # 日志
 spring:
   elasticsearch:
-    uris: http://172.16.90.231:9200
+    uris: http://elasticsearch:9200
   datasource:
     username: search_admin
     password: search_admin
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://172.16.113.253:5432/search
+    url: jdbc:postgresql://postgresql:5432/search
     druid:
       filters: stat,wall
       maxActive: 5
@@ -50,7 +50,7 @@ management:
 search:
   config:
     hosts:
-      - "172.16.90.231:9200"
+      - "node1"
 
 #spring:
 #  security:
@@ -80,4 +80,4 @@ mybatis-plus:
 
 arthas:
   appName: ${spring.application.name}
-  tunnel-server: ws://172.16.90.11:7777/ws
+  tunnel-server: ws://arthas:7777/ws
