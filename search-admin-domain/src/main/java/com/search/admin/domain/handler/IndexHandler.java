@@ -5,10 +5,7 @@ import com.search.admin.domain.bo.IndexPageConditionBO;
 import com.search.admin.domain.bo.IndexSettingBO;
 import com.search.admin.domain.bo.PageBO;
 import com.search.admin.domain.convert.Entity2BOConvert;
-import com.search.admin.domain.logic.IndexAddLogic;
-import com.search.admin.domain.logic.IndexDeleteLogic;
-import com.search.admin.domain.logic.IndexQueryLogic;
-import com.search.admin.domain.logic.IndexUpdateLogic;
+import com.search.admin.domain.logic.*;
 import com.search.admin.infra.enums.BusinessExceptionEnum;
 import com.search.admin.infra.ex.SearchFrameworkException;
 import com.search.admin.infra.storage.entity.IndexSettings;
@@ -31,6 +28,8 @@ public class IndexHandler {
     private IndexUpdateLogic indexUpdateLogic;
     @Autowired
     private IndexDeleteLogic indexDeleteLogic;
+    @Autowired
+    private FieldLogic fieldLogic;
 
     public boolean createIndexSetting(IndexSettingBO indexSettingBO) {
         boolean exist = indexQueryLogic.findIndexByIndexName(indexSettingBO.getIndexName());
@@ -77,6 +76,11 @@ public class IndexHandler {
     }
 
     public boolean createIndexMapping(IndexBO indexBO) {
+        boolean fieldsRepeat = fieldLogic.validateIndexMapping(indexBO);
+        if (fieldsRepeat){
+            throw new SearchFrameworkException(BusinessExceptionEnum.INDEX_FIELD_REPEATED.getCode(),
+                    BusinessExceptionEnum.INDEX_FIELD_REPEATED.getDesc());
+        }
         return indexUpdateLogic.updateIndexMapping(indexBO);
     }
 
