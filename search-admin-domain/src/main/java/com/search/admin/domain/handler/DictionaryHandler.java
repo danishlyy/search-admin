@@ -32,9 +32,6 @@ public class DictionaryHandler {
     }
 
     public List<DictionaryBO> queryDictionary(String dictionaryType) {
-        if(StringUtils.isEmpty(dictionaryType)){
-            throw new SearchFrameworkException(BusinessExceptionEnum.DICTIONARY_TYPE_IS_NULL.getCode(),BusinessExceptionEnum.DICTIONARY_TYPE_IS_NULL.getDesc());
-        }
         return dictionaryLogic.queryDictionariesByDictionaryType(dictionaryType);
     }
 }

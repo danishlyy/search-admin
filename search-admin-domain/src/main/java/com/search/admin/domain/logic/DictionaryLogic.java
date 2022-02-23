@@ -5,11 +5,13 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.search.admin.domain.bo.DictionaryBO;
 import com.search.admin.domain.convert.Entity2BOConvert;
 import com.search.admin.infra.enums.BusinessExceptionEnum;
+import com.search.admin.infra.enums.YesNoEnum;
 import com.search.admin.infra.ex.SearchFrameworkException;
 import com.search.admin.infra.storage.entity.SearchDictionary;
 import com.search.admin.infra.storage.service.ISearchDictionaryService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -54,7 +56,10 @@ public class DictionaryLogic {
 
     public List<DictionaryBO> queryDictionariesByDictionaryType(String dictionaryType) {
         LambdaQueryWrapper<SearchDictionary> queryWrapper = Wrappers.lambdaQuery();
-        queryWrapper.eq(SearchDictionary::getDictType,dictionaryType);
+        if (StringUtils.isNotBlank(dictionaryType)){
+            queryWrapper.eq(SearchDictionary::getDictType,dictionaryType);
+        }
+        queryWrapper.eq(SearchDictionary::getDeleteFlag, YesNoEnum.YES.getCode());
         return Entity2BOConvert.INSTANCE.convertDictionaryEntityList2DictionaryBOList(iSearchDictionaryService.list(queryWrapper));
     }
 }
