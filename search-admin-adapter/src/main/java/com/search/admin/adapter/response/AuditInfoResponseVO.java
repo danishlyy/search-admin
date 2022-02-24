@@ -46,6 +46,11 @@ public class AuditInfoResponseVO implements Serializable {
     private String reindexFlag;
 
     /**
+     *  是 否
+     */
+    private String reindexFlagDesc;
+
+    /**
      * reindex成功标志0 是 1 否
      */
     private String reindexStatus;
@@ -78,14 +83,9 @@ public class AuditInfoResponseVO implements Serializable {
     private String syncTypeCode;
 
     /**
-     * 审核副本分片按钮显示控制 0 显示 1不显示
+     * 审核按钮显示控制 0 显示 1不显示
      */
-    private String auditSettingBtnFlag;
-
-    /**
-     * 审核映射按钮显示控制 0 显示 1不显示
-     */
-    private String auditMappingBtnFlag;
+    private String showAuditBtnFlag;
 
     /**
      * 审核删除索引按钮显示控制 0 显示 1不显示
@@ -96,15 +96,5 @@ public class AuditInfoResponseVO implements Serializable {
      * ReIndex按钮显示控制 0 显示 1不显示
      */
     private String auditReIndexBtnFlag;
-
-
-
-
-
-
-
-
-
-
 
 }

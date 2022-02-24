@@ -114,34 +114,16 @@ public class DefaultValueUtil {
      *
      * @param auditTpe
      * @param syncStatus
-     * @param syncType
      * @return
      */
-    public static String showAuditSettingBtnFlag(String auditTpe,String syncStatus,String syncType){
-       if (AuditTypeEnum.WAIT_AUDIT.getCode().equals(auditTpe)
-               && SyncStatusEnum.WAIT_SYNC.getCode().equals(syncStatus)
-               && (SyncTypeEnum.SYNC_ALL.getCode().equals(syncType) || SyncTypeEnum.SYNC_SETTING.equals(syncType))){
-           return YesNoEnum.YES.getCode();
-       }
-       return YesNoEnum.NO.getCode();
-    }
-
-    /**
-     * 审核状态为待审核、同步状态为未同步、同步类型是 mapping或者全部 显示审核分片副本按钮
-     *
-     * @param auditTpe
-     * @param syncStatus
-     * @param syncType
-     * @return
-     */
-    public static String showAuditMappingBtnFlag(String auditTpe,String syncStatus,String syncType){
+    public static String showAuditBtnFlag(String auditTpe,String syncStatus){
         if (AuditTypeEnum.WAIT_AUDIT.getCode().equals(auditTpe)
-                && SyncStatusEnum.WAIT_SYNC.getCode().equals(syncStatus)
-                && (SyncTypeEnum.SYNC_ALL.getCode().equals(syncType) || SyncTypeEnum.SYNC_SETTING.equals(syncType))){
+                && SyncStatusEnum.WAIT_SYNC.getCode().equals(syncStatus)){
             return YesNoEnum.YES.getCode();
         }
         return YesNoEnum.NO.getCode();
     }
+
 
 
     public static String showAuditReIndexBtnFlag(String indexStatus,String auditTpe,String syncStatus,String reIndexFlag){
@@ -155,12 +137,12 @@ public class DefaultValueUtil {
     }
 
     public static String transDictType(String dictType){
-            DictionaryTypeEnum[] values = DictionaryTypeEnum.values();
-            for (DictionaryTypeEnum dict:values){
-                if (dictType.equals(dict.getCode())){
-                    return dict.getDesc();
-                }
+        DictionaryTypeEnum[] values = DictionaryTypeEnum.values();
+        for (DictionaryTypeEnum dict:values){
+            if (dictType.equals(dict.getCode())){
+                return dict.getDesc();
             }
-            return null;
+        }
+        return null;
     }
 }

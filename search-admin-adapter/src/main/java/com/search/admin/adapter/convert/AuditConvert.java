@@ -22,8 +22,8 @@ public interface AuditConvert {
 
     AuditInfoDTO convertAuditResponseVO2AuditInfoDTO(AuditRequestVO source);
 
-    @Mapping(target = "auditSettingBtnFlag",expression = "java(DefaultValueUtil.showAuditSettingBtnFlag(source.getAuditType(),source.getSyncStatus(),source.getSyncType()))")
-    @Mapping(target = "auditMappingBtnFlag",expression = "java(DefaultValueUtil.showAuditMappingBtnFlag(source.getAuditType(),source.getSyncStatus(),source.getSyncType()))")
+
+    @Mapping(target = "showAuditBtnFlag",expression = "java(DefaultValueUtil.showAuditBtnFlag(source.getAuditType(),source.getSyncStatus()))")
     @Mapping(target = "auditDeleteIndexBtnFlag",expression = "java(DefaultValueUtil.showAuditDeleteIndexBtnFlag(source.getIndexStatus()))")
     @Mapping(target = "auditReIndexBtnFlag",expression = "java(DefaultValueUtil.showAuditReIndexBtnFlag(source.getIndexStatus(),source.getAuditType(),source.getSyncStatus(),source.getReindexFlag()))")
     @Mapping(target = "syncType",expression = "java(DefaultValueUtil.transSyncType(source.getSyncType()))")

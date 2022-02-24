@@ -38,6 +38,7 @@ public interface DTOConvert {
 
     IndexPageConditionBO convertIndexPageDTO2IndexPageBO(IndexPageDTO source);
 
+    @Mapping(source = "auditStatus",target = "auditType")
     AuditInfoBO convertAuditInfoDTO2AuditInfoBO(AuditInfoDTO source);
 
 
