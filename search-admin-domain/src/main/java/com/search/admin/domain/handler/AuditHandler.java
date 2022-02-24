@@ -42,7 +42,7 @@ public class AuditHandler {
     public boolean auditInfo(AuditInfoBO auditInfoBO) {
         RestHighLevelClient client = searchAdminClient.elasticsearchClient();
         // 审核不通过 不需要同步到es
-        if (AuditTypeEnum.AUDIT_REJECT.getCode().equals(auditInfoBO)){
+        if (AuditTypeEnum.AUDIT_REJECT.getCode().equals(auditInfoBO.getAuditType())){
             return auditUpdateLogic.updateAuditIndexInfo(auditInfoBO);
         }
         // 审核通过
@@ -53,6 +53,6 @@ public class AuditHandler {
             fieldLogic.validateFields(index,client);
             return   exists ? syncIndexLogic.updateEsIndexInfo(index,client,auditInfoBO) : syncIndexLogic.createEsIndexInfo(index,client,auditInfoBO) ;
         }
-        return false;
+        return true;
     }
 }

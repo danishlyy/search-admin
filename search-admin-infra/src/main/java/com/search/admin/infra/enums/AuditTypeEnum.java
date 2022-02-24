@@ -3,7 +3,7 @@ package com.search.admin.infra.enums;
 public enum AuditTypeEnum implements KeyValueEnum<String>{
     WAIT_AUDIT("0","待审核"),
     AUDIT_PASS("1","审核通过"),
-    AUDIT_REJECT("2","拒绝审核"),;
+    AUDIT_REJECT("2","审核不通过"),;
 
     private String code;
     private String desc;
