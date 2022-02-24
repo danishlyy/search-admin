@@ -14,6 +14,7 @@ import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,9 @@ public class IndexMappingHelper {
     }
 
     public static List<IndexMappingPropertiesBO> convertFieldStr2List(String source){
+        if (StringUtils.isBlank(source)){
+            return Collections.emptyList();
+        }
         try {
             return OBJECT_MAPPER.readValue(source, new TypeReference<>() {});
         } catch (JsonProcessingException e) {
