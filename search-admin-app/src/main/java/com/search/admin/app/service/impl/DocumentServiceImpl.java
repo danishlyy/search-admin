@@ -1,7 +1,9 @@
 package com.search.admin.app.service.impl;
 
+import com.search.admin.app.convert.DTOConvert;
 import com.search.admin.app.dto.ReIndexDTO;
 import com.search.admin.app.service.DocumentService;
+import com.search.admin.domain.bo.ReindexBO;
 import com.search.admin.domain.handler.DocumentHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ public class DocumentServiceImpl implements DocumentService {
     private DocumentHandler documentHandler;
     @Override
     public boolean reIndexDoc(ReIndexDTO reIndexDTO) {
-        return documentHandler.reIndexDoc(reIndexDTO.getSourceIndexName(),reIndexDTO.getTargetIndexName());
+        ReindexBO reindexBO = DTOConvert.INSTANCE.convertReIndexDTO2ReIndexBO(reIndexDTO);
+        return documentHandler.reIndexDoc(reindexBO);
     }
 }

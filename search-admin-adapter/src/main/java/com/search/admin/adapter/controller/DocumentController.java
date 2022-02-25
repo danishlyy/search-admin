@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -29,8 +30,9 @@ public class DocumentController {
      * @return
      */
     @PostMapping(value = "/v1/create/copy/index")
-    public Result<Boolean> reIndexDoc(@RequestBody @Valid ReIndexRequestVO requestVO){
+    public Result<Boolean> reIndexDoc(@RequestBody @Valid ReIndexRequestVO requestVO, @RequestHeader(value = "userCode") String userCode){
         ReIndexDTO reIndexDTO = DocumentConvert.INSTANCE.convertReIndexRequestVO2ReIndexDTO(requestVO);
+        reIndexDTO.setModifier(userCode);
         return Result.success(documentService.reIndexDoc(reIndexDTO));
     }
 }

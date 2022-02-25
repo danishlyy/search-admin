@@ -22,4 +22,7 @@ public class ReIndexRequestVO implements Serializable {
 
     @NotBlank(message = "目标索引名称不可为空")
     private String targetIndexName;
+
+    @NotBlank(message = "审核记录id不可为空")
+    private String id;
 }

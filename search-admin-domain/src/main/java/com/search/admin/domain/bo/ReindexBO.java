@@ -1,19 +1,15 @@
-package com.search.admin.app.dto;
+package com.search.admin.domain.bo;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @Setter
 @ToString
-public class ReIndexDTO implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 2349033262255689519L;
+public class ReindexBO {
 
     private List<String> sourceIndexName;
 

@@ -1,7 +1,10 @@
 package com.search.admin.domain.logic;
 
+import com.search.admin.domain.bo.AuditInfoBO;
+import com.search.admin.domain.bo.ReindexBO;
 import com.search.admin.infra.config.SearchAdminClient;
 import com.search.admin.infra.enums.BusinessExceptionEnum;
+import com.search.admin.infra.enums.YesOrNoEnum;
 import com.search.admin.infra.ex.SearchFrameworkException;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.ActionListener;
@@ -26,9 +29,15 @@ public class DocumentLogic {
 
     @Autowired
     private SearchAdminClient searchAdminClient;
+    @Autowired
+    private AuditUpdateLogic auditUpdateLogic;
 
 
-    public boolean reIndexDoc(List<String> sourceIndexName, String targetIndexName) {
+    public boolean reIndexDoc(ReindexBO reindexBO) {
+
+        List<String> sourceIndexName = reindexBO.getSourceIndexName();
+        String id = reindexBO.getId();
+        String targetIndexName = reindexBO.getTargetIndexName();
 
         String[] sourIndexNameArray = sourceIndexName.toArray(new String[sourceIndexName.size()]);
         RestHighLevelClient client = null;
@@ -37,6 +46,9 @@ public class DocumentLogic {
         QueryBuilder queryBuilder = QueryBuilders.matchAllQuery();
         countRequest.query(queryBuilder);
         CountResponse countResponse = null;
+        AuditInfoBO auditInfoBO = new AuditInfoBO();
+        auditInfoBO.setId(id);
+        auditInfoBO.setModifier(reindexBO.getModifier());
         long count = 0L;
         try {
             client = searchAdminClient.elasticsearchClient();
@@ -53,12 +65,15 @@ public class DocumentLogic {
             client.reindexAsync(reindexRequest, RequestOptions.DEFAULT, new ActionListener<BulkByScrollResponse>() {
                 @Override
                 public void onResponse(BulkByScrollResponse bulkByScrollResponse) {
-
+                    auditInfoBO.setReindexStatus(YesOrNoEnum.TYPE_YES.getCode());
+                    auditUpdateLogic.updateAuditIndexInfo(auditInfoBO);
                 }
 
                 @Override
                 public void onFailure(Exception e) {
                     log.error("reindex failed,sourceIndexName:{},targetIndexName:{}",sourceIndexName,targetIndexName,e);
+                    auditInfoBO.setReindexStatus(YesOrNoEnum.TYPE_NO.getCode());
+                    auditUpdateLogic.updateAuditIndexInfo(auditInfoBO);
                 }
             });
         } catch (IOException e) {

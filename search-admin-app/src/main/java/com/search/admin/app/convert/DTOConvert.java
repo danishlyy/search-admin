@@ -45,5 +45,7 @@ public interface DTOConvert {
     PageDTO<AuditInfoResultDTO> convertPageAuditInfoBO2PageAuditInfoResultDTO(PageBO<AuditInfoBO> source);
 
     @Mapping(source = "auditId",target = "id")
-    AuditInfoBO convertAuditDTO2AuditInfoBO(AuditDTO auditDTO);
+    AuditInfoBO convertAuditDTO2AuditInfoBO(AuditDTO source);
+
+    ReindexBO convertReIndexDTO2ReIndexBO(ReIndexDTO source);
 }
