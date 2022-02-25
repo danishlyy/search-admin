@@ -50,7 +50,7 @@ public class AuditHandler {
             // 更新审核状态，
             IndexSettings index = indexQueryLogic.findIndexByIndexId(auditInfoBO.getIndexSettingsId());
             boolean exists = syncIndexLogic.checkIndexExists(index.getIndexName(),client);
-            fieldLogic.validateFields(index,client);
+//            fieldLogic.validateFields(index,client);
             return   exists ? syncIndexLogic.updateEsIndexInfo(index,client,auditInfoBO) : syncIndexLogic.createEsIndexInfo(index,client,auditInfoBO) ;
         }
         return true;
