@@ -23,14 +23,14 @@ public interface AuditConvert {
     AuditInfoDTO convertAuditResponseVO2AuditInfoDTO(AuditRequestVO source);
 
 
-    @Mapping(target = "showAuditBtnFlag",expression = "java(DefaultValueUtil.showAuditBtnFlag(source.getAuditType(),source.getSyncStatus(),source.getIndexStatus()))")
+    @Mapping(target = "showAuditBtnFlag",expression = "java(DefaultValueUtil.showAuditBtnFlag(source.getAuditType(),source.getIndexStatus()))")
     @Mapping(target = "auditDeleteIndexBtnFlag",expression = "java(DefaultValueUtil.showAuditDeleteIndexBtnFlag(source.getIndexStatus(),source.getSyncStatus()))")
     @Mapping(target = "auditReIndexBtnFlag",expression = "java(DefaultValueUtil.showAuditReIndexBtnFlag(source.getIndexStatus(),source.getAuditType(),source.getSyncStatus(),source.getReindexFlag()))")
     @Mapping(target = "syncType",expression = "java(DefaultValueUtil.transSyncType(source.getSyncType()))")
     @Mapping(target = "syncStatus",expression = "java(DefaultValueUtil.transSyncStatus(source.getSyncStatus()))")
     @Mapping(target = "indexStatus",expression = "java(DefaultValueUtil.transIndexStatus(source.getIndexStatus()))")
     @Mapping(target = "auditType",expression = "java(DefaultValueUtil.transAuditType(source.getAuditType()))")
-    @Mapping(target = "reindexFlag",expression = "java(DefaultValueUtil.transReindexFlag(source.getReindexFlag()))")
+    @Mapping(target = "reindexFlagDesc",expression = "java(DefaultValueUtil.transReindexFlag(source.getReindexFlag()))")
     @Mapping(target = "reindexStatus",expression = "java(DefaultValueUtil.transReindexStatus(source.getReindexStatus()))")
     @Mapping(target = "modifyTime",expression = "java(DateTimeUtil.formatDateTime2Pattern0002(source.getModifyTime()))")
     @Mapping(target = "noticeTime",expression = "java(DateTimeUtil.formatDateTime2Pattern0002(source.getNoticeTime()))")

@@ -9,6 +9,7 @@ import com.search.admin.domain.convert.Entity2BOConvert;
 import com.search.admin.infra.config.SearchAdminClient;
 import com.search.admin.infra.enums.BusinessExceptionEnum;
 import com.search.admin.infra.enums.ElasticSearchKeysEnum;
+import com.search.admin.infra.enums.SyncStatusEnum;
 import com.search.admin.infra.enums.YesNoEnum;
 import com.search.admin.infra.ex.SearchFrameworkException;
 import com.search.admin.infra.storage.entity.AuditIndexInfo;
@@ -128,5 +129,16 @@ public class AuditLogic {
         queryWrapper.last(" limit 1");
         AuditIndexInfo auditIndexInfo = iAuditIndexInfoService.getOne(queryWrapper);
         return Entity2BOConvert.INSTANCE.convertAuditIndexInfo2AuditIndexInfoBO(auditIndexInfo);
+    }
+
+    public String queryIndexAuditInfoHistory(String indexName) {
+        LambdaQueryWrapper<AuditIndexInfo> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.select(AuditIndexInfo::getSyncStatus)
+                .eq(AuditIndexInfo::getIndexName,indexName)
+                .eq(AuditIndexInfo::getDeleteFlag,YesNoEnum.YES.getCode())
+                .orderByDesc(AuditIndexInfo::getModifyTime)
+                .last(" limit 1");
+        AuditIndexInfo one = iAuditIndexInfoService.getOne(queryWrapper);
+        return one != null ? one.getSyncStatus() : SyncStatusEnum.WAIT_SYNC.getCode();
     }
 }

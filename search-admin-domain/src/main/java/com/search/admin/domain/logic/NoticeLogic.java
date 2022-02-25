@@ -14,9 +14,13 @@ public class NoticeLogic {
 
     @Autowired
     private IAuditIndexInfoService iAuditIndexInfoService;
+    @Autowired
+    private AuditLogic auditLogic;
 
     public boolean noticeReview(NoticeBO noticeBO) {
         AuditIndexInfo auditIndexInfo = BO2EntityConvert.INSTANCE.convertNoticeBO2AuditIndexInfo(noticeBO);
+        String syncStatus = auditLogic.queryIndexAuditInfoHistory(noticeBO.getIndexName());
+        auditIndexInfo.setSyncStatus(syncStatus);
         return iAuditIndexInfoService.save(auditIndexInfo);
     }
 }

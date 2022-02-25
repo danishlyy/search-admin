@@ -115,9 +115,8 @@ public class DefaultValueUtil {
      * @param indexStatus
      * @return
      */
-    public static String showAuditBtnFlag(String auditTpe,String syncStatus,String indexStatus){
-        if (AuditTypeEnum.WAIT_AUDIT.getCode().equals(auditTpe)
-                && SyncStatusEnum.WAIT_SYNC.getCode().equals(syncStatus) && YesNoEnum.YES.getCode().equals(indexStatus)){
+    public static String showAuditBtnFlag(String auditTpe,String indexStatus){
+        if (AuditTypeEnum.WAIT_AUDIT.getCode().equals(auditTpe) && YesNoEnum.YES.getCode().equals(indexStatus)){
             return YesNoEnum.YES.getCode();
         }
         return YesNoEnum.NO.getCode();
