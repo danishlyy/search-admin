@@ -1,11 +1,9 @@
 package com.search.admin.adapter.response;
 
 import com.search.admin.adapter.base.DictionaryBaseVO;
-import com.search.admin.infra.enums.DictionaryTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serial;
 import java.io.Serializable;

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.search.admin.domain.bo.IndexMappingPropertiesBO;
 import com.search.admin.infra.enums.BusinessExceptionEnum;
+import com.search.admin.infra.enums.FieldTypeEnum;
 import com.search.admin.infra.ex.SearchFrameworkException;
 import com.search.admin.infra.util.JacksonUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -60,7 +61,7 @@ public class IndexMappingHelper {
         try {
             return OBJECT_MAPPER.readValue(source, new TypeReference<>() {});
         } catch (JsonProcessingException e) {
-           throw new SearchFrameworkException(BusinessExceptionEnum.SYSTEM_ERROR.getCode(), BusinessExceptionEnum.SYSTEM_ERROR.getDesc());
+            throw new SearchFrameworkException(BusinessExceptionEnum.SYSTEM_ERROR.getCode(), BusinessExceptionEnum.SYSTEM_ERROR.getDesc());
         }
     }
 
@@ -77,7 +78,11 @@ public class IndexMappingHelper {
                     for (IndexMappingPropertiesBO item:fields){
                         builder.startObject(item.getFieldName());
                         {
-                            builder.field("type", item.getFieldType());
+                            if (FieldTypeEnum.TYPE_ARRAY.getCode().equals(item.getFieldType())){
+                                builder.field("type",FieldTypeEnum.TYPE_TEXT.getCode());
+                            }else {
+                                builder.field("type", item.getFieldType());
+                            }
                             if (StringUtils.isNotBlank(item.getAnalyzeType())){
                                 builder.field("analyzer",item.getAnalyzeType());
                             }
