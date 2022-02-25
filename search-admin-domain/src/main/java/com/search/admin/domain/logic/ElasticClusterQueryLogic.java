@@ -30,6 +30,7 @@ public class ElasticClusterQueryLogic {
         try {
             health = client.cluster().health(healthRequest, RequestOptions.DEFAULT);
         } catch (IOException e) {
+            log.error("cluster status failed",e);
             throw new SearchFrameworkException(BusinessExceptionEnum.CLUSTER_HEALTH_FAILED.getCode(),BusinessExceptionEnum.CLUSTER_HEALTH_FAILED.getDesc());
         }
         String clusterName = health.getClusterName();

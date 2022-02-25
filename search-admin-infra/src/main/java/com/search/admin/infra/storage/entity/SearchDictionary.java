@@ -1,6 +1,7 @@
 package com.search.admin.infra.storage.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.annotation.*;
  * @since 2022-02-03
  */
 @TableName("search_dictionary")
+@Data
 public class SearchDictionary {
 
 
@@ -71,99 +73,4 @@ public class SearchDictionary {
      */
     private String dictDesc;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getDictType() {
-        return dictType;
-    }
-
-    public void setDictType(String dictType) {
-        this.dictType = dictType;
-    }
-
-    public String getDictCode() {
-        return dictCode;
-    }
-
-    public void setDictCode(String dictCode) {
-        this.dictCode = dictCode;
-    }
-
-    public String getDictValue() {
-        return dictValue;
-    }
-
-    public void setDictValue(String dictValue) {
-        this.dictValue = dictValue;
-    }
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getModifier() {
-        return modifier;
-    }
-
-    public void setModifier(String modifier) {
-        this.modifier = modifier;
-    }
-
-    public String getModifyTime() {
-        return modifyTime;
-    }
-
-    public void setModifyTime(String modifyTime) {
-        this.modifyTime = modifyTime;
-    }
-
-    public String getDeleteFlag() {
-        return deleteFlag;
-    }
-
-    public void setDeleteFlag(String deleteFlag) {
-        this.deleteFlag = deleteFlag;
-    }
-
-    public String getDictDesc() {
-        return dictDesc;
-    }
-
-    public void setDictDesc(String dictDesc) {
-        this.dictDesc = dictDesc;
-    }
-
-    @Override
-    public String toString() {
-        return "SearchDictionary{" +
-                "id=" + id +
-                ", dictType=" + dictType +
-                ", dictCode=" + dictCode +
-                ", dictValue=" + dictValue +
-                ", creator=" + creator +
-                ", createTime=" + createTime +
-                ", modifier=" + modifier +
-                ", modifyTime=" + modifyTime +
-                ", deleteFlag=" + deleteFlag +
-                ", dictDesc=" + dictDesc +
-                "}";
-    }
 }

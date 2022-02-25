@@ -37,4 +37,6 @@ public interface BO2EntityConvert {
     @Mapping(target = "auditType",expression = "java(DefaultValueUtil.setAuditTypeDefaultValue())")
     @Mapping(target = "noticeTime",expression = "java(DefaultValueUtil.setNoticeTimeDefaultValue())")
     AuditIndexInfo convertNoticeBO2AuditIndexInfo(NoticeBO source);
+
+    List<IndexSettings> convertIndexBOList2IndexSettingList(List<IndexBO> list);
 }
