@@ -31,7 +31,7 @@ public class DocumentLogic {
     public boolean reIndexDoc(List<String> sourceIndexName, String targetIndexName) {
 
         String[] sourIndexNameArray = sourceIndexName.toArray(new String[sourceIndexName.size()]);
-        RestHighLevelClient client = null;searchAdminClient.elasticsearchClient();
+        RestHighLevelClient client = null;
         CountRequest countRequest = new CountRequest();
         countRequest.indices(sourIndexNameArray);
         QueryBuilder queryBuilder = QueryBuilders.matchAllQuery();
