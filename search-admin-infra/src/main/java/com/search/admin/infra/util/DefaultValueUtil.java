@@ -101,24 +101,23 @@ public class DefaultValueUtil {
      * @param indexStatusCode
      * @return
      */
-    public static String showAuditDeleteIndexBtnFlag(String indexStatusCode){
-        if (StringUtils.isBlank(indexStatusCode)){
-            return null;
+    public static String showAuditDeleteIndexBtnFlag(String indexStatusCode,String syncStatus){
+        if (IndexStatusEnum.INDEX_INEFFECTIVE.getCode().equals(indexStatusCode) || SyncStatusEnum.SYNC_SUCCESS.getCode().equals(syncStatus)){
+            YesNoEnum.YES.getCode();
         }
-        return IndexStatusEnum.INDEX_INEFFECTIVE.getCode().equals(indexStatusCode)
-                ? YesNoEnum.YES.getCode() : YesNoEnum.NO.getCode();
+        return YesNoEnum.NO.getCode();
     }
-
     /**
-     * 审核状态为待审核、同步状态为未同步、同步类型是 setting或者全部 显示审核分片副本按钮
+     * 审核状态为待审核、同步状态为未同步、索引有效 显示审核分片副本按钮
      *
      * @param auditTpe
      * @param syncStatus
+     * @param indexStatus
      * @return
      */
-    public static String showAuditBtnFlag(String auditTpe,String syncStatus){
+    public static String showAuditBtnFlag(String auditTpe,String syncStatus,String indexStatus){
         if (AuditTypeEnum.WAIT_AUDIT.getCode().equals(auditTpe)
-                && SyncStatusEnum.WAIT_SYNC.getCode().equals(syncStatus)){
+                && SyncStatusEnum.WAIT_SYNC.getCode().equals(syncStatus) && YesNoEnum.YES.getCode().equals(indexStatus)){
             return YesNoEnum.YES.getCode();
         }
         return YesNoEnum.NO.getCode();
