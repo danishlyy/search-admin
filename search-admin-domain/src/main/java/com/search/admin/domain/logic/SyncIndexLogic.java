@@ -41,7 +41,7 @@ public class SyncIndexLogic {
         boolean acknowledged = false;
         UpdateSettingsRequest updateSettingsRequest = new UpdateSettingsRequest(index.getIndexName());
         PutMappingRequest putMappingRequest = new PutMappingRequest(index.getIndexName());
-        if (SyncTypeEnum.SYNC_ALL.equals(auditInfoBO.getSyncType())){
+        if (SyncTypeEnum.SYNC_ALL.getCode().equals(auditInfoBO.getSyncType())){
             try {
                 updateSettingsRequest.settings(Settings.builder()
                         .put("index.number_of_replicas",Integer.parseInt(index.getNumberOfReplicas()))
@@ -63,7 +63,7 @@ public class SyncIndexLogic {
 
 
         }
-        if (SyncTypeEnum.SYNC_SETTING.equals(auditInfoBO.getSyncType())){
+        if (SyncTypeEnum.SYNC_SETTING.getCode().equals(auditInfoBO.getSyncType())){
 
             try {
                 updateSettingsRequest.settings(Settings.builder()
@@ -79,7 +79,7 @@ public class SyncIndexLogic {
             }
 
         }
-        if (SyncTypeEnum.SYNC_MAPPING.equals(auditInfoBO.getSyncType())){
+        if (SyncTypeEnum.SYNC_MAPPING.getCode().equals(auditInfoBO.getSyncType())){
             try {
                 XContentBuilder xContentBuilder = IndexMappingHelper.convertMapping2XContentBuilder(index.getIndexName(),index.getIndexMapping());
                 putMappingRequest.source(xContentBuilder);
@@ -111,7 +111,7 @@ public class SyncIndexLogic {
         CreateIndexResponse createIndexResponse = null;
         boolean acknowledged = false;
         CreateIndexRequest createIndexRequest = new CreateIndexRequest(index.getIndexName());
-        if (SyncTypeEnum.SYNC_ALL.equals(auditInfoBO.getSyncType())){
+        if (SyncTypeEnum.SYNC_ALL.getCode().equals(auditInfoBO.getSyncType())){
             try {
                 createIndexRequest.settings(Settings.builder()
                         .put("index.number_of_shards",Integer.parseInt(index.getNumberOfShards()))
@@ -129,7 +129,7 @@ public class SyncIndexLogic {
 
 
         }
-        if (SyncTypeEnum.SYNC_SETTING.equals(auditInfoBO.getSyncType())){
+        if (SyncTypeEnum.SYNC_SETTING.getCode().equals(auditInfoBO.getSyncType())){
             createIndexRequest.settings(Settings.builder()
                     .put("index.number_of_shards",Integer.parseInt(index.getNumberOfShards()))
                     .put("index.number_of_replicas",Integer.parseInt(index.getNumberOfReplicas())).build());
@@ -144,7 +144,7 @@ public class SyncIndexLogic {
                 throw new SearchFrameworkException(BusinessExceptionEnum.CREATE_INDEX_FAILED.getCode(), BusinessExceptionEnum.CREATE_INDEX_FAILED.getDesc());
             }
         }
-        if (SyncTypeEnum.SYNC_MAPPING.equals(auditInfoBO.getSyncType())){
+        if (SyncTypeEnum.SYNC_MAPPING.getCode().equals(auditInfoBO.getSyncType())){
             try {
                 XContentBuilder xContentBuilder = IndexMappingHelper.convertMapping2XContentBuilder(index.getIndexName(),index.getIndexMapping());
                 createIndexRequest.mapping(xContentBuilder);
