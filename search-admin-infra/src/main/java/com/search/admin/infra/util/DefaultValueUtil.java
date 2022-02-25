@@ -103,7 +103,7 @@ public class DefaultValueUtil {
      */
     public static String showAuditDeleteIndexBtnFlag(String indexStatusCode,String syncStatus){
         if (IndexStatusEnum.INDEX_INEFFECTIVE.getCode().equals(indexStatusCode) || SyncStatusEnum.SYNC_SUCCESS.getCode().equals(syncStatus)){
-            YesNoEnum.YES.getCode();
+            return YesNoEnum.YES.getCode();
         }
         return YesNoEnum.NO.getCode();
     }
