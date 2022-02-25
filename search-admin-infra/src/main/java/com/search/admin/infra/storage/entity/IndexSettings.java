@@ -74,7 +74,6 @@ public class IndexSettings {
     /**
      * 是否有效 0有效1无效
      */
-    @TableLogic
     @TableField(fill = FieldFill.INSERT)
     private String deleteFlag;
 

@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,13 +43,13 @@ public class IndexQueryLogic {
 
     public PageBO<IndexSettingBO> pageQueryIndexes(IndexPageConditionBO pageConditionBO) {
         LambdaQueryWrapper<IndexSettings> queryWrapper = Wrappers.lambdaQuery();
-//        queryWrapper.eq(IndexSettings::getDeleteFlag, YesNoEnum.YES.getCode());
         if (StringUtils.isNotBlank(pageConditionBO.getIndexStatus())){
             queryWrapper.eq(IndexSettings::getDeleteFlag,pageConditionBO.getIndexStatus());
         }
         if (StringUtils.isNotBlank(pageConditionBO.getIndexName())){
             queryWrapper.like(IndexSettings::getIndexName,pageConditionBO.getIndexName());
         }
+
         Page<IndexSettings> indexPage = new Page<>();
         indexPage.setCurrent(Long.parseLong(pageConditionBO.getPageNumber()));
         indexPage.setSize(Long.parseLong(pageConditionBO.getPageSize()));
