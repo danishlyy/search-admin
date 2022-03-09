@@ -26,4 +26,6 @@ public class NoticeDTO {
     private String noticeTime;
 
     private String syncType;
+
+    private String modifier;
 }

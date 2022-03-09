@@ -30,5 +30,7 @@ public class NoticeRequestVO implements Serializable {
     @NotBlank(message = "是否需要reIndex必填")
     private String reindexFlag;
 
+    private String modifier;
+
 
 }
