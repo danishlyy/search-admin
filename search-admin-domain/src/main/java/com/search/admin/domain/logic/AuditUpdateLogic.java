@@ -40,4 +40,10 @@ public class AuditUpdateLogic {
                 .eq(AuditIndexInfo::getDeleteFlag, YesNoEnum.YES.getCode());
         return iAuditIndexInfoService.update(null,updateWrapper);
     }
+
+    public boolean updateAuditIndexInfoInEffectiveByIndexName(String indexName) {
+        LambdaUpdateWrapper<AuditIndexInfo> updateWrapper = Wrappers.lambdaUpdate();
+        updateWrapper.eq(AuditIndexInfo::getIndexName,indexName).set(AuditIndexInfo::getDeleteFlag,YesNoEnum.NO.getCode());
+        return iAuditIndexInfoService.update(null, updateWrapper);
+    }
 }

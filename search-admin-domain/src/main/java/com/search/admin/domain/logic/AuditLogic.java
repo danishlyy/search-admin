@@ -39,6 +39,10 @@ public class AuditLogic {
     private SearchAdminClient searchAdminClient;
     @Autowired
     private IAuditIndexInfoService iAuditIndexInfoService;
+    @Autowired
+    private IndexDeleteLogic indexDeleteLogic;
+    @Autowired
+    private AuditUpdateLogic auditUpdateLogic;
 
 
 
@@ -84,10 +88,11 @@ public class AuditLogic {
                 @Override
                 public void onResponse(AcknowledgedResponse acknowledgedResponse) {
                     log.info("delete index indexName:{} response:{}",indexName,acknowledgedResponse.isAcknowledged());
-                    LambdaQueryWrapper<AuditIndexInfo> queryWrapper = Wrappers.lambdaQuery();
-                    queryWrapper.eq(AuditIndexInfo::getIndexName,indexName);
-                    int delete = iAuditIndexInfoService.getBaseMapper().delete(queryWrapper);
-                    log.info("delete record count:{}",delete);
+
+                    boolean updateFlag = auditUpdateLogic.updateAuditIndexInfoInEffectiveByIndexName(indexName);
+                    if (updateFlag){
+                        indexDeleteLogic.physicalDeleteByIndexName(indexName);
+                    }
                     return;
                 }
 

@@ -31,4 +31,10 @@ public class IndexDeleteLogic {
         }
         return iIndexSettingsService.updateBatchById(indexList,indexList.size());
     }
+
+    public void physicalDeleteByIndexName(String indexName) {
+        LambdaUpdateWrapper<IndexSettings> wrapper = Wrappers.lambdaUpdate();
+        wrapper.eq(IndexSettings::getIndexName,indexName);
+        iIndexSettingsService.remove(wrapper);
+    }
 }
