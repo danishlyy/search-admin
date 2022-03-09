@@ -24,6 +24,8 @@ public class IndexSettingBO {
 
     private String indexStatusDesc;
 
+    private String syncStatus;
+
     /**
      * 分片数
      */

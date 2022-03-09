@@ -29,6 +29,11 @@ public class IndexSettingDTO implements Serializable {
     private String indexDesc;
 
     /**
+     * 同步状态
+     */
+    private String syncStatus;
+
+    /**
      * 分片数
      */
     private String numberOfShards;

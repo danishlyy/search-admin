@@ -68,7 +68,14 @@ public class IndexHandler {
             throw new SearchFrameworkException(BusinessExceptionEnum.INDEX_NOT_EXIST.getCode(),BusinessExceptionEnum.INDEX_NOT_EXIST.getDesc() );
         }
         IndexSettings entity = indexQueryLogic.findIndexByIndexId(indexSettingBO.getIndexId());
-        return Entity2BOConvert.INSTANCE.convertIndexSettings2IndexSettingBO(entity);
+        IndexSettingBO settingBO = Entity2BOConvert.INSTANCE.convertIndexSettings2IndexSettingBO(entity);
+        ;
+        AuditInfoBO auditInfoBO = auditLogic.findAuditInfoNewestByIndexId(indexSettingBO.getIndexId());
+        if (Objects.nonNull(auditInfoBO) && Objects.nonNull(settingBO)){
+            settingBO.setSyncStatus(auditInfoBO.getSyncStatus());
+        }
+
+        return settingBO;
     }
 
     public PageBO<IndexSettingBO> pageQueryIndexes(IndexPageConditionBO pageConditionBO) {

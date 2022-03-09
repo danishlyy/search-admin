@@ -26,6 +26,12 @@ public class IndexSettingResponseVO extends IndexBaseResponseVO implements Seria
     private String indexDesc;
 
     /**
+     * 同步状态 为1 表示已同步 不可修改分片数
+     * {@link com.search.admin.infra.enums.SyncStatusEnum}
+     */
+    private String syncStatus;
+
+    /**
      * 索引分片数
      */
     private String numberOfShards;
