@@ -48,10 +48,9 @@ public class SnapshotRepositoryLogic {
         try {
             client = searchAdminClient.elasticsearchClient();
             repository = client.snapshot().getRepository(request, RequestOptions.DEFAULT);
-        } catch (IOException e) {
-            log.error("check snapshot failed,repositoryName:{}",repositoryName);
-            throw new SearchFrameworkException(BusinessExceptionEnum.CHECK_SNAPSHOT_REPOSITORY_FAILED.getCode(),
-                    BusinessExceptionEnum.CHECK_SNAPSHOT_REPOSITORY_FAILED.getDesc());
+        } catch (Exception e) {
+            log.error("check snapshot failed,repository not exist,repositoryName:{}",repositoryName);
+           return false;
         }
         if (ObjectUtils.isEmpty(repository)){
             log.warn("repository is null,repositoryName:{}",repositoryName);

@@ -62,8 +62,8 @@ search:
 es:
   index:
     snapshot:
-      repositoryLocation: es_snapshot_repo
-      repositoryName: /backup/es_snapshot
+      repositoryLocation: /backup/es_backup
+      repositoryName: es_snapshot_repo
 
 
 
