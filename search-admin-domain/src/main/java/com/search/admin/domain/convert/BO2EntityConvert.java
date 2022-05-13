@@ -22,7 +22,7 @@ public interface BO2EntityConvert {
 
 
     @Mapping(target = "numberOfShards",expression = "java(DefaultValueUtil.setDefaultNumberOfShardsIfNull(source.getNumberOfShards()))")
-    @Mapping(target = "numberOfReplicas",expression = "java(DefaultValueUtil.setDefaultNumberOfReplicasIfNull(source.getNumberOfShards()))")
+    @Mapping(target = "numberOfReplicas",expression = "java(DefaultValueUtil.setDefaultNumberOfReplicasIfNull(source.getNumberOfReplicas()))")
     IndexSettings convertIndexSettingBO2IndexSetting(IndexSettingBO source);
 
     List<SearchDictionary> convertDictionaryBOList2DictionaryEntityList(List<DictionaryBO> source);
